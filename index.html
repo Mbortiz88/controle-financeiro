@@ -1,0 +1,2961 @@
+<!doctype html>
+<html lang="pt-BR" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Controle Financeiro 2026</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                red: "#FF3B5C",
+                redHover: "#FF5473",
+                green: "#00E676",
+                greenHover: "#22EF89",
+                cyan: "#00E5FF",
+                darkBg: "#0B0C10",
+                cardBg: "#151621",
+                cardBgHover: "#1D1E2C",
+                border: "#252738",
+              },
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+              mono: ["JetBrains Mono", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #0b0c10;
+        color: #e2e8f0;
+        font-family: "Inter", sans-serif;
+      }
+      .neon-glow-red {
+        box-shadow: 0 0 18px rgba(255, 59, 92, 0.25);
+      }
+      .neon-glow-green {
+        box-shadow: 0 0 18px rgba(0, 230, 118, 0.25);
+      }
+      .neon-glow-cyan {
+        box-shadow: 0 0 18px rgba(0, 229, 255, 0.22);
+      }
+      .card-panel {
+        background-color: #151621;
+        border: 1px solid #252738;
+      }
+      .custom-scrollbar::-webkit-scrollbar {
+        height: 6px;
+        width: 6px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: #0d0e17;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #2d3048;
+        border-radius: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #ff3b5c;
+      }
+      .input-dark {
+        background-color: #0e0f18;
+        border: 1px solid #252738;
+        color: #f1f5f9;
+      }
+      .input-dark:focus {
+        outline: none;
+        border-color: #ff3b5c;
+        box-shadow: 0 0 10px rgba(255, 59, 92, 0.35);
+      }
+      .editable-row {
+        cursor: pointer;
+        transition: background-color 0.15s ease-in-out;
+      }
+      .editable-row:hover {
+        background-color: #1d1e2d !important;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex flex-col custom-scrollbar">
+    <!-- HEADER / NAVIGATION -->
+    <header
+      class="bg-[#10111A] border-b border-[#252738] sticky top-0 z-40 backdrop-blur-md bg-opacity-90"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <!-- App Title -->
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#C01235] to-[#FF3B5C] flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-red-950/60 neon-glow-red"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+            <div>
+              <h1
+                class="text-lg font-bold tracking-wider text-white uppercase flex items-center gap-2"
+              >
+                PLANEJAMENTO <span class="text-[#FF3B5C]">2026</span>
+              </h1>
+              <p class="text-xs text-gray-400 hidden sm:block">
+                Controle Financeiro Pessoal & Familiar
+              </p>
+            </div>
+          </div>
+
+          <!-- Actions Header -->
+          <div class="flex items-center gap-2">
+            <button
+              onclick="exportData()"
+              class="px-3 py-1.5 text-xs font-medium bg-[#1A1B28] hover:bg-[#252738] border border-[#252738] text-gray-300 hover:text-white rounded-lg transition flex items-center gap-1.5 shadow-sm"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 text-[#FF3B5C]"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                />
+              </svg>
+              <span class="hidden md:inline">Backup</span> Exportar
+            </button>
+
+            <label
+              class="px-3 py-1.5 text-xs font-medium bg-[#1A1B28] hover:bg-[#252738] border border-[#252738] text-gray-300 hover:text-white rounded-lg transition cursor-pointer flex items-center gap-1.5 shadow-sm"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 text-[#00E676]"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                />
+              </svg>
+              <span class="hidden md:inline">Restaurar</span> Importar
+              <input
+                type="file"
+                id="import-file"
+                accept=".json"
+                class="hidden"
+                onchange="importData(event)"
+              />
+            </label>
+
+            <button
+              onclick="resetDataPrompt()"
+              class="px-2.5 py-1.5 text-xs font-medium bg-red-950/40 hover:bg-red-900/60 border border-red-800/50 text-red-300 rounded-lg transition"
+              title="Restaurar dados padrão"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Tab Navigation Links -->
+        <nav
+          class="flex space-x-1 sm:space-x-4 overflow-x-auto custom-scrollbar py-2 border-t border-[#1E1F2E]"
+          id="tab-nav"
+        >
+          <button
+            onclick="switchTab('mensal')"
+            id="tab-btn-mensal"
+            class="tab-btn px-4 py-2 text-sm font-semibold rounded-lg text-white bg-[#FF3B5C] transition whitespace-nowrap flex items-center gap-2 shadow-md"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+              />
+            </svg>
+            Visão Mensal
+          </button>
+          <button
+            onclick="switchTab('cartao')"
+            id="tab-btn-cartao"
+            class="tab-btn px-4 py-2 text-sm font-medium rounded-lg text-gray-400 hover:text-white hover:bg-[#1A1B28] transition whitespace-nowrap flex items-center gap-2"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 10h18M7 15h1m4 0h1m-7 4h12a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+              />
+            </svg>
+            Cartão CC Inter
+          </button>
+          <button
+            onclick="switchTab('custos')"
+            id="tab-btn-custos"
+            class="tab-btn px-4 py-2 text-sm font-medium rounded-lg text-gray-400 hover:text-white hover:bg-[#1A1B28] transition whitespace-nowrap flex items-center gap-2"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+              />
+            </svg>
+            Custos Fixos
+          </button>
+          <button
+            onclick="switchTab('reserva')"
+            id="tab-btn-reserva"
+            class="tab-btn px-4 py-2 text-sm font-medium rounded-lg text-gray-400 hover:text-white hover:bg-[#1A1B28] transition whitespace-nowrap flex items-center gap-2"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"
+              />
+            </svg>
+            Reserva (Porkinho)
+          </button>
+          <button
+            onclick="switchTab('sonhos')"
+            id="tab-btn-sonhos"
+            class="tab-btn px-4 py-2 text-sm font-medium rounded-lg text-gray-400 hover:text-white hover:bg-[#1A1B28] transition whitespace-nowrap flex items-center gap-2"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+              />
+            </svg>
+            Mural de Sonhos
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+      <!-- 1. ABA VISÃO MENSAL -->
+      <section id="tab-content-mensal" class="tab-content space-y-6">
+        <!-- Month Selector Carousel -->
+        <div
+          class="card-panel rounded-2xl p-3 flex items-center justify-between overflow-x-auto custom-scrollbar gap-2"
+          id="month-selector"
+        >
+          <!-- Buttons JAN-DEZ injected by JS -->
+        </div>
+
+        <!-- Dashboard Summary Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <!-- Receita Total -->
+          <div
+            class="card-panel rounded-2xl p-5 border-l-4 border-l-[#00E676] relative overflow-hidden neon-glow-green"
+          >
+            <div
+              class="flex justify-between items-center text-gray-400 text-xs font-semibold uppercase tracking-wider mb-2"
+            >
+              <span>Total de Receitas</span>
+              <div
+                class="w-8 h-8 rounded-full bg-[#00E676]/10 text-[#00E676] flex items-center justify-center"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M7 11l5-5m0 0l5 5m-5-5v12"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div
+              class="text-3xl font-bold font-mono text-[#00E676]"
+              id="dash-receita"
+            >
+              R$ 0,00
+            </div>
+            <div class="text-xs text-gray-500 mt-2" id="dash-receita-sub">
+              Previsto: R$ 0,00
+            </div>
+          </div>
+
+          <!-- Despesa Total -->
+          <div
+            class="card-panel rounded-2xl p-5 border-l-4 border-l-[#FF3B5C] relative overflow-hidden neon-glow-red"
+          >
+            <div
+              class="flex justify-between items-center text-gray-400 text-xs font-semibold uppercase tracking-wider mb-2"
+            >
+              <span>Total de Despesas</span>
+              <div
+                class="w-8 h-8 rounded-full bg-[#FF3B5C]/10 text-[#FF3B5C] flex items-center justify-center"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17 13l-5 5m0 0l-5-5m5 5V6"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div
+              class="text-3xl font-bold font-mono text-[#FF3B5C]"
+              id="dash-despesa"
+            >
+              R$ 0,00
+            </div>
+            <div class="text-xs text-gray-500 mt-2" id="dash-despesa-sub">
+              Previsto: R$ 0,00
+            </div>
+          </div>
+
+          <!-- Lucro Mensal (Saldo) -->
+          <div
+            class="card-panel rounded-2xl p-5 border-l-4 border-l-[#00E5FF] relative overflow-hidden neon-glow-cyan"
+          >
+            <div
+              class="flex justify-between items-center text-gray-400 text-xs font-semibold uppercase tracking-wider mb-2"
+            >
+              <span>Lucro Mensal (Saldo)</span>
+              <div
+                class="w-8 h-8 rounded-full bg-[#00E5FF]/10 text-[#00E5FF] flex items-center justify-center"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div
+              class="text-3xl font-bold font-mono text-[#00E5FF]"
+              id="dash-saldo"
+            >
+              R$ 0,00
+            </div>
+            <div class="text-xs text-gray-500 mt-2" id="dash-saldo-sub">
+              Receita Real - Despesa Real
+            </div>
+          </div>
+        </div>
+
+        <!-- NOVO: Gráfico de Evolução Anual -->
+        <div
+          class="card-panel rounded-2xl p-5 mt-2 mb-2 relative w-full border border-[#252738]"
+        >
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-sm font-bold text-white flex items-center gap-2">
+              <span class="text-[#00E5FF]">📊</span> Evolução Anual Consolidada
+              (Valores Reais)
+            </h3>
+          </div>
+          <div class="w-full h-[280px]">
+            <canvas id="monthlyChart"></canvas>
+          </div>
+        </div>
+
+        <p class="text-xs text-gray-400 italic flex items-center gap-1">
+          <span>💡 Dica:</span> Clique no ícone de <b>Lápis ✏️</b> ou dê um
+          <b>duplo-clique</b> em qualquer linha para editar rapidamente os
+          valores.
+        </p>
+
+        <!-- Two Columns: Despesas & Receitas -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- Left Column: Despesas -->
+          <div class="card-panel rounded-2xl p-5 space-y-4">
+            <div
+              class="flex items-center justify-between border-b border-[#252738] pb-3"
+            >
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-[#FF3B5C]"></span>
+                <h3 class="text-lg font-bold text-white">Despesas & Contas</h3>
+              </div>
+              <button
+                onclick="openModalDespesa()"
+                class="px-3 py-1.5 text-xs font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition flex items-center gap-1 shadow-md shadow-red-950/50"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-4 w-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 4v16m8-8H4"
+                  />
+                </svg>
+                Nova Despesa
+              </button>
+            </div>
+
+            <div class="overflow-x-auto custom-scrollbar">
+              <table class="w-full text-left text-sm text-gray-300">
+                <thead
+                  class="text-xs text-gray-400 uppercase bg-[#0E0F18] border-b border-[#252738]"
+                >
+                  <tr>
+                    <th class="py-2.5 px-3">Venc.</th>
+                    <th class="py-2.5 px-3">Descrição</th>
+                    <th class="py-2.5 px-3">Previsto</th>
+                    <th class="py-2.5 px-3">Pago / Real</th>
+                    <th class="py-2.5 px-3 text-center">Status</th>
+                    <th class="py-2.5 px-2 text-right">Ação</th>
+                  </tr>
+                </thead>
+                <tbody
+                  id="table-despesas-body"
+                  class="divide-y divide-[#1E1F2E]"
+                >
+                  <!-- Rows injected by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Right Column: Receitas -->
+          <div class="card-panel rounded-2xl p-5 space-y-4">
+            <div
+              class="flex items-center justify-between border-b border-[#252738] pb-3"
+            >
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-[#00E676]"></span>
+                <h3 class="text-lg font-bold text-white">
+                  Receitas & Entradas
+                </h3>
+              </div>
+              <button
+                onclick="openModalReceita()"
+                class="px-3 py-1.5 text-xs font-semibold bg-[#00E676] hover:bg-[#22EF89] text-gray-950 rounded-lg transition flex items-center gap-1 shadow-md shadow-green-950/50 font-bold"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-4 w-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 4v16m8-8H4"
+                  />
+                </svg>
+                Nova Receita
+              </button>
+            </div>
+
+            <div class="overflow-x-auto custom-scrollbar">
+              <table class="w-full text-left text-sm text-gray-300">
+                <thead
+                  class="text-xs text-gray-400 uppercase bg-[#0E0F18] border-b border-[#252738]"
+                >
+                  <tr>
+                    <th class="py-2.5 px-3">Descrição</th>
+                    <th class="py-2.5 px-3">Previsto</th>
+                    <th class="py-2.5 px-3">Real Recebido</th>
+                    <th class="py-2.5 px-2 text-right">Ação</th>
+                  </tr>
+                </thead>
+                <tbody
+                  id="table-receitas-body"
+                  class="divide-y divide-[#1E1F2E]"
+                >
+                  <!-- Rows injected by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. ABA CARTÃO CC INTER -->
+      <section id="tab-content-cartao" class="tab-content hidden space-y-6">
+        <div class="card-panel rounded-2xl p-5 space-y-4">
+          <div
+            class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#252738] pb-4"
+          >
+            <div>
+              <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                <span class="text-[#FF3B5C]">💳</span> Fatura Cartão CC Inter
+                (Matriz Anual)
+              </h2>
+              <p class="text-xs text-gray-400">
+                Acompanhamento das parcelas e assinaturas mês a mês. Edite
+                qualquer item com um clique.
+              </p>
+            </div>
+            <button
+              onclick="openModalCartao()"
+              class="px-4 py-2 text-xs font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition flex items-center gap-1.5 shadow-md shadow-red-950/50"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 4v16m8-8H4"
+                />
+              </svg>
+              Nova Compra / Assinatura
+            </button>
+          </div>
+
+          <div class="overflow-x-auto custom-scrollbar">
+            <table
+              class="w-full text-left text-xs text-gray-300 whitespace-nowrap"
+            >
+              <thead
+                class="text-gray-400 uppercase bg-[#0E0F18] border-b border-[#252738]"
+              >
+                <tr id="cartao-header-row">
+                  <th class="py-3 px-3">Categoria</th>
+                  <th class="py-3 px-3">Despesa / Item</th>
+                  <!-- Month Headers injected by JS -->
+                  <th class="py-3 px-2 text-right">Ação</th>
+                </tr>
+              </thead>
+              <tbody
+                id="cartao-body"
+                class="divide-y divide-[#1E1F2E] font-mono"
+              >
+                <!-- Items injected by JS -->
+              </tbody>
+              <tfoot
+                id="cartao-footer"
+                class="bg-[#0E0F18] font-bold border-t-2 border-[#FF3B5C] text-white font-mono"
+              >
+                <!-- Totals injected by JS -->
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. ABA CUSTOS FIXOS & ORÇAMENTO -->
+      <section id="tab-content-custos" class="tab-content hidden space-y-6">
+        <!-- Budget Comparison Overview -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div
+            class="card-panel rounded-2xl p-5 border-l-4 border-l-indigo-500"
+          >
+            <span class="text-xs font-semibold text-gray-400 uppercase"
+              >Renda Fixa Familiar Estimada</span
+            >
+            <div
+              class="text-2xl font-bold font-mono text-indigo-400 mt-1"
+              id="custos-renda-estimada"
+            >
+              R$ 0,00
+            </div>
+            <p class="text-xs text-gray-500 mt-1">
+              Base de cálculo mensal (Receita JAN)
+            </p>
+          </div>
+          <div class="card-panel rounded-2xl p-5 border-l-4 border-l-[#FF3B5C]">
+            <span class="text-xs font-semibold text-gray-400 uppercase"
+              >Média de Custos Fixos</span
+            >
+            <div
+              class="text-2xl font-bold font-mono text-[#FF3B5C] mt-1"
+              id="custos-total-fixo"
+            >
+              R$ 0,00
+            </div>
+            <p class="text-xs text-gray-500 mt-1">
+              Soma das despesas recorrentes
+            </p>
+          </div>
+          <div
+            class="card-panel rounded-2xl p-5 border-l-4 border-l-[#00E676] neon-glow-green"
+          >
+            <span class="text-xs font-semibold text-gray-400 uppercase"
+              >Margem de Segurança / Diferença</span
+            >
+            <div
+              class="text-2xl font-bold font-mono text-[#00E676] mt-1"
+              id="custos-margem"
+            >
+              R$ 0,00
+            </div>
+            <p class="text-xs text-gray-500 mt-1">
+              Sobra livre para investimento/lazer
+            </p>
+          </div>
+        </div>
+
+        <!-- Fixed Costs List & Add Button -->
+        <div class="card-panel rounded-2xl p-5 space-y-4">
+          <div
+            class="flex items-center justify-between border-b border-[#252738] pb-3"
+          >
+            <h3 class="text-lg font-bold text-white flex items-center gap-2">
+              <span>🏡</span> Mapeamento de Custos Fixos Base
+            </h3>
+            <button
+              onclick="openModalCustoFixo()"
+              class="px-3 py-1.5 text-xs font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition flex items-center gap-1"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 4v16m8-8H4"
+                />
+              </svg>
+              Adicionar Custo Base
+            </button>
+          </div>
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 gap-4"
+            id="custos-fixos-grid"
+          >
+            <!-- Category Cards injected by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. ABA RESERVA (PORKINHO) -->
+      <section id="tab-content-reserva" class="tab-content hidden space-y-6">
+        <!-- Balance Banner -->
+        <div
+          class="card-panel rounded-2xl p-6 bg-gradient-to-r from-[#181824] via-[#1F1426] to-[#181824] border border-[#3B1828] relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6 neon-glow-red"
+        >
+          <div class="flex items-center gap-4">
+            <div
+              class="w-16 h-16 rounded-2xl bg-pink-500/10 border border-pink-500/30 flex items-center justify-center text-3xl"
+            >
+              🐷
+            </div>
+            <div>
+              <span
+                class="text-xs uppercase font-bold text-pink-400 tracking-wider"
+                >Reserva Financeira</span
+              >
+              <h2
+                class="text-3xl font-bold font-mono text-white mt-0.5"
+                id="porkinho-saldo-total"
+              >
+                R$ 0,00
+              </h2>
+              <p class="text-xs text-gray-400 mt-1">
+                Patrimônio acumulado no Porkinho
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <button
+              onclick="openModalPorkinho()"
+              class="px-5 py-2.5 font-bold text-sm bg-gradient-to-r from-pink-600 to-[#FF3B5C] hover:from-pink-500 hover:to-[#FF5473] text-white rounded-xl transition shadow-lg shadow-pink-950/50 flex items-center gap-2"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                />
+              </svg>
+              Nova Movimentação
+            </button>
+          </div>
+        </div>
+
+        <!-- Ledger Table -->
+        <div class="card-panel rounded-2xl p-5 space-y-4">
+          <h3
+            class="text-lg font-bold text-white border-b border-[#252738] pb-3"
+          >
+            Extrato de Entradas, Resgates & Rendimentos
+          </h3>
+          <div class="overflow-x-auto custom-scrollbar">
+            <table class="w-full text-left text-sm text-gray-300">
+              <thead
+                class="text-xs text-gray-400 uppercase bg-[#0E0F18] border-b border-[#252738]"
+              >
+                <tr>
+                  <th class="py-3 px-3">Data / Mês</th>
+                  <th class="py-3 px-3">Tipo</th>
+                  <th class="py-3 px-3">Descrição</th>
+                  <th class="py-3 px-3">Valor</th>
+                  <th class="py-3 px-2 text-right">Ação</th>
+                </tr>
+              </thead>
+              <tbody id="porkinho-body" class="divide-y divide-[#1E1F2E]">
+                <!-- Rows injected by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. ABA MURAL DE SONHOS -->
+      <section id="tab-content-sonhos" class="tab-content hidden space-y-6">
+        <div
+          class="flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+        >
+          <div>
+            <h2 class="text-xl font-bold text-white flex items-center gap-2">
+              <span>✨</span> Mural de Objetivos & Sonhos
+            </h2>
+            <p class="text-xs text-gray-400">
+              Priorize conquistas e altere dados a qualquer momento.
+            </p>
+          </div>
+          <button
+            onclick="openModalSonho()"
+            class="px-4 py-2 text-xs font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition flex items-center gap-1.5 shadow-md shadow-red-950/50"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 4v16m8-8H4"
+              />
+            </svg>
+            Novo Item / Sonho
+          </button>
+        </div>
+
+        <!-- 4 Column Kanban Board -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+          <!-- Col 1: Essencial -->
+          <div class="card-panel rounded-2xl p-4 space-y-3 bg-[#11121C]">
+            <div
+              class="flex justify-between items-center border-b border-[#252738] pb-2"
+            >
+              <h4
+                class="font-bold text-amber-400 text-sm flex items-center gap-1.5"
+              >
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+                Essencial
+              </h4>
+              <span class="text-xs text-gray-500 font-mono" id="count-essencial"
+                >0</span
+              >
+            </div>
+            <div id="col-essencial" class="space-y-3 min-h-[150px]">
+              <!-- Cards injected by JS -->
+            </div>
+          </div>
+
+          <!-- Col 2: Importante -->
+          <div class="card-panel rounded-2xl p-4 space-y-3 bg-[#11121C]">
+            <div
+              class="flex justify-between items-center border-b border-[#252738] pb-2"
+            >
+              <h4
+                class="font-bold text-blue-400 text-sm flex items-center gap-1.5"
+              >
+                <span class="w-2.5 h-2.5 rounded-full bg-blue-400"></span>
+                Importante
+              </h4>
+              <span
+                class="text-xs text-gray-500 font-mono"
+                id="count-importante"
+                >0</span
+              >
+            </div>
+            <div id="col-importante" class="space-y-3 min-h-[150px]">
+              <!-- Cards injected by JS -->
+            </div>
+          </div>
+
+          <!-- Col 3: Metas -->
+          <div class="card-panel rounded-2xl p-4 space-y-3 bg-[#11121C]">
+            <div
+              class="flex justify-between items-center border-b border-[#252738] pb-2"
+            >
+              <h4
+                class="font-bold text-purple-400 text-sm flex items-center gap-1.5"
+              >
+                <span class="w-2.5 h-2.5 rounded-full bg-purple-400"></span>
+                Metas
+              </h4>
+              <span class="text-xs text-gray-500 font-mono" id="count-metas"
+                >0</span
+              >
+            </div>
+            <div id="col-metas" class="space-y-3 min-h-[150px]">
+              <!-- Cards injected by JS -->
+            </div>
+          </div>
+
+          <!-- Col 4: Sonhos Realizados -->
+          <div
+            class="card-panel rounded-2xl p-4 space-y-3 bg-[#11121C] border-[#00E676]/30"
+          >
+            <div
+              class="flex justify-between items-center border-b border-[#00E676]/30 pb-2"
+            >
+              <h4
+                class="font-bold text-[#00E676] text-sm flex items-center gap-1.5"
+              >
+                <span class="w-2.5 h-2.5 rounded-full bg-[#00E676]"></span>
+                Sonhos Realizados 🎉
+              </h4>
+              <span
+                class="text-xs text-gray-500 font-mono"
+                id="count-realizados"
+                >0</span
+              >
+            </div>
+            <div id="col-realizados" class="space-y-3 min-h-[150px]">
+              <!-- Cards injected by JS -->
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- MODALS -->
+
+    <!-- Modal Despesa (Adicionar / Editar) -->
+    <div
+      id="modal-despesa"
+      class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-4"
+    >
+      <div
+        class="card-panel rounded-2xl max-w-md w-full p-6 space-y-4 relative border-red-900/40"
+      >
+        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+          <span class="text-[#FF3B5C]" id="modal-despesa-title-icon">+</span>
+          <span id="modal-despesa-title">Nova Despesa</span> (<span
+            id="modal-despesa-mes"
+            >JAN</span
+          >)
+        </h3>
+        <form onsubmit="handleSaveDespesa(event)" class="space-y-3">
+          <input type="hidden" id="despesa-edit-id" value="" />
+          <div>
+            <label class="block text-xs font-semibold text-gray-400 mb-1"
+              >Dia do Vencimento</label
+            >
+            <input
+              type="text"
+              id="despesa-venc"
+              placeholder="Ex: 10"
+              required
+              class="w-full p-2.5 rounded-lg input-dark text-sm"
+            />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-400 mb-1"
+              >Descrição</label
+            >
+            <input
+              type="text"
+              id="despesa-desc"
+              placeholder="Ex: Conta de Luz"
+              required
+              class="w-full p-2.5 rounded-lg input-dark text-sm"
+            />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-400 mb-1"
+              >Valor Previsto (R$)</label
+            >
+            <input
+              type="number"
+              step="0.01"
+              id="despesa-previsto"
+              placeholder="0.00"
+              required
+              class="w-full p-2.5 rounded-lg input-dark text-sm font-mono"
+            />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-400 mb-1"
+              >Valor Real / Pago (R$)</label
+            >
+            <input
+              type="number"
+              step="0.01"
+              id="despesa-real"
+              placeholder="0.00"
+              class="w-full p-2.5 rounded-lg input-dark text-sm font-mono"
+            />
+          </div>
+          <div class="flex items-center gap-2 pt-2">
+            <input
+              type="checkbox"
+              id="despesa-pago"
+              class="w-4 h-4 accent-[#FF3B5C] rounded cursor-pointer"
+            />
+            <label
+              for="despesa-pago"
+              class="text-xs text-gray-300 cursor-pointer"
+              >Marcar como Pago</label
+            >
+          </div>
+          <div class="flex justify-end gap-2 pt-4">
+            <button
+              type="button"
+              onclick="closeModal('modal-despesa')"
+              class="px-4 py-2 text-xs font-semibold text-gray-400 hover:text-white"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              id="btn-save-despesa"
+              class="px-4 py-2 text-xs font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition"
+            >
+              Salvar Despesa
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal Receita (Adicionar / Editar) -->
+    <div
+      id="modal-receita"
+      class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-4"
+    >
+      <div
+        class="card-panel rounded-2xl max-w-md w-full p-6 space-y-4 relative border-emerald-900/40"
+      >
+        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+          <span class="text-[#00E676]" id="modal-receita-title-icon">+</span>
+          <span id="modal-receita-title">Nova Receita</span> (<span
+            id="modal-receita-mes"
+            >JAN</span
+          >)
+        </h3>
+        <form onsubmit="handleSaveReceita(event)" class="space-y-3">
+          <input type="hidden" id="receita-edit-id" value="" />
+          <div>
+            <label class="block text-xs font-semibold text-gray-400 mb-1"
+              >Descrição</label
+            >
+            <input
+              type="text"
+              id="receita-desc"
+              placeholder="Ex: Salário, Comissão..."
+              required
+              class="w-full p-2.5 rounded-lg input-dark text-sm"
+            />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-400 mb-1"
+              >Valor Previsto (R$)</label
+            >
+            <input
+              type="number"
+              step="0.01"
+              id="receita-previsto"
+              placeholder="0.00"
+              required
+              class="w-full p-2.5 rounded-lg input-dark text-sm font-mono"
+            />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-400 mb-1"
+              >Valor Real Recebido (R$)</label
+            >
+            <input
+              type="number"
+              step="0.01"
+              id="receita-real"
+              placeholder="0.00"
+              class="w-full p-2.5 rounded-lg input-dark text-sm font-mono"
+            />
+          </div>
+          <div class="flex justify-end gap-2 pt-4">
+            <button
+              type="button"
+              onclick="closeModal('modal-receita')"
+              class="px-4 py-2 text-xs font-semibold text-gray-400 hover:text-white"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              id="btn-save-receita"
+              class="px-4 py-2 text-xs font-semibold bg-[#00E676] hover:bg-[#22EF89] text-gray-950 font-bold rounded-lg transition"
+            >
+              Salvar Receita
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal Item Cartão (Adicionar / Editar) -->
+    <div
+      id="modal-cartao"
+      class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-4"
+    >
+      <div
+        class="card-panel rounded-2xl max-w-md w-full p-6 space-y-4 relative border-red-900/40"
+      >
+        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+          <span class="text-[#FF3B5C]">💳</span>
+          <span id="modal-cartao-title">Adicionar Compra no Cartão</span>
+        </h3>
+        <form onsubmit="handleSaveCartao(event)" class="space-y-3">
+          <input type="hidden" id="cartao-edit-id" value="" />
+          <div>
+            <label class="block text-xs font-semibold text-gray-400 mb-1"
+              >Categoria</label
+            >
+            <input
+              type="text"
+              id="cartao-cat"
+              placeholder="Ex: Assinaturas, Mercado, Lazer..."
+              required
+              class="w-full p-2.5 rounded-lg input-dark text-sm"
+            />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-400 mb-1"
+              >Descrição do Item/Compra</label
+            >
+            <input
+              type="text"
+              id="cartao-desc"
+              placeholder="Ex: Netflix, Pneu Carro..."
+              required
+              class="w-full p-2.5 rounded-lg input-dark text-sm"
+            />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-400 mb-1"
+              >Valor Mensal Padronizado (R$)</label
+            >
+            <input
+              type="number"
+              step="0.01"
+              id="cartao-valor"
+              placeholder="0.00"
+              class="w-full p-2.5 rounded-lg input-dark text-sm font-mono"
+            />
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-gray-400 mb-1"
+                >Mês Inicial</label
+              >
+              <select
+                id="cartao-mes-inicio"
+                class="w-full p-2.5 rounded-lg input-dark text-sm cursor-pointer"
+              >
+                <option value="JAN">JAN</option>
+                <option value="FEV">FEV</option>
+                <option value="MAR">MAR</option>
+                <option value="ABR">ABR</option>
+                <option value="MAI">MAI</option>
+                <option value="JUN">JUN</option>
+                <option value="JUL">JUL</option>
+                <option value="AGO">AGO</option>
+                <option value="SET">SET</option>
+                <option value="OUT">OUT</option>
+                <option value="NOV">NOV</option>
+                <option value="DEZ">DEZ</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-gray-400 mb-1"
+                >Nº Parcelas</label
+              >
+              <input
+                type="number"
+                id="cartao-parcelas"
+                min="1"
+                max="12"
+                value="12"
+                class="w-full p-2.5 rounded-lg input-dark text-sm font-mono"
+              />
+            </div>
+          </div>
+          <div class="flex justify-end gap-2 pt-4">
+            <button
+              type="button"
+              onclick="closeModal('modal-cartao')"
+              class="px-4 py-2 text-xs font-semibold text-gray-400 hover:text-white"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              id="btn-save-cartao"
+              class="px-4 py-2 text-xs font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition"
+            >
+              Salvar Item
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal Custo Fixo Base -->
+    <div
+      id="modal-custo-fixo"
+      class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-4"
+    >
+      <div
+        class="card-panel rounded-2xl max-w-md w-full p-6 space-y-4 relative"
+      >
+        <h3 class="text-lg font-bold text-white">
+          <span id="modal-custo-title">Adicionar Custo Fixo Base</span>
+        </h3>
+        <form onsubmit="handleSaveCustoFixo(event)" class="space-y-3">
+          <input type="hidden" id="custo-edit-id" value="" />
+          <div>
+            <label class="block text-xs font-semibold text-gray-400 mb-1"
+              >Categoria</label
+            >
+            <select
+              id="custo-cat"
+              class="w-full p-2.5 rounded-lg input-dark text-sm cursor-pointer"
+            >
+              <option value="Moradia">Moradia</option>
+              <option value="Alimentação">Alimentação</option>
+              <option value="Transporte">Transporte</option>
+              <option value="Financiamento">Financiamento</option>
+              <option value="Assinaturas">Assinaturas</option>
+              <option value="Saúde & Exercício">Saúde & Exercício</option>
+              <option value="Outros">Outros</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-400 mb-1"
+              >Descrição</label
+            >
+            <input
+              type="text"
+              id="custo-desc"
+              placeholder="Ex: Aluguel, Mercado Média..."
+              required
+              class="w-full p-2.5 rounded-lg input-dark text-sm"
+            />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-400 mb-1"
+              >Valor Médio Estimado (R$)</label
+            >
+            <input
+              type="number"
+              step="0.01"
+              id="custo-valor"
+              placeholder="0.00"
+              required
+              class="w-full p-2.5 rounded-lg input-dark text-sm font-mono"
+            />
+          </div>
+          <div class="flex justify-end gap-2 pt-4">
+            <button
+              type="button"
+              onclick="closeModal('modal-custo-fixo')"
+              class="px-4 py-2 text-xs font-semibold text-gray-400 hover:text-white"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              id="btn-save-custo"
+              class="px-4 py-2 text-xs font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition"
+            >
+              Salvar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal Transação Porkinho -->
+    <div
+      id="modal-porkinho"
+      class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-4"
+    >
+      <div
+        class="card-panel rounded-2xl max-w-md w-full p-6 space-y-4 relative border-pink-900/40"
+      >
+        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+          <span>🐷</span>
+          <span id="modal-porkinho-title">Nova Movimentação na Reserva</span>
+        </h3>
+        <form onsubmit="handleSavePorkinho(event)" class="space-y-3">
+          <input type="hidden" id="porkinho-edit-id" value="" />
+          <div>
+            <label class="block text-xs font-semibold text-gray-400 mb-1"
+              >Data / Mês</label
+            >
+            <input
+              type="text"
+              id="porkinho-date"
+              placeholder="Ex: Jan/2026 ou 15/01"
+              required
+              class="w-full p-2.5 rounded-lg input-dark text-sm"
+            />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-400 mb-1"
+              >Tipo de Movimentação</label
+            >
+            <select
+              id="porkinho-tipo"
+              class="w-full p-2.5 rounded-lg input-dark text-sm cursor-pointer"
+            >
+              <option value="aporte">Aporte / Depósito (+)</option>
+              <option value="rendimento">Rendimento Mês (+)</option>
+              <option value="resgate">Resgate / Retirada (-)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-400 mb-1"
+              >Descrição</label
+            >
+            <input
+              type="text"
+              id="porkinho-desc"
+              placeholder="Ex: Sobra do Mês, Rendimento CDB..."
+              required
+              class="w-full p-2.5 rounded-lg input-dark text-sm"
+            />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-400 mb-1"
+              >Valor (R$)</label
+            >
+            <input
+              type="number"
+              step="0.01"
+              id="porkinho-valor"
+              placeholder="0.00"
+              required
+              class="w-full p-2.5 rounded-lg input-dark text-sm font-mono"
+            />
+          </div>
+          <div class="flex justify-end gap-2 pt-4">
+            <button
+              type="button"
+              onclick="closeModal('modal-porkinho')"
+              class="px-4 py-2 text-xs font-semibold text-gray-400 hover:text-white"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              id="btn-save-porkinho"
+              class="px-4 py-2 text-xs font-semibold bg-pink-600 hover:bg-pink-500 text-white rounded-lg transition"
+            >
+              Salvar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal Novo Sonho/Meta -->
+    <div
+      id="modal-sonho"
+      class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-4"
+    >
+      <div
+        class="card-panel rounded-2xl max-w-md w-full p-6 space-y-4 relative"
+      >
+        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+          <span>✨</span>
+          <span id="modal-sonho-title">Novo Item no Mural de Sonhos</span>
+        </h3>
+        <form onsubmit="handleSaveSonho(event)" class="space-y-3">
+          <input type="hidden" id="sonho-edit-id" value="" />
+          <div>
+            <label class="block text-xs font-semibold text-gray-400 mb-1"
+              >Título do Item/Conquista</label
+            >
+            <input
+              type="text"
+              id="sonho-title-input"
+              placeholder="Ex: Purificador de Água, PS5..."
+              required
+              class="w-full p-2.5 rounded-lg input-dark text-sm"
+            />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-400 mb-1"
+              >Prioridade / Coluna</label
+            >
+            <select
+              id="sonho-col"
+              class="w-full p-2.5 rounded-lg input-dark text-sm cursor-pointer"
+            >
+              <option value="essencial">Essencial</option>
+              <option value="importante">Importante</option>
+              <option value="metas">Metas</option>
+              <option value="realizados">Sonhos Realizados 🎉</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-gray-400 mb-1"
+              >Valor Estimado (R$)</label
+            >
+            <input
+              type="number"
+              step="0.01"
+              id="sonho-val"
+              placeholder="0.00"
+              class="w-full p-2.5 rounded-lg input-dark text-sm font-mono"
+            />
+          </div>
+          <div class="flex justify-end gap-2 pt-4">
+            <button
+              type="button"
+              onclick="closeModal('modal-sonho')"
+              class="px-4 py-2 text-xs font-semibold text-gray-400 hover:text-white"
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              id="btn-save-sonho"
+              class="px-4 py-2 text-xs font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition"
+            >
+              Salvar Sonho
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- JS LOGIC -->
+    <script>
+      // --- CONSTANTS & DEFAULT SEED DATA ---
+      const MONTHS = [
+        "JAN",
+        "FEV",
+        "MAR",
+        "ABR",
+        "MAI",
+        "JUN",
+        "JUL",
+        "AGO",
+        "SET",
+        "OUT",
+        "NOV",
+        "DEZ",
+      ];
+      const STORAGE_KEY = "planejamento_2026_db";
+
+      function getDefaultData() {
+        const monthlyData = {};
+
+        MONTHS.forEach((m, idx) => {
+          monthlyData[m] = {
+            expenses: [
+              {
+                id: "e1_" + m,
+                venc: "05",
+                desc: "Aluguel",
+                previsto: 1200,
+                real: 1200,
+                pago: idx === 0,
+              },
+              {
+                id: "e2_" + m,
+                venc: "10",
+                desc: "Água",
+                previsto: 80,
+                real: 80,
+                pago: idx === 0,
+              },
+              {
+                id: "e3_" + m,
+                venc: "10",
+                desc: "Luz Apê",
+                previsto: 180,
+                real: 195,
+                pago: idx === 0,
+              },
+              {
+                id: "e4_" + m,
+                venc: "10",
+                desc: "Condomínio",
+                previsto: 350,
+                real: 350,
+                pago: idx === 0,
+              },
+              {
+                id: "e5_" + m,
+                venc: "15",
+                desc: "Gás",
+                previsto: 65,
+                real: 65,
+                pago: idx === 0,
+              },
+              {
+                id: "e6_" + m,
+                venc: "15",
+                desc: "Internet e Celular",
+                previsto: 160,
+                real: 160,
+                pago: idx === 0,
+              },
+              {
+                id: "e7_" + m,
+                venc: "20",
+                desc: "CC Inter Fixos",
+                previsto: 450,
+                real: 450,
+                pago: idx === 0,
+              },
+              {
+                id: "e8_" + m,
+                venc: "20",
+                desc: "CC Inter Extras",
+                previsto: 300,
+                real: 320,
+                pago: idx === 0,
+              },
+              {
+                id: "e9_" + m,
+                venc: "25",
+                desc: "Habitação Caixa",
+                previsto: 1450,
+                real: 1450,
+                pago: idx === 0,
+              },
+              {
+                id: "e10_" + m,
+                venc: "28",
+                desc: "Alimentação / Mercado",
+                previsto: 1200,
+                real: 1250,
+                pago: idx === 0,
+              },
+              {
+                id: "e11_" + m,
+                venc: "05",
+                desc: "Auxílio Pai e Mãe",
+                previsto: 400,
+                real: 400,
+                pago: idx === 0,
+              },
+              {
+                id: "e12_" + m,
+                venc: "12",
+                desc: "IPTV",
+                previsto: 35,
+                real: 35,
+                pago: idx === 0,
+              },
+              {
+                id: "e13_" + m,
+                venc: "18",
+                desc: "Seguro Carro",
+                previsto: 220,
+                real: 220,
+                pago: idx === 0,
+              },
+            ],
+            incomes: [
+              {
+                id: "i1_" + m,
+                desc: "Salário Matheus",
+                previsto: 4800,
+                real: 4800,
+              },
+              {
+                id: "i2_" + m,
+                desc: "Salário Tamara",
+                previsto: 3800,
+                real: 3800,
+              },
+              {
+                id: "i3_" + m,
+                desc: "Alimentação Matheus (VA/VR)",
+                previsto: 650,
+                real: 650,
+              },
+              {
+                id: "i4_" + m,
+                desc: "Alimentação Tamara (VA/VR)",
+                previsto: 550,
+                real: 550,
+              },
+              {
+                id: "i5_" + m,
+                desc: "Comissão Matheus",
+                previsto: 500,
+                real: 620,
+              },
+              {
+                id: "i6_" + m,
+                desc: "Adiantamento / Auxílios",
+                previsto: 300,
+                real: 300,
+              },
+            ],
+          };
+        });
+
+        return {
+          selectedMonth: "JAN",
+          activeTab: "mensal",
+          monthlyData: monthlyData,
+          cardItems: [
+            {
+              id: "c1",
+              category: "Assinaturas",
+              desc: "Google One",
+              values: {
+                JAN: 9.99,
+                FEV: 9.99,
+                MAR: 9.99,
+                ABR: 9.99,
+                MAI: 9.99,
+                JUN: 9.99,
+                JUL: 9.99,
+                AGO: 9.99,
+                SET: 9.99,
+                OUT: 9.99,
+                NOV: 9.99,
+                DEZ: 9.99,
+              },
+            },
+            {
+              id: "c2",
+              category: "Assinaturas",
+              desc: "Netflix",
+              values: {
+                JAN: 55.9,
+                FEV: 55.9,
+                MAR: 55.9,
+                ABR: 55.9,
+                MAI: 55.9,
+                JUN: 55.9,
+                JUL: 55.9,
+                AGO: 55.9,
+                SET: 55.9,
+                OUT: 55.9,
+                NOV: 55.9,
+                DEZ: 55.9,
+              },
+            },
+            {
+              id: "c3",
+              category: "Academia",
+              desc: "Gympass / FitDance",
+              values: {
+                JAN: 119.0,
+                FEV: 119.0,
+                MAR: 119.0,
+                ABR: 119.0,
+                MAI: 119.0,
+                JUN: 119.0,
+                JUL: 119.0,
+                AGO: 119.0,
+                SET: 119.0,
+                OUT: 119.0,
+                NOV: 119.0,
+                DEZ: 119.0,
+              },
+            },
+            {
+              id: "c4",
+              category: "Utensílios",
+              desc: "Havan (Air Fryer/Copos)",
+              values: {
+                JAN: 149.9,
+                FEV: 149.9,
+                MAR: 149.9,
+                ABR: 149.9,
+                MAI: 149.9,
+                JUN: 149.9,
+                JUL: 149.9,
+                AGO: 149.9,
+                SET: 149.9,
+                OUT: 149.9,
+                NOV: 0,
+                DEZ: 0,
+              },
+            },
+            {
+              id: "c5",
+              category: "Lazer",
+              desc: "Ingressos Beto Carrero",
+              values: {
+                JAN: 250.0,
+                FEV: 250.0,
+                MAR: 250.0,
+                ABR: 250.0,
+                MAI: 0,
+                JUN: 0,
+                JUL: 0,
+                AGO: 0,
+                SET: 0,
+                OUT: 0,
+                NOV: 0,
+                DEZ: 0,
+              },
+            },
+            {
+              id: "c6",
+              category: "Manutenção",
+              desc: "Pneus Carro (Troca)",
+              values: {
+                JAN: 0,
+                FEV: 320.0,
+                MAR: 320.0,
+                ABR: 320.0,
+                MAI: 320.0,
+                JUN: 0,
+                JUL: 0,
+                AGO: 0,
+                SET: 0,
+                OUT: 0,
+                NOV: 0,
+                DEZ: 0,
+              },
+            },
+            {
+              id: "c7",
+              category: "Mercado",
+              desc: "Mercado Livre Utensílios",
+              values: {
+                JAN: 89.9,
+                FEV: 89.9,
+                MAR: 89.9,
+                ABR: 0,
+                MAI: 0,
+                JUN: 0,
+                JUL: 0,
+                AGO: 0,
+                SET: 0,
+                OUT: 0,
+                NOV: 0,
+                DEZ: 0,
+              },
+            },
+          ],
+          fixedCosts: [
+            {
+              id: "f1",
+              category: "Moradia",
+              desc: "Aluguel + Condomínio",
+              value: 1550,
+            },
+            {
+              id: "f2",
+              category: "Moradia",
+              desc: "Água + Luz + Gás",
+              value: 325,
+            },
+            {
+              id: "f3",
+              category: "Financiamento",
+              desc: "Habitação Caixa",
+              value: 1450,
+            },
+            {
+              id: "f4",
+              category: "Alimentação",
+              desc: "Mercado Geral + VAs",
+              value: 2400,
+            },
+            {
+              id: "f5",
+              category: "Transporte",
+              desc: "Seguro Carro + Combustível",
+              value: 650,
+            },
+            {
+              id: "f6",
+              category: "Assinaturas",
+              desc: "Internet + Celular + Streaming",
+              value: 260,
+            },
+            {
+              id: "f7",
+              category: "Saúde & Exercício",
+              desc: "Academia + Fisioterapia",
+              value: 350,
+            },
+          ],
+          porkinho: {
+            transactions: [
+              {
+                id: "p1",
+                date: "Jan/2026",
+                type: "aporte",
+                desc: "Sobra Inicial Salários",
+                amount: 1000,
+              },
+              {
+                id: "p2",
+                date: "Jan/2026",
+                type: "rendimento",
+                desc: "Rendimento CDB",
+                amount: 12.5,
+              },
+              {
+                id: "p3",
+                date: "Fev/2026",
+                type: "aporte",
+                desc: "Aporte Mensal",
+                amount: 500,
+              },
+            ],
+          },
+          dreams: [
+            {
+              id: "d1",
+              title: "Cabides e Organizadores",
+              col: "essencial",
+              val: 150,
+            },
+            {
+              id: "d2",
+              title: "Colchonete & Halteres",
+              col: "essencial",
+              val: 120,
+            },
+            {
+              id: "d3",
+              title: "Manutenção do Carro",
+              col: "importante",
+              val: 800,
+            },
+            {
+              id: "d4",
+              title: "Cadeira de Escritório",
+              col: "importante",
+              val: 650,
+            },
+            { id: "d5", title: "Purificador de Água", col: "metas", val: 580 },
+            { id: "d6", title: "PS5 & GTA 6", col: "metas", val: 4500 },
+            {
+              id: "d7",
+              title: "Máquina de Lavar",
+              col: "realizados",
+              val: 2200,
+            },
+            {
+              id: "d8",
+              title: "Colchão do Henrique",
+              col: "realizados",
+              val: 1400,
+            },
+            { id: "d9", title: "Air Fryer Havan", col: "realizados", val: 380 },
+          ],
+        };
+      }
+
+      // App State
+      let state = {};
+      let monthlyChartInstance = null;
+
+      // --- INIT ---
+      function initApp() {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          try {
+            state = JSON.parse(saved);
+          } catch (e) {
+            state = getDefaultData();
+          }
+        } else {
+          state = getDefaultData();
+        }
+        saveState();
+        renderApp();
+      }
+
+      function saveState() {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      }
+
+      function renderApp() {
+        switchTab(state.activeTab || "mensal");
+        renderMonthSelector();
+        renderMensal();
+        renderCartao();
+        renderCustos();
+        renderPorkinho();
+        renderSonhos();
+      }
+
+      function formatBRL(val) {
+        return (val || 0).toLocaleString("pt-BR", {
+          style: "currency",
+          currency: "BRL",
+        });
+      }
+
+      // --- TAB NAVIGATION ---
+      function switchTab(tab) {
+        state.activeTab = tab;
+        saveState();
+
+        document
+          .querySelectorAll(".tab-content")
+          .forEach((el) => el.classList.add("hidden"));
+
+        document.querySelectorAll(".tab-btn").forEach((btn) => {
+          btn.classList.remove("bg-[#FF3B5C]", "text-white", "shadow-md");
+          btn.classList.add("text-gray-400");
+        });
+
+        const targetContent = document.getElementById(`tab-content-${tab}`);
+        const targetBtn = document.getElementById(`tab-btn-${tab}`);
+
+        if (targetContent) targetContent.classList.remove("hidden");
+        if (targetBtn) {
+          targetBtn.classList.add("bg-[#FF3B5C]", "text-white", "shadow-md");
+          targetBtn.classList.remove("text-gray-400");
+        }
+      }
+
+      // --- VISÃO MENSAL ---
+      function renderMonthSelector() {
+        const container = document.getElementById("month-selector");
+        container.innerHTML = "";
+
+        MONTHS.forEach((m) => {
+          const btn = document.createElement("button");
+          const isSelected = state.selectedMonth === m;
+          btn.className = `px-4 py-2 rounded-xl font-bold text-xs font-mono transition flex-1 text-center whitespace-nowrap ${
+            isSelected
+              ? "bg-[#FF3B5C] text-white shadow-lg shadow-red-950/60 border border-red-500"
+              : "bg-[#10111A] text-gray-400 hover:text-white hover:bg-[#1C1D2A] border border-[#252738]"
+          }`;
+          btn.innerText = m;
+          btn.onclick = () => {
+            state.selectedMonth = m;
+            saveState();
+            renderMonthSelector();
+            renderMensal();
+          };
+          container.appendChild(btn);
+        });
+      }
+
+      function renderMensal() {
+        const currentM = state.selectedMonth || "JAN";
+        const mData = state.monthlyData[currentM] || {
+          expenses: [],
+          incomes: [],
+        };
+
+        // Expenses Table
+        const tbodyExpenses = document.getElementById("table-despesas-body");
+        tbodyExpenses.innerHTML = "";
+
+        let totalExpPrevisto = 0;
+        let totalExpReal = 0;
+
+        mData.expenses.forEach((item) => {
+          totalExpPrevisto += parseFloat(item.previsto || 0);
+          totalExpReal += parseFloat(item.real || 0);
+
+          const tr = document.createElement("tr");
+          tr.className = "editable-row transition";
+          tr.ondblclick = () => editExpense(item.id);
+          tr.innerHTML = `
+                    <td class="py-2.5 px-3 font-mono text-xs text-gray-400">${item.venc || "--"}</td>
+                    <td class="py-2.5 px-3 font-semibold text-gray-200">${item.desc}</td>
+                    <td class="py-2.5 px-3 font-mono text-gray-400">${formatBRL(item.previsto)}</td>
+                    <td class="py-2.5 px-3 font-mono font-bold ${item.pago ? "text-[#00E676]" : "text-[#FF3B5C]"}">${formatBRL(item.real)}</td>
+                    <td class="py-2.5 px-3 text-center">
+                        <button onclick="event.stopPropagation(); toggleExpenseStatus('${item.id}')" class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-md transition ${
+                          item.pago
+                            ? "bg-[#00E676]/15 text-[#00E676] border border-[#00E676]/30"
+                            : "bg-red-500/15 text-red-400 border border-red-500/30 hover:bg-red-500/30"
+                        }">
+                            ${item.pago ? "PAGO" : "PENDENTE"}
+                        </button>
+                    </td>
+                    <td class="py-2.5 px-2 text-right">
+                        <div class="flex items-center justify-end gap-1">
+                            <button onclick="event.stopPropagation(); editExpense('${item.id}')" class="text-gray-400 hover:text-white p-1" title="Editar">
+                                ✏️
+                            </button>
+                            <button onclick="event.stopPropagation(); deleteExpense('${item.id}')" class="text-gray-500 hover:text-red-400 p-1" title="Excluir">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                            </button>
+                        </div>
+                    </td>
+                `;
+          tbodyExpenses.appendChild(tr);
+        });
+
+        // Incomes Table
+        const tbodyIncomes = document.getElementById("table-receitas-body");
+        tbodyIncomes.innerHTML = "";
+
+        let totalIncPrevisto = 0;
+        let totalIncReal = 0;
+
+        mData.incomes.forEach((item) => {
+          totalIncPrevisto += parseFloat(item.previsto || 0);
+          totalIncReal += parseFloat(item.real || 0);
+
+          const tr = document.createElement("tr");
+          tr.className = "editable-row transition";
+          tr.ondblclick = () => editIncome(item.id);
+          tr.innerHTML = `
+                    <td class="py-2.5 px-3 font-semibold text-gray-200">${item.desc}</td>
+                    <td class="py-2.5 px-3 font-mono text-gray-400">${formatBRL(item.previsto)}</td>
+                    <td class="py-2.5 px-3 font-mono font-bold text-[#00E676]">${formatBRL(item.real)}</td>
+                    <td class="py-2.5 px-2 text-right">
+                        <div class="flex items-center justify-end gap-1">
+                            <button onclick="event.stopPropagation(); editIncome('${item.id}')" class="text-gray-400 hover:text-white p-1" title="Editar">
+                                ✏️
+                            </button>
+                            <button onclick="event.stopPropagation(); deleteIncome('${item.id}')" class="text-gray-500 hover:text-red-400 p-1" title="Excluir">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                            </button>
+                        </div>
+                    </td>
+                `;
+          tbodyIncomes.appendChild(tr);
+        });
+
+        // Calculate Dashboard
+        const saldo = totalIncReal - totalExpReal;
+
+        document.getElementById("dash-receita").innerText =
+          formatBRL(totalIncReal);
+        document.getElementById("dash-receita-sub").innerText =
+          `Previsto: ${formatBRL(totalIncPrevisto)}`;
+
+        document.getElementById("dash-despesa").innerText =
+          formatBRL(totalExpReal);
+        document.getElementById("dash-despesa-sub").innerText =
+          `Previsto: ${formatBRL(totalExpPrevisto)}`;
+
+        const dashSaldoEl = document.getElementById("dash-saldo");
+        dashSaldoEl.innerText = formatBRL(saldo);
+        if (saldo < 0) {
+          dashSaldoEl.className = "text-3xl font-bold font-mono text-red-500";
+        } else {
+          dashSaldoEl.className = "text-3xl font-bold font-mono text-[#00E5FF]";
+        }
+
+        renderChart();
+      }
+
+      function renderChart() {
+        const ctx = document.getElementById("monthlyChart");
+        if (!ctx) return;
+
+        const labels = MONTHS;
+        const receitasData = [];
+        const despesasData = [];
+        const saldosData = [];
+
+        MONTHS.forEach((m) => {
+          const mData = state.monthlyData[m] || { expenses: [], incomes: [] };
+          let tInc = 0,
+            tExp = 0;
+          mData.incomes.forEach((i) => (tInc += parseFloat(i.real || 0)));
+          mData.expenses.forEach((e) => (tExp += parseFloat(e.real || 0)));
+          receitasData.push(tInc);
+          despesasData.push(tExp);
+          saldosData.push(tInc - tExp);
+        });
+
+        if (monthlyChartInstance) {
+          monthlyChartInstance.destroy();
+        }
+
+        Chart.defaults.color = "#94a3b8";
+        Chart.defaults.font.family = "'Inter', sans-serif";
+
+        monthlyChartInstance = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: "Receitas",
+                data: receitasData,
+                backgroundColor: "rgba(0, 230, 118, 0.15)",
+                borderColor: "#00E676",
+                borderWidth: 1.5,
+                borderRadius: 4,
+              },
+              {
+                label: "Despesas",
+                data: despesasData,
+                backgroundColor: "rgba(255, 59, 92, 0.15)",
+                borderColor: "#FF3B5C",
+                borderWidth: 1.5,
+                borderRadius: 4,
+              },
+              {
+                type: "line",
+                label: "Saldo (Lucro)",
+                data: saldosData,
+                borderColor: "#00E5FF",
+                backgroundColor: "#00E5FF",
+                borderWidth: 2.5,
+                tension: 0.4, // Curva suave
+                pointBackgroundColor: "#0B0C10",
+                pointBorderWidth: 2,
+                pointRadius: 4,
+                pointHoverRadius: 6,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+              mode: "index",
+              intersect: false,
+            },
+            plugins: {
+              legend: {
+                position: "top",
+                labels: { usePointStyle: true, boxWidth: 8, padding: 15 },
+              },
+              tooltip: {
+                backgroundColor: "rgba(21, 22, 33, 0.95)",
+                titleColor: "#fff",
+                bodyColor: "#e2e8f0",
+                borderColor: "#252738",
+                borderWidth: 1,
+                padding: 10,
+                callbacks: {
+                  label: function (context) {
+                    let label = context.dataset.label || "";
+                    if (label) label += ": ";
+                    if (context.parsed.y !== null) {
+                      label += new Intl.NumberFormat("pt-BR", {
+                        style: "currency",
+                        currency: "BRL",
+                      }).format(context.parsed.y);
+                    }
+                    return label;
+                  },
+                },
+              },
+            },
+            scales: {
+              y: {
+                grid: { color: "#1E1F2E", drawBorder: false },
+                ticks: {
+                  callback: function (value) {
+                    return value === 0 ? "R$ 0" : value / 1000 + "k"; // Formatação limpa
+                  },
+                },
+              },
+              x: {
+                grid: { display: false, drawBorder: false },
+              },
+            },
+          },
+        });
+      }
+
+      function toggleExpenseStatus(id) {
+        const currentM = state.selectedMonth;
+        const exp = state.monthlyData[currentM].expenses.find(
+          (x) => x.id === id,
+        );
+        if (exp) {
+          exp.pago = !exp.pago;
+          saveState();
+          renderMensal();
+        }
+      }
+
+      function deleteExpense(id) {
+        const currentM = state.selectedMonth;
+        state.monthlyData[currentM].expenses = state.monthlyData[
+          currentM
+        ].expenses.filter((x) => x.id !== id);
+        saveState();
+        renderMensal();
+      }
+
+      function deleteIncome(id) {
+        const currentM = state.selectedMonth;
+        state.monthlyData[currentM].incomes = state.monthlyData[
+          currentM
+        ].incomes.filter((x) => x.id !== id);
+        saveState();
+        renderMensal();
+      }
+
+      // --- EDIT DESPESA & RECEITA ---
+      function openModalDespesa() {
+        document.getElementById("despesa-edit-id").value = "";
+        document.getElementById("modal-despesa-title").innerText =
+          "Nova Despesa";
+        document.getElementById("modal-despesa-title-icon").innerText = "+";
+        document.getElementById("btn-save-despesa").innerText =
+          "Salvar Despesa";
+        document.getElementById("despesa-venc").value = "";
+        document.getElementById("despesa-desc").value = "";
+        document.getElementById("despesa-previsto").value = "";
+        document.getElementById("despesa-real").value = "";
+        document.getElementById("despesa-pago").checked = false;
+        openModal("modal-despesa");
+      }
+
+      function editExpense(id) {
+        const currentM = state.selectedMonth;
+        const exp = state.monthlyData[currentM].expenses.find(
+          (x) => x.id === id,
+        );
+        if (exp) {
+          document.getElementById("despesa-edit-id").value = exp.id;
+          document.getElementById("modal-despesa-title").innerText =
+            "Editar Despesa";
+          document.getElementById("modal-despesa-title-icon").innerText = "✏️";
+          document.getElementById("btn-save-despesa").innerText =
+            "Atualizar Despesa";
+          document.getElementById("despesa-venc").value = exp.venc || "";
+          document.getElementById("despesa-desc").value = exp.desc || "";
+          document.getElementById("despesa-previsto").value =
+            exp.previsto || "";
+          document.getElementById("despesa-real").value = exp.real || "";
+          document.getElementById("despesa-pago").checked = !!exp.pago;
+          openModal("modal-despesa");
+        }
+      }
+
+      function handleSaveDespesa(e) {
+        e.preventDefault();
+        const currentM = state.selectedMonth;
+        const editId = document.getElementById("despesa-edit-id").value;
+
+        const venc = document.getElementById("despesa-venc").value || "--";
+        const desc = document.getElementById("despesa-desc").value;
+        const previsto = parseFloat(
+          document.getElementById("despesa-previsto").value || 0,
+        );
+        const real = parseFloat(
+          document.getElementById("despesa-real").value || 0,
+        );
+        const pago = document.getElementById("despesa-pago").checked;
+
+        if (editId) {
+          const exp = state.monthlyData[currentM].expenses.find(
+            (x) => x.id === editId,
+          );
+          if (exp) {
+            exp.venc = venc;
+            exp.desc = desc;
+            exp.previsto = previsto;
+            exp.real = real;
+            exp.pago = pago;
+          }
+        } else {
+          state.monthlyData[currentM].expenses.push({
+            id: "e_" + Date.now(),
+            venc,
+            desc,
+            previsto,
+            real,
+            pago,
+          });
+        }
+
+        saveState();
+        renderMensal();
+        closeModal("modal-despesa");
+      }
+
+      function openModalReceita() {
+        document.getElementById("receita-edit-id").value = "";
+        document.getElementById("modal-receita-title").innerText =
+          "Nova Receita";
+        document.getElementById("modal-receita-title-icon").innerText = "+";
+        document.getElementById("btn-save-receita").innerText =
+          "Salvar Receita";
+        document.getElementById("receita-desc").value = "";
+        document.getElementById("receita-previsto").value = "";
+        document.getElementById("receita-real").value = "";
+        openModal("modal-receita");
+      }
+
+      function editIncome(id) {
+        const currentM = state.selectedMonth;
+        const inc = state.monthlyData[currentM].incomes.find(
+          (x) => x.id === id,
+        );
+        if (inc) {
+          document.getElementById("receita-edit-id").value = inc.id;
+          document.getElementById("modal-receita-title").innerText =
+            "Editar Receita";
+          document.getElementById("modal-receita-title-icon").innerText = "✏️";
+          document.getElementById("btn-save-receita").innerText =
+            "Atualizar Receita";
+          document.getElementById("receita-desc").value = inc.desc || "";
+          document.getElementById("receita-previsto").value =
+            inc.previsto || "";
+          document.getElementById("receita-real").value = inc.real || "";
+          openModal("modal-receita");
+        }
+      }
+
+      function handleSaveReceita(e) {
+        e.preventDefault();
+        const currentM = state.selectedMonth;
+        const editId = document.getElementById("receita-edit-id").value;
+
+        const desc = document.getElementById("receita-desc").value;
+        const previsto = parseFloat(
+          document.getElementById("receita-previsto").value || 0,
+        );
+        const real = parseFloat(
+          document.getElementById("receita-real").value || 0,
+        );
+
+        if (editId) {
+          const inc = state.monthlyData[currentM].incomes.find(
+            (x) => x.id === editId,
+          );
+          if (inc) {
+            inc.desc = desc;
+            inc.previsto = previsto;
+            inc.real = real;
+          }
+        } else {
+          state.monthlyData[currentM].incomes.push({
+            id: "i_" + Date.now(),
+            desc,
+            previsto,
+            real,
+          });
+        }
+
+        saveState();
+        renderMensal();
+        closeModal("modal-receita");
+      }
+
+      // --- CARTÃO CC INTER ---
+      function renderCartao() {
+        const headerRow = document.getElementById("cartao-header-row");
+        const tbody = document.getElementById("cartao-body");
+        const tfoot = document.getElementById("cartao-footer");
+
+        headerRow.innerHTML = `
+                <th class="py-3 px-3">Categoria</th>
+                <th class="py-3 px-3">Despesa / Item</th>
+                ${MONTHS.map((m) => `<th class="py-3 px-2 text-center">${m}</th>`).join("")}
+                <th class="py-3 px-2 text-right">Ação</th>
+            `;
+
+        tbody.innerHTML = "";
+        const monthTotals = {};
+        MONTHS.forEach((m) => (monthTotals[m] = 0));
+
+        state.cardItems.forEach((item) => {
+          const tr = document.createElement("tr");
+          tr.className = "editable-row transition";
+          tr.ondblclick = () => editCardItem(item.id);
+
+          let monthCols = "";
+          MONTHS.forEach((m) => {
+            const val = parseFloat(item.values[m] || 0);
+            monthTotals[m] += val;
+            monthCols += `
+                        <td class="py-2.5 px-2 text-center ${val > 0 ? "text-gray-200 font-semibold" : "text-gray-600"}">
+                            ${val > 0 ? val.toFixed(2) : "-"}
+                        </td>
+                    `;
+          });
+
+          tr.innerHTML = `
+                    <td class="py-2.5 px-3 font-sans text-xs text-gray-400">${item.category}</td>
+                    <td class="py-2.5 px-3 font-sans font-semibold text-white">${item.desc}</td>
+                    ${monthCols}
+                    <td class="py-2.5 px-2 text-right">
+                        <div class="flex items-center justify-end gap-1">
+                            <button onclick="event.stopPropagation(); editCardItem('${item.id}')" class="text-gray-400 hover:text-white p-1" title="Editar">✏️</button>
+                            <button onclick="event.stopPropagation(); deleteCardItem('${item.id}')" class="text-gray-500 hover:text-red-400 p-1" title="Excluir">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                            </button>
+                        </div>
+                    </td>
+                `;
+          tbody.appendChild(tr);
+        });
+
+        tfoot.innerHTML = `
+                <tr>
+                    <td colspan="2" class="py-3 px-3 uppercase text-xs tracking-wider text-[#FF3B5C]">Total Fatura R$</td>
+                    ${MONTHS.map((m) => `<td class="py-3 px-2 text-center text-[#00E676]">${monthTotals[m].toFixed(2)}</td>`).join("")}
+                    <td></td>
+                </tr>
+            `;
+      }
+
+      function openModalCartao() {
+        document.getElementById("cartao-edit-id").value = "";
+        document.getElementById("modal-cartao-title").innerText =
+          "Adicionar Compra no Cartão";
+        document.getElementById("btn-save-cartao").innerText = "Salvar Item";
+        document.getElementById("cartao-cat").value = "";
+        document.getElementById("cartao-desc").value = "";
+        document.getElementById("cartao-valor").value = "";
+        openModal("modal-cartao");
+      }
+
+      function editCardItem(id) {
+        const item = state.cardItems.find((x) => x.id === id);
+        if (item) {
+          document.getElementById("cartao-edit-id").value = item.id;
+          document.getElementById("modal-cartao-title").innerText =
+            "Editar Item no Cartão";
+          document.getElementById("btn-save-cartao").innerText =
+            "Atualizar Item";
+          document.getElementById("cartao-cat").value = item.category || "";
+          document.getElementById("cartao-desc").value = item.desc || "";
+
+          // Calculate representative monthly val
+          const nonZeroValues = Object.values(item.values).filter((v) => v > 0);
+          const avgVal = nonZeroValues.length ? nonZeroValues[0] : 0;
+          document.getElementById("cartao-valor").value = avgVal || "";
+
+          openModal("modal-cartao");
+        }
+      }
+
+      function handleSaveCartao(e) {
+        e.preventDefault();
+        const editId = document.getElementById("cartao-edit-id").value;
+        const cat = document.getElementById("cartao-cat").value;
+        const desc = document.getElementById("cartao-desc").value;
+        const valor = parseFloat(
+          document.getElementById("cartao-valor").value || 0,
+        );
+        const startMonth = document.getElementById("cartao-mes-inicio").value;
+        const parcelas = parseInt(
+          document.getElementById("cartao-parcelas").value || 12,
+        );
+
+        if (editId) {
+          const item = state.cardItems.find((x) => x.id === editId);
+          if (item) {
+            item.category = cat;
+            item.desc = desc;
+            if (valor > 0) {
+              const startIdx = MONTHS.indexOf(startMonth);
+              MONTHS.forEach((m, idx) => {
+                if (idx >= startIdx && idx < startIdx + parcelas) {
+                  item.values[m] = valor;
+                } else {
+                  item.values[m] = 0;
+                }
+              });
+            }
+          }
+        } else {
+          const startIdx = MONTHS.indexOf(startMonth);
+          const valuesObj = {};
+          MONTHS.forEach((m, idx) => {
+            valuesObj[m] =
+              idx >= startIdx && idx < startIdx + parcelas ? valor : 0;
+          });
+          state.cardItems.push({
+            id: "c_" + Date.now(),
+            category: cat,
+            desc: desc,
+            values: valuesObj,
+          });
+        }
+
+        saveState();
+        renderCartao();
+        closeModal("modal-cartao");
+      }
+
+      function deleteCardItem(id) {
+        state.cardItems = state.cardItems.filter((x) => x.id !== id);
+        saveState();
+        renderCartao();
+      }
+
+      // --- CUSTOS FIXOS ---
+      function renderCustos() {
+        const sampleIncomes = state.monthlyData["JAN"]
+          ? state.monthlyData["JAN"].incomes
+          : [];
+        const avgIncome = sampleIncomes.reduce(
+          (acc, curr) => acc + parseFloat(curr.previsto || 0),
+          0,
+        );
+        const totalFixed = state.fixedCosts.reduce(
+          (acc, curr) => acc + parseFloat(curr.value || 0),
+          0,
+        );
+        const margem = avgIncome - totalFixed;
+
+        document.getElementById("custos-renda-estimada").innerText =
+          formatBRL(avgIncome);
+        document.getElementById("custos-total-fixo").innerText =
+          formatBRL(totalFixed);
+        document.getElementById("custos-margem").innerText = formatBRL(margem);
+
+        const grouped = {};
+        state.fixedCosts.forEach((item) => {
+          if (!grouped[item.category]) grouped[item.category] = [];
+          grouped[item.category].push(item);
+        });
+
+        const grid = document.getElementById("custos-fixos-grid");
+        grid.innerHTML = "";
+
+        Object.keys(grouped).forEach((cat) => {
+          const items = grouped[cat];
+          const catTotal = items.reduce(
+            (a, c) => a + parseFloat(c.value || 0),
+            0,
+          );
+
+          const card = document.createElement("div");
+          card.className =
+            "card-panel rounded-xl p-4 bg-[#10111A] border border-[#252738]";
+          card.innerHTML = `
+                    <div class="flex justify-between items-center border-b border-[#252738] pb-2 mb-3">
+                        <h4 class="font-bold text-white text-sm">${cat}</h4>
+                        <span class="font-mono text-xs text-[#FF3B5C] font-bold">${formatBRL(catTotal)}</span>
+                    </div>
+                    <ul class="space-y-2 text-xs text-gray-300">
+                        ${items
+                          .map(
+                            (i) => `
+                            <li class="flex justify-between items-center p-1 hover:bg-[#1A1B28] rounded cursor-pointer transition" onclick="editFixedCost('${i.id}')">
+                                <span>${i.desc}</span>
+                                <div class="flex items-center gap-2">
+                                    <span class="font-mono text-gray-300 font-semibold">${formatBRL(i.value)}</span>
+                                    <button onclick="event.stopPropagation(); editFixedCost('${i.id}')" class="text-gray-400 hover:text-white" title="Editar">✏️</button>
+                                    <button onclick="event.stopPropagation(); deleteFixedCost('${i.id}')" class="text-gray-500 hover:text-red-400 font-bold" title="Excluir">×</button>
+                                </div>
+                            </li>
+                        `,
+                          )
+                          .join("")}
+                    </ul>
+                `;
+          grid.appendChild(card);
+        });
+      }
+
+      function openModalCustoFixo() {
+        document.getElementById("custo-edit-id").value = "";
+        document.getElementById("modal-custo-title").innerText =
+          "Adicionar Custo Fixo Base";
+        document.getElementById("btn-save-custo").innerText =
+          "Salvar Custo Base";
+        document.getElementById("custo-desc").value = "";
+        document.getElementById("custo-valor").value = "";
+        openModal("modal-custo-fixo");
+      }
+
+      function editFixedCost(id) {
+        const item = state.fixedCosts.find((x) => x.id === id);
+        if (item) {
+          document.getElementById("custo-edit-id").value = item.id;
+          document.getElementById("modal-custo-title").innerText =
+            "Editar Custo Fixo";
+          document.getElementById("btn-save-custo").innerText = "Atualizar";
+          document.getElementById("custo-cat").value =
+            item.category || "Moradia";
+          document.getElementById("custo-desc").value = item.desc || "";
+          document.getElementById("custo-valor").value = item.value || "";
+          openModal("modal-custo-fixo");
+        }
+      }
+
+      function handleSaveCustoFixo(e) {
+        e.preventDefault();
+        const editId = document.getElementById("custo-edit-id").value;
+        const category = document.getElementById("custo-cat").value;
+        const desc = document.getElementById("custo-desc").value;
+        const value = parseFloat(
+          document.getElementById("custo-valor").value || 0,
+        );
+
+        if (editId) {
+          const item = state.fixedCosts.find((x) => x.id === editId);
+          if (item) {
+            item.category = category;
+            item.desc = desc;
+            item.value = value;
+          }
+        } else {
+          state.fixedCosts.push({
+            id: "f_" + Date.now(),
+            category,
+            desc,
+            value,
+          });
+        }
+
+        saveState();
+        renderCustos();
+        closeModal("modal-custo-fixo");
+      }
+
+      function deleteFixedCost(id) {
+        state.fixedCosts = state.fixedCosts.filter((x) => x.id !== id);
+        saveState();
+        renderCustos();
+      }
+
+      // --- RESERVA (PORKINHO) ---
+      function renderPorkinho() {
+        const tbody = document.getElementById("porkinho-body");
+        tbody.innerHTML = "";
+
+        let totalPorkinho = 0;
+
+        state.porkinho.transactions.forEach((tx) => {
+          const amount = parseFloat(tx.amount || 0);
+          if (tx.type === "resgate") {
+            totalPorkinho -= amount;
+          } else {
+            totalPorkinho += amount;
+          }
+
+          const tr = document.createElement("tr");
+          tr.className = "editable-row transition";
+          tr.ondblclick = () => editPorkinhoTx(tx.id);
+
+          let badge = "";
+          let colorClass = "";
+
+          if (tx.type === "aporte") {
+            badge = `<span class="px-2 py-0.5 text-[10px] bg-[#00E676]/20 text-[#00E676] rounded font-bold">Aporte</span>`;
+            colorClass = "text-[#00E676]";
+          } else if (tx.type === "rendimento") {
+            badge = `<span class="px-2 py-0.5 text-[10px] bg-[#00E5FF]/20 text-[#00E5FF] rounded font-bold">Rendimento</span>`;
+            colorClass = "text-[#00E5FF]";
+          } else {
+            badge = `<span class="px-2 py-0.5 text-[10px] bg-red-500/20 text-red-400 rounded font-bold">Resgate</span>`;
+            colorClass = "text-red-400";
+          }
+
+          tr.innerHTML = `
+                    <td class="py-2.5 px-3 font-mono text-xs text-gray-400">${tx.date}</td>
+                    <td class="py-2.5 px-3">${badge}</td>
+                    <td class="py-2.5 px-3 font-semibold text-gray-200">${tx.desc}</td>
+                    <td class="py-2.5 px-3 font-mono font-bold ${colorClass}">${tx.type === "resgate" ? "-" : "+"} ${formatBRL(amount)}</td>
+                    <td class="py-2.5 px-2 text-right">
+                        <div class="flex items-center justify-end gap-1">
+                            <button onclick="event.stopPropagation(); editPorkinhoTx('${tx.id}')" class="text-gray-400 hover:text-white p-1" title="Editar">✏️</button>
+                            <button onclick="event.stopPropagation(); deletePorkinhoTx('${tx.id}')" class="text-gray-500 hover:text-red-400 p-1" title="Excluir">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                            </button>
+                        </div>
+                    </td>
+                `;
+          tbody.appendChild(tr);
+        });
+
+        document.getElementById("porkinho-saldo-total").innerText =
+          formatBRL(totalPorkinho);
+      }
+
+      function openModalPorkinho() {
+        document.getElementById("porkinho-edit-id").value = "";
+        document.getElementById("modal-porkinho-title").innerText =
+          "Nova Movimentação na Reserva";
+        document.getElementById("btn-save-porkinho").innerText =
+          "Salvar Movimentação";
+        document.getElementById("porkinho-date").value = "";
+        document.getElementById("porkinho-desc").value = "";
+        document.getElementById("porkinho-valor").value = "";
+        openModal("modal-porkinho");
+      }
+
+      function editPorkinhoTx(id) {
+        const tx = state.porkinho.transactions.find((x) => x.id === id);
+        if (tx) {
+          document.getElementById("porkinho-edit-id").value = tx.id;
+          document.getElementById("modal-porkinho-title").innerText =
+            "Editar Movimentação";
+          document.getElementById("btn-save-porkinho").innerText = "Atualizar";
+          document.getElementById("porkinho-date").value = tx.date || "";
+          document.getElementById("porkinho-tipo").value = tx.type || "aporte";
+          document.getElementById("porkinho-desc").value = tx.desc || "";
+          document.getElementById("porkinho-valor").value = tx.amount || "";
+          openModal("modal-porkinho");
+        }
+      }
+
+      function handleSavePorkinho(e) {
+        e.preventDefault();
+        const editId = document.getElementById("porkinho-edit-id").value;
+        const date = document.getElementById("porkinho-date").value;
+        const type = document.getElementById("porkinho-tipo").value;
+        const desc = document.getElementById("porkinho-desc").value;
+        const amount = parseFloat(
+          document.getElementById("porkinho-valor").value || 0,
+        );
+
+        if (editId) {
+          const tx = state.porkinho.transactions.find((x) => x.id === editId);
+          if (tx) {
+            tx.date = date;
+            tx.type = type;
+            tx.desc = desc;
+            tx.amount = amount;
+          }
+        } else {
+          state.porkinho.transactions.push({
+            id: "p_" + Date.now(),
+            date,
+            type,
+            desc,
+            amount,
+          });
+        }
+
+        saveState();
+        renderPorkinho();
+        closeModal("modal-porkinho");
+      }
+
+      function deletePorkinhoTx(id) {
+        state.porkinho.transactions = state.porkinho.transactions.filter(
+          (x) => x.id !== id,
+        );
+        saveState();
+        renderPorkinho();
+      }
+
+      // --- MURAL DE SONHOS ---
+      function renderSonhos() {
+        const cols = {
+          essencial: document.getElementById("col-essencial"),
+          importante: document.getElementById("col-importante"),
+          metas: document.getElementById("col-metas"),
+          realizados: document.getElementById("col-realizados"),
+        };
+
+        const counts = { essencial: 0, importante: 0, metas: 0, realizados: 0 };
+        Object.keys(cols).forEach((k) => (cols[k].innerHTML = ""));
+
+        state.dreams.forEach((dream) => {
+          counts[dream.col] = (counts[dream.col] || 0) + 1;
+
+          const card = document.createElement("div");
+          card.className =
+            "card-panel rounded-xl p-3 bg-[#151621] border border-[#252738] space-y-2 relative group hover:border-[#FF3B5C] transition cursor-pointer";
+          card.ondblclick = () => editDream(dream.id);
+
+          card.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <h5 class="text-xs font-bold text-gray-200">${dream.title}</h5>
+                        <div class="flex items-center gap-1">
+                            <button onclick="event.stopPropagation(); editDream('${dream.id}')" class="text-gray-400 hover:text-white text-xs" title="Editar">✏️</button>
+                            <button onclick="event.stopPropagation(); deleteDream('${dream.id}')" class="text-gray-600 hover:text-red-400 text-xs font-bold" title="Excluir">×</button>
+                        </div>
+                    </div>
+                    ${dream.val ? `<div class="text-xs font-mono text-gray-400 font-semibold">${formatBRL(dream.val)}</div>` : ""}
+                    
+                    <div class="flex items-center justify-between pt-2 border-t border-[#252738] text-[10px]">
+                        <select onchange="event.stopPropagation(); moveDream('${dream.id}', this.value)" class="bg-[#0E0F18] text-gray-300 border border-[#252738] rounded px-1.5 py-1 text-[10px] cursor-pointer">
+                            <option value="essencial" ${dream.col === "essencial" ? "selected" : ""}>Essencial</option>
+                            <option value="importante" ${dream.col === "importante" ? "selected" : ""}>Importante</option>
+                            <option value="metas" ${dream.col === "metas" ? "selected" : ""}>Metas</option>
+                            <option value="realizados" ${dream.col === "realizados" ? "selected" : ""}>Realizado 🎉</option>
+                        </select>
+                    </div>
+                `;
+
+          if (cols[dream.col]) cols[dream.col].appendChild(card);
+        });
+
+        Object.keys(counts).forEach((k) => {
+          const el = document.getElementById(`count-${k}`);
+          if (el) el.innerText = counts[k];
+        });
+      }
+
+      function openModalSonho() {
+        document.getElementById("sonho-edit-id").value = "";
+        document.getElementById("modal-sonho-title").innerText =
+          "Novo Item no Mural de Sonhos";
+        document.getElementById("btn-save-sonho").innerText = "Salvar Sonho";
+        document.getElementById("sonho-title-input").value = "";
+        document.getElementById("sonho-val").value = "";
+        openModal("modal-sonho");
+      }
+
+      function editDream(id) {
+        const dream = state.dreams.find((x) => x.id === id);
+        if (dream) {
+          document.getElementById("sonho-edit-id").value = dream.id;
+          document.getElementById("modal-sonho-title").innerText =
+            "Editar Item no Mural";
+          document.getElementById("btn-save-sonho").innerText =
+            "Atualizar Item";
+          document.getElementById("sonho-title-input").value =
+            dream.title || "";
+          document.getElementById("sonho-col").value = dream.col || "essencial";
+          document.getElementById("sonho-val").value = dream.val || "";
+          openModal("modal-sonho");
+        }
+      }
+
+      function handleSaveSonho(e) {
+        e.preventDefault();
+        const editId = document.getElementById("sonho-edit-id").value;
+        const title = document.getElementById("sonho-title-input").value;
+        const col = document.getElementById("sonho-col").value;
+        const val = parseFloat(document.getElementById("sonho-val").value || 0);
+
+        if (editId) {
+          const dream = state.dreams.find((x) => x.id === editId);
+          if (dream) {
+            dream.title = title;
+            dream.col = col;
+            dream.val = val;
+          }
+        } else {
+          state.dreams.push({
+            id: "d_" + Date.now(),
+            title,
+            col,
+            val,
+          });
+        }
+
+        saveState();
+        renderSonhos();
+        closeModal("modal-sonho");
+      }
+
+      function moveDream(id, targetCol) {
+        const dream = state.dreams.find((x) => x.id === id);
+        if (dream) {
+          dream.col = targetCol;
+          saveState();
+          renderSonhos();
+        }
+      }
+
+      function deleteDream(id) {
+        state.dreams = state.dreams.filter((x) => x.id !== id);
+        saveState();
+        renderSonhos();
+      }
+
+      // --- MODAL UTILS ---
+      function openModal(id) {
+        document.getElementById("modal-despesa-mes").innerText =
+          state.selectedMonth;
+        document.getElementById("modal-receita-mes").innerText =
+          state.selectedMonth;
+
+        const m = document.getElementById(id);
+        if (m) {
+          m.classList.remove("hidden");
+          m.classList.add("flex");
+        }
+      }
+
+      function closeModal(id) {
+        const m = document.getElementById(id);
+        if (m) {
+          m.classList.add("hidden");
+          m.classList.remove("flex");
+        }
+      }
+
+      // --- BACKUP EXPORT / IMPORT ---
+      function exportData() {
+        const dataStr =
+          "data:text/json;charset=utf-8," +
+          encodeURIComponent(JSON.stringify(state, null, 2));
+        const dlAnchorElem = document.createElement("a");
+        dlAnchorElem.setAttribute("href", dataStr);
+        dlAnchorElem.setAttribute(
+          "download",
+          `Planejamento_Financeiro_2026_Backup_${new Date().toISOString().slice(0, 10)}.json`,
+        );
+        document.body.appendChild(dlAnchorElem);
+        dlAnchorElem.click();
+        dlAnchorElem.remove();
+      }
+
+      function importData(event) {
+        const fileReader = new FileReader();
+        fileReader.onload = function (e) {
+          try {
+            const imported = JSON.parse(e.target.result);
+            if (imported && imported.monthlyData) {
+              state = imported;
+              saveState();
+              renderApp();
+            }
+          } catch (err) {
+            console.error(err);
+          }
+        };
+        if (event.target.files[0]) {
+          fileReader.readAsText(event.target.files[0]);
+        }
+      }
+
+      function resetDataPrompt() {
+        state = getDefaultData();
+        saveState();
+        renderApp();
+      }
+
+      // START ON WINDOW LOAD
+      window.onload = function () {
+        initApp();
+      };
+    </script>
+  </body>
+</html>
