@@ -1476,409 +1476,100 @@
         "NOV",
         "DEZ",
       ];
-      const STORAGE_KEY = "planejamento_2026_db";
+      // ATUALIZADO para forçar recarregamento sem precisar limpar cache
+      const STORAGE_KEY = "planejamento_2026_db_v2";
+
+      // Dados exatos da sua planilha espelhados do código anterior
+      const db = {"transacoes": [{"mes": "01", "tipo": "despesa", "descricao": "\u00c1GUA E ESGOTO", "previsto": 190.0, "real": 0, "status": "PENDENTE"}, {"mes": "01", "tipo": "receita", "descricao": "SALARIO MATHEUS", "previsto": 1165.0, "real": 1165.0}, {"mes": "01", "tipo": "despesa", "descricao": "INTERNET", "previsto": 150.0, "real": 179.81, "status": "PAGO"}, {"mes": "01", "tipo": "receita", "descricao": "SAL\u00c1RIO TAMARA", "previsto": 1411.65, "real": 964.0}, {"mes": "01", "tipo": "despesa", "descricao": "CELULARES M\u00d3VEIS", "previsto": 50.0, "real": 0, "status": "PENDENTE"}, {"mes": "01", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O TAMARA", "previsto": 550.0, "real": 550.0}, {"mes": "01", "tipo": "despesa", "descricao": "CC INTER FIXOS", "previsto": 2017.5, "real": 2017.5, "status": "PAGO"}, {"mes": "01", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O MATHEUS", "previsto": 550.0, "real": 550.0}, {"mes": "01", "tipo": "despesa", "descricao": "CC INTER EXTRAS", "previsto": 3510.36, "real": 3510.36, "status": "PAGO"}, {"mes": "01", "tipo": "receita", "descricao": "COMISS\u00c3O TAMARA", "previsto": 500.0, "real": 514.5}, {"mes": "01", "tipo": "despesa", "descricao": "LUZ", "previsto": 335.0, "real": 335.0, "status": "PAGO"}, {"mes": "01", "tipo": "receita", "descricao": "ALUGUEL AP\u00ca + CONDOMINIO", "previsto": 950.0, "real": 950.0}, {"mes": "01", "tipo": "despesa", "descricao": "ALIMENTA\u00c7\u00c3O", "previsto": 1100.0, "real": 1100.0, "status": "PAGO"}, {"mes": "01", "tipo": "receita", "descricao": "ADIANTAMENTO MATHEUS", "previsto": 895.0, "real": 895.0}, {"mes": "01", "tipo": "despesa", "descricao": "SEGURO CARRO", "previsto": 89.0, "real": 89.0, "status": "PAGO"}, {"mes": "01", "tipo": "receita", "descricao": "ADIANTAMENTO TAMARA", "previsto": 1093.0, "real": 766.0}, {"mes": "01", "tipo": "despesa", "descricao": "ULTRAG\u00c1S", "previsto": 140.0, "real": 70.0, "status": "PAGO"}, {"mes": "01", "tipo": "despesa", "descricao": "JURACY", "previsto": 400.0, "real": 400.0, "status": "PAGO"}, {"mes": "02", "tipo": "despesa", "descricao": "\u00c1GUA E ESGOTO", "previsto": 150.0, "real": 150.0, "status": "PAGO"}, {"mes": "02", "tipo": "receita", "descricao": "SALARIO MATHEUS", "previsto": 1167.0, "real": 1167.0}, {"mes": "02", "tipo": "despesa", "descricao": "INTERNET", "previsto": 119.0, "real": 119.0, "status": "PAGO"}, {"mes": "02", "tipo": "receita", "descricao": "SAL\u00c1RIO TAMARA", "previsto": 1300.0, "real": 1300.0}, {"mes": "02", "tipo": "despesa", "descricao": "CELULAR MATHEUS", "previsto": 62.56, "real": 62.56, "status": "PAGO"}, {"mes": "02", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O TAMARA", "previsto": 550.0, "real": 550.0}, {"mes": "02", "tipo": "despesa", "descricao": "CC INTER FIXOS", "previsto": 1565.0, "real": 1565.0, "status": "PAGO"}, {"mes": "02", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O MATHEUS", "previsto": 550.0, "real": 550.0}, {"mes": "02", "tipo": "despesa", "descricao": "CC INTER EXTRAS", "previsto": 3191.78, "real": 3191.78, "status": "PAGO"}, {"mes": "02", "tipo": "receita", "descricao": "COMISS\u00c3O TAMARA", "previsto": 556.0, "real": 556.0}, {"mes": "02", "tipo": "despesa", "descricao": "LUZ", "previsto": 300.0, "real": 300.0, "status": "PAGO"}, {"mes": "02", "tipo": "receita", "descricao": "ALUGUEL AP\u00ca + CONDOMINIO", "previsto": 950.0, "real": 950.0}, {"mes": "02", "tipo": "despesa", "descricao": "ALIMENTA\u00c7\u00c3O", "previsto": 1100.0, "real": 1100.0, "status": "PAGO"}, {"mes": "02", "tipo": "receita", "descricao": "ADIANTAMENTO MATHEUS", "previsto": 895.0, "real": 895.0}, {"mes": "02", "tipo": "despesa", "descricao": "SEGURO CARRO", "previsto": 89.0, "real": 89.0, "status": "PAGO"}, {"mes": "02", "tipo": "receita", "descricao": "ADIANTAMENTO TAMARA", "previsto": 1093.0, "real": 1093.0}, {"mes": "02", "tipo": "despesa", "descricao": "JURACY", "previsto": 400.0, "real": 400.0, "status": "PAGO"}, {"mes": "02", "tipo": "receita", "descricao": "JURACY", "previsto": 410.0, "real": 410.0}, {"mes": "02", "tipo": "despesa", "descricao": "ALUGUEL", "previsto": 1600.0, "real": 1600.0, "status": "PAGO"}, {"mes": "02", "tipo": "despesa", "descricao": "IPTV", "previsto": 35.0, "real": 35.0, "status": "PAGO"}, {"mes": "03", "tipo": "despesa", "descricao": "ALUGUEL", "previsto": 1600.0, "real": 1600.0, "status": "PAGO"}, {"mes": "03", "tipo": "receita", "descricao": "SALARIO MATHEUS", "previsto": 1165.0, "real": 1165.0}, {"mes": "03", "tipo": "despesa", "descricao": "LUZ E \u00c1GUA JU", "previsto": 296.0, "real": 296.0, "status": "PAGO"}, {"mes": "03", "tipo": "receita", "descricao": "SALARIO TAMARA", "previsto": 1400.0, "real": 1400.0}, {"mes": "03", "tipo": "despesa", "descricao": "CELULARES M\u00d3VEIS", "previsto": 95.0, "real": 95.0, "status": "PAGO"}, {"mes": "03", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O TAMARA", "previsto": 550.0, "real": 550.0}, {"mes": "03", "tipo": "despesa", "descricao": "CC INTER FIXOS", "previsto": 1000.0, "real": 1000.0, "status": "PAGO"}, {"mes": "03", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O MATHEUS", "previsto": 550.0, "real": 550.0}, {"mes": "03", "tipo": "despesa", "descricao": "CC INTER EXTRAS", "previsto": 3300.0, "real": 3425.0, "status": "PAGO"}, {"mes": "03", "tipo": "receita", "descricao": "COMISS\u00c3O TAMARA", "previsto": 510.0, "real": 510.0}, {"mes": "03", "tipo": "despesa", "descricao": "JURACY", "previsto": 400.0, "real": 400.0, "status": "PAGO"}, {"mes": "03", "tipo": "receita", "descricao": "ALUGUEL AP\u00ca + CONDOMINIO", "previsto": 950.0, "real": 950.0}, {"mes": "03", "tipo": "despesa", "descricao": "ALIMENTA\u00c7\u00c3O", "previsto": 1100.0, "real": 1100.0, "status": "PAGO"}, {"mes": "03", "tipo": "receita", "descricao": "ADIANTAMENTO MATHEUS", "previsto": 895.0, "real": 895.0}, {"mes": "03", "tipo": "despesa", "descricao": "SEGURO CARRO", "previsto": 89.0, "real": 89.0, "status": "PAGO"}, {"mes": "03", "tipo": "receita", "descricao": "ADIANTAMENTO TAMARA", "previsto": 1094.0, "real": 1094.0}, {"mes": "03", "tipo": "despesa", "descricao": "INTERNET JU (PG PARTE LUZ)", "previsto": 120.0, "real": 120.0, "status": "PAGO"}, {"mes": "03", "tipo": "receita", "descricao": "Resgate contas", "previsto": 1038.05, "real": 1038.05}, {"mes": "03", "tipo": "despesa", "descricao": "LUZ AP\u00ca", "previsto": 282.46, "real": 282.46, "status": "PAGO"}, {"mes": "03", "tipo": "despesa", "descricao": "IPVA", "previsto": 180.0, "real": 110.0, "status": "PAGO"}, {"mes": "04", "tipo": "despesa", "descricao": "ALUGUEL", "previsto": 1565.0, "real": 1565.0, "status": "PAGO"}, {"mes": "04", "tipo": "receita", "descricao": "SALARIO MATHEUS", "previsto": 1165.0, "real": 1165.0}, {"mes": "04", "tipo": "despesa", "descricao": "LUZ AP\u00ca", "previsto": 250.0, "real": 221.52, "status": "PAGO"}, {"mes": "04", "tipo": "receita", "descricao": "SALARIO TAMARA", "previsto": 1470.0, "real": 1470.0}, {"mes": "04", "tipo": "despesa", "descricao": "CELULARES M\u00d3VEIS", "previsto": 39.91, "real": 39.91, "status": "PAGO"}, {"mes": "04", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O TAMARA", "previsto": 550.0, "real": 550.0}, {"mes": "04", "tipo": "despesa", "descricao": "CC INTER FIXOS", "previsto": 980.0, "real": 980.0, "status": "PAGO"}, {"mes": "04", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O MATHEUS", "previsto": 550.0, "real": 550.0}, {"mes": "04", "tipo": "despesa", "descricao": "CC INTER EXTRAS", "previsto": 3678.17, "real": 3678.17, "status": "PAGO"}, {"mes": "04", "tipo": "receita", "descricao": "COMISS\u00c3O TAMARA", "previsto": 1029.0, "real": 1029.0}, {"mes": "04", "tipo": "despesa", "descricao": "JURACY", "previsto": 400.0, "real": 400.0, "status": "PAGO"}, {"mes": "04", "tipo": "receita", "descricao": "ALUGUEL AP\u00ca + CONDOMINIO", "previsto": 1000.0, "real": 1000.0}, {"mes": "04", "tipo": "despesa", "descricao": "ALIMENTA\u00c7\u00c3O", "previsto": 1100.0, "real": 1100.0, "status": "PAGO"}, {"mes": "04", "tipo": "receita", "descricao": "ADIANTAMENTO MATHEUS", "previsto": 895.0, "real": 895.0}, {"mes": "04", "tipo": "despesa", "descricao": "SEGURO CARRO", "previsto": 91.76, "real": 91.76, "status": "PAGO"}, {"mes": "04", "tipo": "receita", "descricao": "ADIANTAMENTO TAMARA", "previsto": 1094.0, "real": 1094.0}, {"mes": "04", "tipo": "despesa", "descricao": "IPTV", "previsto": 35.0, "real": 35.0, "status": "PAGO"}, {"mes": "04", "tipo": "despesa", "descricao": "HABITA\u00c7\u00c3O CAIXA", "previsto": 134.21, "real": 134.21, "status": "PAGO"}, {"mes": "04", "tipo": "despesa", "descricao": "IPVA", "previsto": 105.78, "real": 105.78, "status": "PAGO"}, {"mes": "05", "tipo": "despesa", "descricao": "ALUGUEL", "previsto": 800.0, "real": 800.0, "status": "PAGO"}, {"mes": "05", "tipo": "receita", "descricao": "SALARIO MATHEUS", "previsto": 1167.0, "real": 1167.0}, {"mes": "05", "tipo": "despesa", "descricao": "LUZ AP\u00ca", "previsto": 250.0, "real": 220.0, "status": "PAGO"}, {"mes": "05", "tipo": "receita", "descricao": "SALARIO TAMARA", "previsto": 1300.0, "real": 1300.0}, {"mes": "05", "tipo": "despesa", "descricao": "CELULARES M\u00d3VEIS", "previsto": 39.0, "real": 39.0, "status": "PAGO"}, {"mes": "05", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O TAMARA", "previsto": 550.0, "real": 550.0}, {"mes": "05", "tipo": "despesa", "descricao": "CC INTER FIXOS", "previsto": 600.0, "real": 600.0, "status": "PAGO"}, {"mes": "05", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O MATHEUS", "previsto": 550.0, "real": 550.0}, {"mes": "05", "tipo": "despesa", "descricao": "CC INTER EXTRAS", "previsto": 3018.21, "real": 3018.21, "status": "PAGO"}, {"mes": "05", "tipo": "receita", "descricao": "COMISS\u00c3O TAMARA", "previsto": 847.0, "real": 847.0}, {"mes": "05", "tipo": "despesa", "descricao": "JURACY", "previsto": 400.0, "real": 400.0, "status": "PAGO"}, {"mes": "05", "tipo": "receita", "descricao": "ALUGUEL AP\u00ca + CONDOMINIO", "previsto": 1000.0, "real": 1000.0}, {"mes": "05", "tipo": "despesa", "descricao": "ALIMENTA\u00c7\u00c3O", "previsto": 1100.0, "real": 1100.0, "status": "PAGO"}, {"mes": "05", "tipo": "receita", "descricao": "ADIANTAMENTO MATHEUS", "previsto": 895.0, "real": 895.0}, {"mes": "05", "tipo": "despesa", "descricao": "SEGURO CARRO", "previsto": 89.0, "real": 89.0, "status": "PAGO"}, {"mes": "05", "tipo": "receita", "descricao": "ADIANTAMENTO TAMARA", "previsto": 1093.0, "real": 1093.0}, {"mes": "05", "tipo": "despesa", "descricao": "IPTV", "previsto": 35.0, "real": 35.0, "status": "PAGO"}, {"mes": "05", "tipo": "despesa", "descricao": "HABITA\u00c7\u00c3O CAIXA", "previsto": 135.0, "real": 130.56, "status": "PAGO"}, {"mes": "05", "tipo": "despesa", "descricao": "IPVA", "previsto": 105.76, "real": 105.76, "status": "PAGO"}, {"mes": "05", "tipo": "despesa", "descricao": "ALUGUEL NOVO AP\u00ca", "previsto": 1500.0, "real": 1500.0, "status": "PAGO"}, {"mes": "06", "tipo": "despesa", "descricao": "ALUGUEL", "previsto": 1500.0, "real": 1500.0, "status": "PAGO"}, {"mes": "06", "tipo": "receita", "descricao": "SALARIO MATHEUS", "previsto": 1165.0, "real": 1165.0}, {"mes": "06", "tipo": "despesa", "descricao": "HABITA\u00c7\u00c3O CAIXA", "previsto": 128.06, "real": 128.06, "status": "PAGO"}, {"mes": "06", "tipo": "receita", "descricao": "SALARIO TAMARA", "previsto": 1000.0, "real": 1000.0}, {"mes": "06", "tipo": "despesa", "descricao": "INTERNET E CELULARES", "previsto": 135.88, "real": 135.88, "status": "PAGO"}, {"mes": "06", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O TAMARA", "previsto": 550.0, "real": 550.0}, {"mes": "06", "tipo": "despesa", "descricao": "IPTV", "previsto": 35.0, "real": 35.0, "status": "PAGO"}, {"mes": "06", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O MATHEUS", "previsto": 550.0, "real": 550.0}, {"mes": "06", "tipo": "despesa", "descricao": "SEGURO CARRO", "previsto": 89.0, "real": 89.0, "status": "PAGO"}, {"mes": "06", "tipo": "receita", "descricao": "COMISS\u00c3O TAMARA", "previsto": 1365.0, "real": 1365.0}, {"mes": "06", "tipo": "despesa", "descricao": "CC INTER FIXOS", "previsto": 700.0, "real": 700.0, "status": "PAGO"}, {"mes": "06", "tipo": "receita", "descricao": "ALUGUEL AP\u00ca + CONDOMINIO", "previsto": 1000.0, "real": 1000.0}, {"mes": "06", "tipo": "despesa", "descricao": "CC INTER EXTRAS", "previsto": 3345.0, "real": 3345.0, "status": "PAGO"}, {"mes": "06", "tipo": "receita", "descricao": "ADIANTAMENTO MATHEUS", "previsto": 895.0, "real": 895.0}, {"mes": "06", "tipo": "despesa", "descricao": "JURACY (1/10)", "previsto": 588.0, "real": 588.0, "status": "PAGO"}, {"mes": "06", "tipo": "receita", "descricao": "ADIANTAMENTO TAMARA", "previsto": 1093.0, "real": 1093.0}, {"mes": "06", "tipo": "despesa", "descricao": "ALIMENTA\u00c7\u00c3O", "previsto": 1100.0, "real": 1100.0, "status": "PAGO"}, {"mes": "06", "tipo": "receita", "descricao": "FAXINAS", "previsto": 0, "real": 330.0}, {"mes": "06", "tipo": "despesa", "descricao": "\u00c1GUA", "previsto": 150.0, "real": 150.0, "status": "PAGO"}, {"mes": "06", "tipo": "despesa", "descricao": "LUZ AP\u00ca", "previsto": 266.0, "real": 266.0, "status": "PAGO"}, {"mes": "06", "tipo": "despesa", "descricao": "CONDOMINIO", "previsto": 300.0, "real": 300.0, "status": "PAGO"}, {"mes": "06", "tipo": "despesa", "descricao": "G\u00c1S", "previsto": 79.0, "real": 79.0, "status": "PAGO"}, {"mes": "06", "tipo": "despesa", "descricao": "ALUGUEL ALAN", "previsto": 800.0, "real": 800.0, "status": "PAGO"}, {"mes": "06", "tipo": "despesa", "descricao": "LICENCIAMENTO", "previsto": 114.09, "real": 114.61, "status": "PAGO"}, {"mes": "06", "tipo": "despesa", "descricao": "MULTA", "previsto": 138.8, "real": 141.61, "status": "PAGO"}, {"mes": "06", "tipo": "despesa", "descricao": "IPVA", "previsto": 106.0, "real": 105.0, "status": "PAGO"}, {"mes": "06", "tipo": "receita", "descricao": "REAL", "previsto": 7948.0, "real": 0}, {"mes": "07", "tipo": "despesa", "descricao": "ALUGUEL", "previsto": 1500.0, "real": 1500.0, "status": "PAGO"}, {"mes": "07", "tipo": "receita", "descricao": "SALARIO MATHEUS", "previsto": 1165.0, "real": 1165.0}, {"mes": "07", "tipo": "despesa", "descricao": "\u00c1GUA", "previsto": 160.0, "real": 155.13, "status": "PAGO"}, {"mes": "07", "tipo": "receita", "descricao": "SALARIO TAMARA", "previsto": 1434.0, "real": 1434.0}, {"mes": "07", "tipo": "despesa", "descricao": "INTERNET E CELULAR", "previsto": 199.81, "real": 199.81, "status": "PAGO"}, {"mes": "07", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O TAMARA", "previsto": 550.0, "real": 550.0}, {"mes": "07", "tipo": "despesa", "descricao": "LUZ AP\u00ca", "previsto": 338.0, "real": 338.27, "status": "PAGO"}, {"mes": "07", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O MATHEUS", "previsto": 550.0, "real": 550.0}, {"mes": "07", "tipo": "despesa", "descricao": "CONDOMINIO", "previsto": 300.0, "real": 300.0, "status": "PAGO"}, {"mes": "07", "tipo": "receita", "descricao": "COMISS\u00c3O TAMARA", "previsto": 750.0, "real": 750.0}, {"mes": "07", "tipo": "despesa", "descricao": "CC INTER FIXOS", "previsto": 1600.0, "real": 1600.0, "status": "PAGO"}, {"mes": "07", "tipo": "despesa", "descricao": "CC INTER EXTRAS", "previsto": 2731.96, "real": 2731.96, "status": "PAGO"}, {"mes": "07", "tipo": "receita", "descricao": "ALUGUEL AP\u00ca + CONDOMINIO", "previsto": 1000.0, "real": 1000.0}, {"mes": "07", "tipo": "despesa", "descricao": "JURACY (2/10)", "previsto": 588.0, "real": 588.0, "status": "PAGO"}, {"mes": "07", "tipo": "receita", "descricao": "ADIANTAMENTO MATHEUS", "previsto": 895.0, "real": 895.0}, {"mes": "07", "tipo": "despesa", "descricao": "ALIMENTA\u00c7\u00c3O", "previsto": 1100.0, "real": 1100.0, "status": "PAGO"}, {"mes": "07", "tipo": "receita", "descricao": "ADIANTAMENTO TAMARA", "previsto": 1093.0, "real": 1093.0}, {"mes": "07", "tipo": "despesa", "descricao": "G\u00c1S", "previsto": 80.0, "real": 23.0, "status": "PAGO"}, {"mes": "07", "tipo": "despesa", "descricao": "SEGURO CARRO", "previsto": 89.68, "real": 89.68, "status": "PAGO"}, {"mes": "07", "tipo": "despesa", "descricao": "IPTV", "previsto": 35.0, "real": 35.0, "status": "PAGO"}, {"mes": "07", "tipo": "despesa", "descricao": "HABITA\u00c7\u00c3O CAIXA", "previsto": 124.34, "real": 124.34, "status": "PAGO"}, {"mes": "08", "tipo": "despesa", "descricao": "ALUGUEL", "previsto": 1500.0, "real": 1500.0, "status": "PAGO"}, {"mes": "08", "tipo": "receita", "descricao": "SALARIO MATHEUS", "previsto": 1165.0, "real": 1165.0}, {"mes": "08", "tipo": "despesa", "descricao": "\u00c1GUA", "previsto": 160.0, "real": 160.0, "status": "PAGO"}, {"mes": "08", "tipo": "receita", "descricao": "SALARIO TAMARA", "previsto": 974.0, "real": 974.0}, {"mes": "08", "tipo": "despesa", "descricao": "INTERNET E CELULAR", "previsto": 199.81, "real": 199.81, "status": "PAGO"}, {"mes": "08", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O TAMARA", "previsto": 550.0, "real": 550.0}, {"mes": "08", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O MATHEUS", "previsto": 550.0, "real": 550.0}, {"mes": "08", "tipo": "despesa", "descricao": "CONDOMINIO", "previsto": 300.0, "real": 300.0, "status": "PAGO"}, {"mes": "08", "tipo": "receita", "descricao": "COMISS\u00c3O TAMARA", "previsto": 650.0, "real": 650.0}, {"mes": "08", "tipo": "despesa", "descricao": "G\u00c1S", "previsto": 20.0, "real": 60.0, "status": "PAGO"}, {"mes": "08", "tipo": "receita", "descricao": "COMISS\u00c3O MATHEUS", "previsto": 90.0, "real": 90.0}, {"mes": "08", "tipo": "despesa", "descricao": "CC INTER FIXOS", "previsto": 1100.0, "real": 1100.0, "status": "PAGO"}, {"mes": "08", "tipo": "receita", "descricao": "ALUGUEL AP\u00ca + CONDOMINIO", "previsto": 1000.0, "real": 1000.0}, {"mes": "08", "tipo": "despesa", "descricao": "CC INTER EXTRAS", "previsto": 2900.0, "real": 2900.0, "status": "PAGO"}, {"mes": "08", "tipo": "receita", "descricao": "ADIANTAMENTO MATHEUS", "previsto": 895.0, "real": 895.0}, {"mes": "08", "tipo": "despesa", "descricao": "JURACY (3/10)", "previsto": 588.0, "real": 588.0, "status": "PAGO"}, {"mes": "08", "tipo": "receita", "descricao": "ADIANTAMENTO TAMARA", "previsto": 1200.0, "real": 1200.0}, {"mes": "08", "tipo": "despesa", "descricao": "ALIMENTA\u00c7\u00c3O", "previsto": 1100.0, "real": 1100.0, "status": "PAGO"}, {"mes": "08", "tipo": "despesa", "descricao": "SEGURO CARRO", "previsto": 84.0, "real": 84.0, "status": "PAGO"}, {"mes": "08", "tipo": "despesa", "descricao": "IPTV", "previsto": 35.0, "real": 35.0, "status": "PAGO"}, {"mes": "08", "tipo": "despesa", "descricao": "HABITA\u00c7\u00c3O CAIXA", "previsto": 120.6, "real": 120.6, "status": "PAGO"}, {"mes": "09", "tipo": "despesa", "descricao": "ALUGUEL", "previsto": 1500.0, "real": 1500.0, "status": "PAGO"}, {"mes": "09", "tipo": "receita", "descricao": "SALARIO MATHEUS", "previsto": 1165.0, "real": 1165.0}, {"mes": "09", "tipo": "despesa", "descricao": "\u00c1GUA", "previsto": 160.0, "real": 160.0, "status": "PAGO"}, {"mes": "09", "tipo": "receita", "descricao": "SALARIO TAMARA", "previsto": 1560.0, "real": 1560.0}, {"mes": "09", "tipo": "despesa", "descricao": "INTERNET E CELULAR", "previsto": 199.81, "real": 199.81, "status": "PAGO"}, {"mes": "09", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O TAMARA", "previsto": 550.0, "real": 550.0}, {"mes": "09", "tipo": "despesa", "descricao": "LUZ AP\u00ca", "previsto": 350.0, "real": 311.0, "status": "PAGO"}, {"mes": "09", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O MATHEUS", "previsto": 550.0, "real": 550.0}, {"mes": "09", "tipo": "despesa", "descricao": "CONDOMINIO", "previsto": 309.0, "real": 309.0, "status": "PAGO"}, {"mes": "09", "tipo": "receita", "descricao": "COMISS\u00c3O TAMARA", "previsto": 200.0, "real": 200.0}, {"mes": "09", "tipo": "despesa", "descricao": "G\u00c1S", "previsto": 80.0, "real": 101.0, "status": "PAGO"}, {"mes": "09", "tipo": "receita", "descricao": "COMISS\u00c3O MATHEUS", "previsto": 125.0, "real": 125.0}, {"mes": "09", "tipo": "despesa", "descricao": "CC INTER FIXOS", "previsto": 1100.0, "real": 1000.0, "status": "PAGO"}, {"mes": "09", "tipo": "receita", "descricao": "ALUGUEL AP\u00ca + CONDOMINIO", "previsto": 1000.0, "real": 1000.0}, {"mes": "09", "tipo": "despesa", "descricao": "CC INTER EXTRAS", "previsto": 3280.0, "real": 3280.0, "status": "PAGO"}, {"mes": "09", "tipo": "receita", "descricao": "AUXILIO TAMARA", "previsto": 2200.0, "real": 2200.0}, {"mes": "09", "tipo": "despesa", "descricao": "JURACY (4/10)", "previsto": 588.0, "real": 588.0, "status": "PAGO"}, {"mes": "09", "tipo": "receita", "descricao": "ADIANTAMENTO MATHEUS", "previsto": 895.0, "real": 895.0}, {"mes": "09", "tipo": "despesa", "descricao": "ALIMENTA\u00c7\u00c3O", "previsto": 1100.0, "real": 1100.0, "status": "PAGO"}, {"mes": "09", "tipo": "receita", "descricao": "ADIANTAMENTO TAMARA", "previsto": 1200.0, "real": 1200.0}, {"mes": "09", "tipo": "despesa", "descricao": "SEGURO CARRO", "previsto": 84.0, "real": 84.0, "status": "PAGO"}, {"mes": "09", "tipo": "despesa", "descricao": "IPTV", "previsto": 35.0, "real": 35.0, "status": "PAGO"}, {"mes": "09", "tipo": "despesa", "descricao": "HABITA\u00c7\u00c3O CAIXA", "previsto": 116.85, "real": 116.85, "status": "PAGO"}, {"mes": "10", "tipo": "despesa", "descricao": "ALUGUEL", "previsto": 1500.0, "real": 1500.0, "status": "PAGO"}, {"mes": "10", "tipo": "receita", "descricao": "SALARIO MATHEUS", "previsto": 1165.0, "real": 1165.0}, {"mes": "10", "tipo": "despesa", "descricao": "\u00c1GUA", "previsto": 158.0, "real": 158.0, "status": "PAGO"}, {"mes": "10", "tipo": "receita", "descricao": "SALARIO TAMARA", "previsto": 1520.0, "real": 1520.0}, {"mes": "10", "tipo": "despesa", "descricao": "INTERNET E CELULAR", "previsto": 199.8, "real": 199.81, "status": "PAGO"}, {"mes": "10", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O TAMARA", "previsto": 550.0, "real": 550.0}, {"mes": "10", "tipo": "despesa", "descricao": "LUZ AP\u00ca", "previsto": 408.0, "real": 408.0, "status": "PAGO"}, {"mes": "10", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O MATHEUS", "previsto": 550.0, "real": 550.0}, {"mes": "10", "tipo": "despesa", "descricao": "CONDOMINIO", "previsto": 309.0, "real": 309.0, "status": "PAGO"}, {"mes": "10", "tipo": "receita", "descricao": "COMISS\u00c3O TAMARA", "previsto": 300.0, "real": 300.0}, {"mes": "10", "tipo": "despesa", "descricao": "G\u00c1S", "previsto": 34.27, "real": 34.27, "status": "PAGO"}, {"mes": "10", "tipo": "receita", "descricao": "COMISS\u00c3O MATHEUS", "previsto": 199.0, "real": 199.0}, {"mes": "10", "tipo": "despesa", "descricao": "CC INTER FIXOS", "previsto": 1200.0, "real": 1200.0, "status": "PAGO"}, {"mes": "10", "tipo": "receita", "descricao": "ALUGUEL AP\u00ca + CONDOMINIO", "previsto": 1000.0, "real": 1000.0}, {"mes": "10", "tipo": "despesa", "descricao": "CC INTER EXTRAS", "previsto": 4339.61, "real": 4339.61, "status": "PAGO"}, {"mes": "10", "tipo": "receita", "descricao": "AUXILIO TAMARA", "previsto": 1590.0, "real": 1590.0}, {"mes": "10", "tipo": "despesa", "descricao": "JURACY (5/10)", "previsto": 588.0, "real": 588.0, "status": "PAGO"}, {"mes": "10", "tipo": "receita", "descricao": "ADIANTAMENTO MATHEUS", "previsto": 895.0, "real": 895.0}, {"mes": "10", "tipo": "despesa", "descricao": "ALIMENTA\u00c7\u00c3O", "previsto": 1100.0, "real": 1100.0, "status": "PAGO"}, {"mes": "10", "tipo": "receita", "descricao": "ADIANTAMENTO TAMARA", "previsto": 1200.0, "real": 1200.0}, {"mes": "10", "tipo": "despesa", "descricao": "SEGURO CARRO", "previsto": 84.0, "real": 84.0, "status": "PAGO"}, {"mes": "10", "tipo": "despesa", "descricao": "PASSEIO DRIFT (Bruno e Karine)", "previsto": 200.0, "real": 200.0, "status": "PAGO"}, {"mes": "10", "tipo": "despesa", "descricao": "AUXILIO PAI E M\u00c3E", "previsto": 122.2, "real": 122.2, "status": "PAGO"}, {"mes": "10", "tipo": "despesa", "descricao": "HABITA\u00c7\u00c3O CAIXA", "previsto": 115.54, "real": 115.54, "status": "PAGO"}, {"mes": "11", "tipo": "despesa", "descricao": "ALUGUEL", "previsto": 1500.0, "real": 1500.0, "status": "PAGO"}, {"mes": "11", "tipo": "receita", "descricao": "SALARIO MATHEUS", "previsto": 1165.0, "real": 1165.0}, {"mes": "11", "tipo": "despesa", "descricao": "\u00c1GUA", "previsto": 170.0, "real": 170.0, "status": "PAGO"}, {"mes": "11", "tipo": "receita", "descricao": "SALARIO TAMARA", "previsto": 1550.0, "real": 1550.0}, {"mes": "11", "tipo": "despesa", "descricao": "INTERNET E CELULAR", "previsto": 200.0, "real": 200.0, "status": "PAGO"}, {"mes": "11", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O TAMARA", "previsto": 550.0, "real": 550.0}, {"mes": "11", "tipo": "despesa", "descricao": "LUZ AP\u00ca", "previsto": 400.0, "real": 400.0, "status": "PAGO"}, {"mes": "11", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O MATHEUS", "previsto": 550.0, "real": 550.0}, {"mes": "11", "tipo": "despesa", "descricao": "CONDOMINIO", "previsto": 300.0, "real": 300.0, "status": "PAGO"}, {"mes": "11", "tipo": "receita", "descricao": "COMISS\u00c3O TAMARA", "previsto": 500.0, "real": 500.0}, {"mes": "11", "tipo": "despesa", "descricao": "G\u00c1S", "previsto": 50.0, "real": 50.0, "status": "PAGO"}, {"mes": "11", "tipo": "receita", "descricao": "COMISS\u00c3O MATHEUS", "previsto": 200.0, "real": 200.0}, {"mes": "11", "tipo": "despesa", "descricao": "CC INTER FIXOS", "previsto": 1500.0, "real": 1500.0, "status": "PAGO"}, {"mes": "11", "tipo": "receita", "descricao": "ALUGUEL AP\u00ca + CONDOMINIO", "previsto": 1000.0, "real": 1000.0}, {"mes": "11", "tipo": "despesa", "descricao": "CC INTER EXTRAS", "previsto": 1100.0, "real": 1100.0, "status": "PAGO"}, {"mes": "11", "tipo": "receita", "descricao": "AUXILIO TAMARA", "previsto": 1590.0, "real": 1590.0}, {"mes": "11", "tipo": "despesa", "descricao": "JURACY (6/10)", "previsto": 588.0, "real": 588.0, "status": "PAGO"}, {"mes": "11", "tipo": "receita", "descricao": "ADIANTAMENTO MATHEUS", "previsto": 895.0, "real": 895.0}, {"mes": "11", "tipo": "despesa", "descricao": "ALIMENTA\u00c7\u00c3O", "previsto": 1100.0, "real": 1100.0, "status": "PAGO"}, {"mes": "11", "tipo": "receita", "descricao": "ADIANTAMENTO TAMARA", "previsto": 1200.0, "real": 1200.0}, {"mes": "11", "tipo": "despesa", "descricao": "SEGURO CARRO", "previsto": 89.0, "real": 89.0, "status": "PAGO"}, {"mes": "11", "tipo": "despesa", "descricao": "SECADORA", "previsto": 250.0, "real": 250.0, "status": "PAGO"}, {"mes": "11", "tipo": "despesa", "descricao": "AUXILIO PAI E M\u00c3E", "previsto": 150.0, "real": 150.0, "status": "PAGO"}, {"mes": "11", "tipo": "despesa", "descricao": "TV", "previsto": 20.0, "real": 20.0, "status": "PAGO"}, {"mes": "11", "tipo": "despesa", "descricao": "HABITA\u00c7\u00c3O CAIXA", "previsto": 128.0, "real": 128.0, "status": "PAGO"}], "cartao": [{"categoria": "APLICATIVOS", "descricao": "(08) GOOGLE ONE", "parcelas": {"01": 11.99, "02": 11.99, "03": 11.99, "04": 11.99, "05": 11.99, "06": 24.99, "07": 24.99, "08": 24.99, "09": 24.99, "10": 24.99, "11": 24.99, "12": 24.99}}, {"categoria": "APLICATIVOS", "descricao": "( 09) NETFLIX", "parcelas": {"01": 20.9, "02": 20.9, "03": 20.9, "04": 20.9, "05": 20.9, "06": 20.9, "07": 20.9, "08": 20.9, "09": 20.9, "10": 20.9, "11": 20.9, "12": 20.9}}, {"categoria": "ACADEMIA", "descricao": "(17) ACADEMIA", "parcelas": {"01": 105.0, "02": 210.0, "03": 279.8, "04": 279.8, "05": 279.8, "06": 319.8, "07": 319.8, "08": 319.8, "09": 319.8, "10": 319.8, "11": 279.8, "12": 279.8}}, {"categoria": "UTENS\u00cdLIOS", "descricao": "CAMAS CASAL E BELICHE", "parcelas": {"01": 0, "02": 0, "03": 0, "04": 0, "05": 0, "06": 218.79, "07": 218.79, "08": 218.79, "09": 218.79, "10": 218.79, "11": 218.79, "12": 218.78}}, {"categoria": "UTENS\u00cdLIOS", "descricao": "ITENS LOJ\u00c3O ASTRAL", "parcelas": {"01": 0, "02": 0, "03": 0, "04": 0, "05": 0, "06": 32.7, "07": 32.7, "08": 110.16, "09": 68.18, "10": 32.7, "11": 32.7, "12": 32.7}}, {"categoria": "UTENS\u00cdLIOS", "descricao": "MOACIR GELADEIRA", "parcelas": {"01": 0, "02": 0, "03": 0, "04": 0, "05": 0, "06": 134.95, "07": 134.95, "08": 134.95, "09": 134.95, "10": 134.95, "11": 134.95, "12": 134.95}}, {"categoria": "UTENS\u00cdLIOS", "descricao": "KOMPRAO MICROONDAS", "parcelas": {"01": 0, "02": 0, "03": 0, "04": 0, "05": 0, "06": 39.9, "07": 39.9, "08": 39.9, "09": 39.9, "10": 39.9, "11": 39.9, "12": 39.9}}, {"categoria": "UTENS\u00cdLIOS", "descricao": "COLCH\u00c3O DO HENRIQUE", "parcelas": {"01": 0, "02": 0, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 56.11, "09": 56.11, "10": 56.11, "11": 56.11, "12": 56.11}}, {"categoria": "LASER", "descricao": "BETO CARRERO", "parcelas": {"01": 0, "02": 0, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 33.3, "09": 33.3, "10": 33.3, "11": 33.3, "12": 33.6}}, {"categoria": "MANUTEN\u00c7\u00c3O", "descricao": "CARRO", "parcelas": {"01": 165.0, "02": 165.0, "03": 165.0, "04": 165.0, "05": 245.0, "06": 165.0, "07": 165.0, "08": 165.0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "ROUPAS", "descricao": "ROUPAS MATHEUS E TAMARA", "parcelas": {"01": 0, "02": 0, "03": 0, "04": 0, "05": 0, "06": 0, "07": 36.68, "08": 36.68, "09": 36.68, "10": 103.3, "11": 93.26, "12": 63.3}}, {"categoria": "UTENS\u00cdLIOS", "descricao": "PENTEADEIRA LINKBLU", "parcelas": {"01": 59.7, "02": 59.7, "03": 59.7, "04": 59.7, "05": 59.7, "06": 59.7, "07": 59.7, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "UTENS\u00cdLIOS", "descricao": "HAVAN", "parcelas": {"01": 37.49, "02": 37.49, "03": 37.49, "04": 37.49, "05": 37.49, "06": 37.49, "07": 37.49, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "UTENS\u00cdLIOS", "descricao": "HAVAN", "parcelas": {"01": 31.48, "02": 31.48, "03": 31.48, "04": 31.48, "05": 31.48, "06": 31.48, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "APLICATIVOS", "descricao": "(18) APP HTM", "parcelas": {"01": 23.92, "02": 23.92, "03": 23.92, "04": 23.92, "05": 23.92, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "LASER", "descricao": "AQUALOCKOS", "parcelas": {"01": 0, "02": 0, "03": 32.0, "04": 32.0, "05": 32.0, "06": 32.0, "07": 32.0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "ROUPAS", "descricao": "CAL\u00c7ADOS", "parcelas": {"01": 0, "02": 0, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 56.68, "10": 56.66, "11": 174.13, "12": 117.47}}, {"categoria": "UTENS\u00cdLIOS", "descricao": "PERFUME", "parcelas": {"01": 0, "02": 0, "03": 0, "04": 0, "05": 49.09, "06": 49.09, "07": 49.09, "08": 49.09, "09": 0, "10": 41.97, "11": 41.97, "12": 41.97}}, {"categoria": "UTENS\u00cdLIOS", "descricao": "ITENS CASA", "parcelas": {"01": 0, "02": 0, "03": 133.0, "04": 201.13, "05": 286.13, "06": 265.39, "07": 26.06, "08": 304.12, "09": 958.09, "10": 264.03, "11": 201.6, "12": 41.94}}, {"categoria": "MANUTEN\u00c7\u00c3O", "descricao": "FISIOTERAPIA", "parcelas": {"01": 0, "02": 0, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 136.35, "09": 136.35, "10": 136.35, "11": 0, "12": 0}}, {"categoria": "ROUPAS", "descricao": "VENTILADOR", "parcelas": {"01": 0, "02": 21.06, "03": 21.06, "04": 35.96, "05": 35.96, "06": 35.96, "07": 35.96, "08": 35.96, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "ROUPAS", "descricao": "SHOPEE (EUPHORIA)", "parcelas": {"01": 15.52, "02": 15.52, "03": 15.52, "04": 15.7, "05": 15.7, "06": 15.7, "07": 34.3, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "UTENS\u00cdLIOS", "descricao": "SHOPEE (livro)", "parcelas": {"01": 0, "02": 12.87, "03": 12.87, "04": 19.46, "05": 19.46, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "ROUPAS", "descricao": "SHOPEE", "parcelas": {"01": 9.89, "02": 11.92, "03": 11.91, "04": 12.08, "05": 12.08, "06": 0, "07": 11.0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "UTENS\u00cdLIOS", "descricao": "SHOPEE", "parcelas": {"01": 0, "02": 0, "03": 0, "04": 0, "05": 22.67, "06": 22.67, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "ROUPAS", "descricao": "SHOPEE (MOP)", "parcelas": {"01": 0, "02": 10.66, "03": 36.74, "04": 33.92, "05": 33.92, "06": 0, "07": 14.61, "08": 14.61, "09": 48.34, "10": 249.74, "11": 183.78, "12": 77.27}}, {"categoria": "UTENS\u00cdLIOS", "descricao": "MAGALU TV CASA NOVA", "parcelas": {"01": 8.88, "02": 8.88, "03": 0, "04": 0, "05": 0, "06": 224.5, "07": 224.5, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "UTENS\u00cdLIOS", "descricao": "HAVAN (PANELA E ETC)", "parcelas": {"01": 110.0, "02": 110.0, "03": 61.56, "04": 61.56, "05": 61.56, "06": 61.56, "07": 61.56, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "UTENS\u00cdLIOS", "descricao": "HAVAN (MATERIAL ESCOLAR)", "parcelas": {"01": 0, "02": 63.27, "03": 63.27, "04": 63.27, "05": 63.27, "06": 63.27, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "COMBUST\u00cdVEL", "descricao": "CARRO", "parcelas": {"01": 300.0, "02": 500.0, "03": 350.0, "04": 409.35, "05": 350.0, "06": 413.26, "07": 160.0, "08": 220.0, "09": 380.0, "10": 160.0, "11": 178.6, "12": 28.6}}, {"categoria": "FARMACIA", "descricao": "FARMACIA", "parcelas": {"01": 39.9, "02": 40.0, "03": 15.0, "04": 135.44, "05": 272.1, "06": 193.28, "07": 281.93, "08": 188.22, "09": 122.81, "10": 128.21, "11": 152.39, "12": 0}}, {"categoria": "MERCADO", "descricao": "ALIMENTA\u00c7\u00c3O", "parcelas": {"01": 0, "02": 0, "03": 2430.0, "04": 2261.23, "05": 1409.6, "06": 1659.3, "07": 2007.19, "08": 1786.61, "09": 1811.69, "10": 2797.46, "11": 818.22, "12": 0}}, {"categoria": "LASER", "descricao": "SA\u00cdDAS", "parcelas": {"01": 0, "02": 582.0, "03": 470.0, "04": 801.73, "05": 222.67, "06": 248.59, "07": 309.0, "08": 118.8, "09": 736.3, "10": 166.0, "11": 7.0, "12": 0}}, {"categoria": "12", "descricao": "KOERICH", "parcelas": {"01": 86.75, "02": 86.75, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "15", "descricao": "SHOPEE", "parcelas": {"01": 66.63, "02": 66.63, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "2025-12-26 00:00:00", "descricao": "PERFUMES", "parcelas": {"01": 66.36, "02": 66.36, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "nan", "descricao": "SHOPEE", "parcelas": {"01": 37.55, "02": 37.55, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "22", "descricao": "MERCADO LIVRE", "parcelas": {"01": 35.18, "02": 35.18, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "17", "descricao": "MERCADO LIVRE", "parcelas": {"01": 30.58, "02": 30.58, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "22", "descricao": "STUDIO Z", "parcelas": {"01": 29.99, "02": 29.99, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "2025-12-27 00:00:00", "descricao": "JOIAS", "parcelas": {"01": 29.98, "02": 29.98, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "18", "descricao": "MERCADO LIVRE", "parcelas": {"01": 28.23, "02": 28.23, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "nan", "descricao": "SHOPEE", "parcelas": {"01": 23.77, "02": 23.77, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "5", "descricao": "SHOPEE", "parcelas": {"01": 74.36, "02": 23.26, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "nan", "descricao": "SHOPEE", "parcelas": {"01": 22.02, "02": 22.02, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "nan", "descricao": "SHOPEE", "parcelas": {"01": 21.1, "02": 21.1, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "15", "descricao": "SHOPEE", "parcelas": {"01": 13.1, "02": 13.1, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "15", "descricao": "FARMACIA", "parcelas": {"01": 40.8, "02": 0, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "12", "descricao": "KARATE", "parcelas": {"01": 44.24, "02": 0, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "12", "descricao": "STUDIO Z", "parcelas": {"01": 29.99, "02": 0, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "25", "descricao": "SUPER INDAIAL", "parcelas": {"01": 32.82, "02": 0, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "13", "descricao": "KOERICH", "parcelas": {"01": 36.11, "02": 0, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "UTENS\u00cdLIOS", "descricao": "LAVANDERIA", "parcelas": {"01": 0, "02": 0, "03": 50.0, "04": 105.93, "05": 111.52, "06": 64.79, "07": 34.0, "08": 16.9, "09": 16.9, "10": 33.98, "11": 0, "12": 0}}], "porkinho": [{"mes": "01", "tipo": "aporte", "descricao": "Saldo inicial", "valor": 9100.0}, {"mes": "02", "tipo": "aporte", "descricao": "Saldo inicial", "valor": 9531.04}, {"mes": "03", "tipo": "aporte", "descricao": "Saldo inicial", "valor": 8206.04}, {"mes": "04", "tipo": "aporte", "descricao": "Saldo inicial", "valor": 7201.99}, {"mes": "05", "tipo": "aporte", "descricao": "Saldo inicial", "valor": 6697.75}, {"mes": "06", "tipo": "aporte", "descricao": "Saldo inicial", "valor": 5837.95}, {"mes": "01", "tipo": "aporte", "descricao": "F\u00e9rias Tamara", "valor": 603.0}, {"mes": "02", "tipo": "resgate", "descricao": "Resgate contas", "valor": 1270.0}, {"mes": "03", "tipo": "resgate", "descricao": "Resgate contas", "valor": 1038.05}, {"mes": "04", "tipo": "resgate", "descricao": "Resgate contas", "valor": 520.0}, {"mes": "05", "tipo": "resgate", "descricao": "Resgate contas", "valor": 880.0}, {"mes": "06", "tipo": "resgate", "descricao": "Resgate contas", "valor": 840.0}, {"mes": "01", "tipo": "resgate", "descricao": "Resgate contas", "valor": 1300.0}, {"mes": "02", "tipo": "resgate", "descricao": "Resgate contas", "valor": 100.0}, {"mes": "06", "tipo": "resgate", "descricao": "Resgate contas", "valor": 2350.86}, {"mes": "01", "tipo": "aporte", "descricao": "FGTS anivers\u00e1rio", "valor": 1076.0}, {"mes": "06", "tipo": "aporte", "descricao": "Cr\u00e9dito", "valor": 140.0}, {"mes": "01", "tipo": "rendimento", "descricao": "Rendimento m\u00eas", "valor": 52.04}, {"mes": "02", "tipo": "rendimento", "descricao": "Rendimento m\u00eas", "valor": 45.0}, {"mes": "03", "tipo": "rendimento", "descricao": "Rendimento M\u00eas", "valor": 34.0}, {"mes": "04", "tipo": "rendimento", "descricao": "Rendimento m\u00eas", "valor": 15.76}, {"mes": "05", "tipo": "rendimento", "descricao": "Rendimento m\u00eas", "valor": 20.2}, {"mes": "06", "tipo": "rendimento", "descricao": "Rendimento m\u00eas", "valor": 28.0}, {"mes": "01", "tipo": "aporte", "descricao": "Saldo inicial", "valor": 2815.09}, {"mes": "02", "tipo": "aporte", "descricao": "Saldo inicial", "valor": 2193.09}, {"mes": "03", "tipo": "aporte", "descricao": "Saldo inicial", "valor": 4431.82}, {"mes": "04", "tipo": "aporte", "descricao": "Saldo inicial", "valor": 10116.83}, {"mes": "05", "tipo": "aporte", "descricao": "Saldo inicial", "valor": 9431.83}, {"mes": "06", "tipo": "aporte", "descricao": "Saldo inicial", "valor": 9431.83}, {"mes": "01", "tipo": "resgate", "descricao": "Resgate contas", "valor": 650.0}, {"mes": "02", "tipo": "aporte", "descricao": "13\u00b0 Matheus", "valor": 1100.0}, {"mes": "03", "tipo": "aporte", "descricao": "INSS", "valor": 9048.93}, {"mes": "04", "tipo": "resgate", "descricao": "Dentista", "valor": 600.0}, {"mes": "06", "tipo": "aporte", "descricao": "13\u00b0 Tamara", "valor": 1500.0}, {"mes": "02", "tipo": "aporte", "descricao": "13\u00b0 Tamara", "valor": 1624.0}, {"mes": "03", "tipo": "resgate", "descricao": "Compra m\u00e1quina", "valor": 1969.0}, {"mes": "04", "tipo": "resgate", "descricao": "Roupas tribo", "valor": 200.0}, {"mes": "06", "tipo": "aporte", "descricao": "13\u00b0 Matheus", "valor": 890.0}, {"mes": "02", "tipo": "resgate", "descricao": "Resgate contas", "valor": 645.0}, {"mes": "03", "tipo": "resgate", "descricao": "Aluguel", "valor": 1500.0}, {"mes": "01", "tipo": "rendimento", "descricao": "Rendimento m\u00eas", "valor": 28.0}, {"mes": "02", "tipo": "rendimento", "descricao": "Rendimento m\u00eas", "valor": 159.73}, {"mes": "03", "tipo": "rendimento", "descricao": "Rendimento M\u00eas", "valor": 105.08}, {"mes": "04", "tipo": "rendimento", "descricao": "Rendimento m\u00eas", "valor": 115.0}], "sonhos": [{"categoria": "essencial", "descricao": "Cabides"}, {"categoria": "essencial", "descricao": "Colchonete"}, {"categoria": "essencial", "descricao": "Pratos"}, {"categoria": "essencial", "descricao": "Tenis Matheus"}, {"categoria": "essencial", "descricao": "Tenis Tamara"}, {"categoria": "importante", "descricao": "Manuten\u00e7\u00e3o do carro"}, {"categoria": "importante", "descricao": "Cadeira escrit\u00f3rio"}, {"categoria": "importante", "descricao": "Panelas"}, {"categoria": "importante", "descricao": "Dentista"}, {"categoria": "importante", "descricao": "Pneu"}, {"categoria": "metas", "descricao": "Purificador de \u00e1gua"}, {"categoria": "metas", "descricao": "Cord\u00e3o led quarto casal"}, {"categoria": "metas", "descricao": "Bicicleta"}, {"categoria": "metas", "descricao": "Ps5"}, {"categoria": "metas", "descricao": "Gta 6"}, {"categoria": "realizados", "descricao": "M\u00e1quina de lavar"}, {"categoria": "realizados", "descricao": "Colch\u00e3o do Henrique"}, {"categoria": "realizados", "descricao": "Aparelho barba"}, {"categoria": "realizados", "descricao": "Torradeira"}, {"categoria": "realizados", "descricao": "Varal sacada"}, {"categoria": "realizados", "descricao": "Air frier"}, {"categoria": "realizados", "descricao": "Ventilador"}, {"categoria": "realizados", "descricao": "Secadora"}, {"categoria": "realizados", "descricao": "Meias"}, {"categoria": "realizados", "descricao": "Joelheira"}, {"categoria": "realizados", "descricao": "Suporte copos sof\u00e1"}, {"categoria": "realizados", "descricao": "Mesa escritorio"}, {"categoria": "realizados", "descricao": "Fone ouvido"}, {"categoria": "realizados", "descricao": "M\u00e3o francesa prateleira Henrique"}], "custos_fixos": [{"descricao": "ALUGUEL", "categoria": "Moradia", "valor": 1500.0}, {"descricao": "\u00c1GUA", "categoria": "Moradia", "valor": 160.0}, {"descricao": "INTERNET E CELULAR", "categoria": "Moradia", "valor": 200.0}, {"descricao": "LUZ AP\u00ca", "categoria": "Moradia", "valor": 350.0}, {"descricao": "CONDOM\u00cdNIO", "categoria": "Moradia", "valor": 300.0}, {"descricao": "G\u00c1S", "categoria": "Moradia", "valor": 50.0}, {"descricao": "JURACY (2027)", "categoria": "Parcelas/D\u00edvidas", "valor": 588.0}, {"descricao": "ALIMENTA\u00c7\u00c3O", "categoria": "Alimenta\u00e7\u00e3o", "valor": 1100.0}, {"descricao": "SEGURO CARRO", "categoria": "Transporte", "valor": 89.0}, {"descricao": "IPTV", "categoria": "Assinaturas", "valor": 35.0}, {"descricao": "HABITA\u00c7\u00c3O CAIXA", "categoria": "Moradia/Financiamento", "valor": 128.0}, {"descricao": "(08) GOOGLE ONE", "categoria": "Assinaturas", "valor": 24.99}, {"descricao": "(09) NETFLIX", "categoria": "Assinaturas", "valor": 20.0}, {"descricao": "(17) ACADEMIA", "categoria": "Educa\u00e7\u00e3o/Exerc\u00edcio", "valor": 319.8}, {"descricao": "GASOLINA", "categoria": "Transporte", "valor": 200.0}, {"descricao": "ALIMENTA\u00c7\u00c3O", "categoria": "Alimenta\u00e7\u00e3o", "valor": 1850.0}, {"descricao": "FARM\u00c1CIA", "categoria": "Sa\u00fade", "valor": 40.0}]};
 
       function getDefaultData() {
+        const monthMap = {"01":"JAN", "02":"FEV", "03":"MAR", "04":"ABR", "05":"MAI", "06":"JUN", "07":"JUL", "08":"AGO", "09":"SET", "10":"OUT", "11":"NOV", "12":"DEZ"};
         const monthlyData = {};
-
-        MONTHS.forEach((m, idx) => {
-          monthlyData[m] = {
-            expenses: [
-              {
-                id: "e1_" + m,
-                venc: "05",
-                desc: "Aluguel",
-                previsto: 1200,
-                real: 1200,
-                pago: idx === 0,
-              },
-              {
-                id: "e2_" + m,
-                venc: "10",
-                desc: "Água",
-                previsto: 80,
-                real: 80,
-                pago: idx === 0,
-              },
-              {
-                id: "e3_" + m,
-                venc: "10",
-                desc: "Luz Apê",
-                previsto: 180,
-                real: 195,
-                pago: idx === 0,
-              },
-              {
-                id: "e4_" + m,
-                venc: "10",
-                desc: "Condomínio",
-                previsto: 350,
-                real: 350,
-                pago: idx === 0,
-              },
-              {
-                id: "e5_" + m,
-                venc: "15",
-                desc: "Gás",
-                previsto: 65,
-                real: 65,
-                pago: idx === 0,
-              },
-              {
-                id: "e6_" + m,
-                venc: "15",
-                desc: "Internet e Celular",
-                previsto: 160,
-                real: 160,
-                pago: idx === 0,
-              },
-              {
-                id: "e7_" + m,
-                venc: "20",
-                desc: "CC Inter Fixos",
-                previsto: 450,
-                real: 450,
-                pago: idx === 0,
-              },
-              {
-                id: "e8_" + m,
-                venc: "20",
-                desc: "CC Inter Extras",
-                previsto: 300,
-                real: 320,
-                pago: idx === 0,
-              },
-              {
-                id: "e9_" + m,
-                venc: "25",
-                desc: "Habitação Caixa",
-                previsto: 1450,
-                real: 1450,
-                pago: idx === 0,
-              },
-              {
-                id: "e10_" + m,
-                venc: "28",
-                desc: "Alimentação / Mercado",
-                previsto: 1200,
-                real: 1250,
-                pago: idx === 0,
-              },
-              {
-                id: "e11_" + m,
-                venc: "05",
-                desc: "Auxílio Pai e Mãe",
-                previsto: 400,
-                real: 400,
-                pago: idx === 0,
-              },
-              {
-                id: "e12_" + m,
-                venc: "12",
-                desc: "IPTV",
-                previsto: 35,
-                real: 35,
-                pago: idx === 0,
-              },
-              {
-                id: "e13_" + m,
-                venc: "18",
-                desc: "Seguro Carro",
-                previsto: 220,
-                real: 220,
-                pago: idx === 0,
-              },
-            ],
-            incomes: [
-              {
-                id: "i1_" + m,
-                desc: "Salário Matheus",
-                previsto: 4800,
-                real: 4800,
-              },
-              {
-                id: "i2_" + m,
-                desc: "Salário Tamara",
-                previsto: 3800,
-                real: 3800,
-              },
-              {
-                id: "i3_" + m,
-                desc: "Alimentação Matheus (VA/VR)",
-                previsto: 650,
-                real: 650,
-              },
-              {
-                id: "i4_" + m,
-                desc: "Alimentação Tamara (VA/VR)",
-                previsto: 550,
-                real: 550,
-              },
-              {
-                id: "i5_" + m,
-                desc: "Comissão Matheus",
-                previsto: 500,
-                real: 620,
-              },
-              {
-                id: "i6_" + m,
-                desc: "Adiantamento / Auxílios",
-                previsto: 300,
-                real: 300,
-              },
-            ],
-          };
+        
+        MONTHS.forEach((m) => {
+          monthlyData[m] = { expenses: [], incomes: [] };
         });
+
+        // 1. Parse Transações (Receitas e Despesas)
+        let eId = 1, iId = 1;
+        db.transacoes.forEach(t => {
+            let mName = monthMap[t.mes];
+            if (!mName) return;
+            if (t.tipo === 'despesa') {
+                monthlyData[mName].expenses.push({
+                    id: "e_" + (eId++),
+                    venc: "--", // A planilha original não possuía dia do vencimento extraído
+                    desc: t.descricao,
+                    previsto: t.previsto,
+                    real: t.real,
+                    pago: (t.status === "PAGO")
+                });
+            } else {
+                monthlyData[mName].incomes.push({
+                    id: "i_" + (iId++),
+                    desc: t.descricao,
+                    previsto: t.previsto,
+                    real: t.real
+                });
+            }
+        });
+
+        // 2. Parse Cartão CC Inter
+        let cId = 1;
+        const cardItems = db.cartao.map(c => {
+            let vals = {};
+            MONTHS.forEach(m => vals[m] = 0); // inicializa tudo zero
+            Object.keys(c.parcelas).forEach(k => {
+                if(monthMap[k]) vals[monthMap[k]] = c.parcelas[k];
+            });
+            // Filtra o nome de categorias estranhas vindas do Python/Pandas
+            let catLimpada = (c.categoria === "nan" || !isNaN(c.categoria) || c.categoria.includes("2025")) ? "Diversos" : c.categoria;
+            return {
+                id: "c_" + (cId++),
+                category: catLimpada,
+                desc: c.descricao,
+                values: vals
+            };
+        });
+
+        // 3. Parse Custos Fixos Base
+        let fId = 1;
+        const fixedCosts = db.custos_fixos.map(f => ({
+            id: "f_" + (fId++),
+            category: f.categoria,
+            desc: f.descricao,
+            value: f.valor
+        }));
+
+        // 4. Parse Porkinho
+        let pId = 1;
+        const porkinho = {
+            transactions: db.porkinho.map(p => ({
+                id: "p_" + (pId++),
+                date: monthMap[p.mes] ? monthMap[p.mes] + "/2026" : p.mes,
+                type: p.tipo,
+                desc: p.descricao,
+                amount: p.valor
+            }))
+        };
+
+        // 5. Parse Sonhos
+        let dId = 1;
+        const dreams = db.sonhos.map(s => ({
+            id: "d_" + (dId++),
+            title: s.descricao,
+            col: s.categoria,
+            val: 0 // Valor zerado inicialmente (como na planilha base original)
+        }));
 
         return {
           selectedMonth: "JAN",
           activeTab: "mensal",
           monthlyData: monthlyData,
-          cardItems: [
-            {
-              id: "c1",
-              category: "Assinaturas",
-              desc: "Google One",
-              values: {
-                JAN: 9.99,
-                FEV: 9.99,
-                MAR: 9.99,
-                ABR: 9.99,
-                MAI: 9.99,
-                JUN: 9.99,
-                JUL: 9.99,
-                AGO: 9.99,
-                SET: 9.99,
-                OUT: 9.99,
-                NOV: 9.99,
-                DEZ: 9.99,
-              },
-            },
-            {
-              id: "c2",
-              category: "Assinaturas",
-              desc: "Netflix",
-              values: {
-                JAN: 55.9,
-                FEV: 55.9,
-                MAR: 55.9,
-                ABR: 55.9,
-                MAI: 55.9,
-                JUN: 55.9,
-                JUL: 55.9,
-                AGO: 55.9,
-                SET: 55.9,
-                OUT: 55.9,
-                NOV: 55.9,
-                DEZ: 55.9,
-              },
-            },
-            {
-              id: "c3",
-              category: "Academia",
-              desc: "Gympass / FitDance",
-              values: {
-                JAN: 119.0,
-                FEV: 119.0,
-                MAR: 119.0,
-                ABR: 119.0,
-                MAI: 119.0,
-                JUN: 119.0,
-                JUL: 119.0,
-                AGO: 119.0,
-                SET: 119.0,
-                OUT: 119.0,
-                NOV: 119.0,
-                DEZ: 119.0,
-              },
-            },
-            {
-              id: "c4",
-              category: "Utensílios",
-              desc: "Havan (Air Fryer/Copos)",
-              values: {
-                JAN: 149.9,
-                FEV: 149.9,
-                MAR: 149.9,
-                ABR: 149.9,
-                MAI: 149.9,
-                JUN: 149.9,
-                JUL: 149.9,
-                AGO: 149.9,
-                SET: 149.9,
-                OUT: 149.9,
-                NOV: 0,
-                DEZ: 0,
-              },
-            },
-            {
-              id: "c5",
-              category: "Lazer",
-              desc: "Ingressos Beto Carrero",
-              values: {
-                JAN: 250.0,
-                FEV: 250.0,
-                MAR: 250.0,
-                ABR: 250.0,
-                MAI: 0,
-                JUN: 0,
-                JUL: 0,
-                AGO: 0,
-                SET: 0,
-                OUT: 0,
-                NOV: 0,
-                DEZ: 0,
-              },
-            },
-            {
-              id: "c6",
-              category: "Manutenção",
-              desc: "Pneus Carro (Troca)",
-              values: {
-                JAN: 0,
-                FEV: 320.0,
-                MAR: 320.0,
-                ABR: 320.0,
-                MAI: 320.0,
-                JUN: 0,
-                JUL: 0,
-                AGO: 0,
-                SET: 0,
-                OUT: 0,
-                NOV: 0,
-                DEZ: 0,
-              },
-            },
-            {
-              id: "c7",
-              category: "Mercado",
-              desc: "Mercado Livre Utensílios",
-              values: {
-                JAN: 89.9,
-                FEV: 89.9,
-                MAR: 89.9,
-                ABR: 0,
-                MAI: 0,
-                JUN: 0,
-                JUL: 0,
-                AGO: 0,
-                SET: 0,
-                OUT: 0,
-                NOV: 0,
-                DEZ: 0,
-              },
-            },
-          ],
-          fixedCosts: [
-            {
-              id: "f1",
-              category: "Moradia",
-              desc: "Aluguel + Condomínio",
-              value: 1550,
-            },
-            {
-              id: "f2",
-              category: "Moradia",
-              desc: "Água + Luz + Gás",
-              value: 325,
-            },
-            {
-              id: "f3",
-              category: "Financiamento",
-              desc: "Habitação Caixa",
-              value: 1450,
-            },
-            {
-              id: "f4",
-              category: "Alimentação",
-              desc: "Mercado Geral + VAs",
-              value: 2400,
-            },
-            {
-              id: "f5",
-              category: "Transporte",
-              desc: "Seguro Carro + Combustível",
-              value: 650,
-            },
-            {
-              id: "f6",
-              category: "Assinaturas",
-              desc: "Internet + Celular + Streaming",
-              value: 260,
-            },
-            {
-              id: "f7",
-              category: "Saúde & Exercício",
-              desc: "Academia + Fisioterapia",
-              value: 350,
-            },
-          ],
-          porkinho: {
-            transactions: [
-              {
-                id: "p1",
-                date: "Jan/2026",
-                type: "aporte",
-                desc: "Sobra Inicial Salários",
-                amount: 1000,
-              },
-              {
-                id: "p2",
-                date: "Jan/2026",
-                type: "rendimento",
-                desc: "Rendimento CDB",
-                amount: 12.5,
-              },
-              {
-                id: "p3",
-                date: "Fev/2026",
-                type: "aporte",
-                desc: "Aporte Mensal",
-                amount: 500,
-              },
-            ],
-          },
-          dreams: [
-            {
-              id: "d1",
-              title: "Cabides e Organizadores",
-              col: "essencial",
-              val: 150,
-            },
-            {
-              id: "d2",
-              title: "Colchonete & Halteres",
-              col: "essencial",
-              val: 120,
-            },
-            {
-              id: "d3",
-              title: "Manutenção do Carro",
-              col: "importante",
-              val: 800,
-            },
-            {
-              id: "d4",
-              title: "Cadeira de Escritório",
-              col: "importante",
-              val: 650,
-            },
-            { id: "d5", title: "Purificador de Água", col: "metas", val: 580 },
-            { id: "d6", title: "PS5 & GTA 6", col: "metas", val: 4500 },
-            {
-              id: "d7",
-              title: "Máquina de Lavar",
-              col: "realizados",
-              val: 2200,
-            },
-            {
-              id: "d8",
-              title: "Colchão do Henrique",
-              col: "realizados",
-              val: 1400,
-            },
-            { id: "d9", title: "Air Fryer Havan", col: "realizados", val: 380 },
-          ],
+          cardItems: cardItems,
+          fixedCosts: fixedCosts,
+          porkinho: porkinho,
+          dreams: dreams,
         };
       }
 
