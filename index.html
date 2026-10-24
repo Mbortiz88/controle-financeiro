@@ -2,12 +2,39 @@
 <html lang="pt-BR" class="dark">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <title>Controle Financeiro 2026</title>
+
+    <!-- Ícone para aba do Navegador (Favicon) -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='115' fill='%230B0C10' stroke='%23252738' stroke-width='16'/%3E%3Cpath d='M130 380 L230 250 L310 290 L400 150' stroke='%2300E5FF' stroke-width='42' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='400' cy='150' r='35' fill='%23FF3B5C' style='filter: drop-shadow(0 0 12px rgba(255, 59, 92, 0.8));'/%3E%3Cpath d='M130 420 L400 420' stroke='%231D1E2C' stroke-width='16' stroke-linecap='round'/%3E%3C/svg%3E"
+    />
+
+    <!-- Ícone para Tela Inicial do iPhone/iOS (Apple Touch Icon) -->
+    <link
+      rel="apple-touch-icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='115' fill='%230B0C10'/%3E%3Cpath d='M130 380 L230 250 L310 290 L400 150' stroke='%2300E5FF' stroke-width='42' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='400' cy='150' r='35' fill='%23FF3B5C'/%3E%3C/svg%3E"
+    />
+
+    <!-- Configurações para iPhone Web App -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="Finance 2026" />
+    <meta name="theme-color" content="#0B0C10" />
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <script>
       tailwind.config = {
         darkMode: "class",
@@ -38,6 +65,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
+
     <style>
       body {
         background-color: #0b0c10;
@@ -53,10 +81,12 @@
       .neon-glow-cyan {
         box-shadow: 0 0 18px rgba(0, 229, 255, 0.22);
       }
+
       .card-panel {
         background-color: #151621;
         border: 1px solid #252738;
       }
+
       .custom-scrollbar::-webkit-scrollbar {
         height: 6px;
         width: 6px;
@@ -71,6 +101,7 @@
       .custom-scrollbar::-webkit-scrollbar-thumb:hover {
         background: #ff3b5c;
       }
+
       .input-dark {
         background-color: #0e0f18;
         border: 1px solid #252738;
@@ -81,6 +112,7 @@
         border-color: #ff3b5c;
         box-shadow: 0 0 10px rgba(255, 59, 92, 0.35);
       }
+
       .editable-row {
         cursor: pointer;
         transition: background-color 0.15s ease-in-out;
@@ -88,19 +120,36 @@
       .editable-row:hover {
         background-color: #1d1e2d !important;
       }
+
+      /* Estilo refinado para as abas */
+      .tab-btn.active {
+        background-color: #ff3b5c;
+        color: white;
+        box-shadow: 0 4px 14px 0 rgba(255, 59, 92, 0.39);
+      }
+      .tab-btn:not(.active) {
+        background-color: transparent;
+        color: #94a3b8; /* slate-400 */
+      }
+      .tab-btn:not(.active):hover {
+        background-color: #1a1b28;
+        color: #f1f5f9;
+      }
     </style>
   </head>
   <body class="min-h-screen flex flex-col custom-scrollbar">
-    <!-- HEADER / NAVIGATION -->
+    <!-- HEADER / NAVIGATION (Refinado conforme Imagem) -->
     <header
-      class="bg-[#10111A] border-b border-[#252738] sticky top-0 z-40 backdrop-blur-md bg-opacity-90"
+      class="bg-[#10111A] border-b border-[#1E1F2E] sticky top-0 z-40 backdrop-blur-md bg-opacity-95"
     >
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-16">
+      <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          class="flex flex-col sm:flex-row sm:items-center justify-between py-4 gap-4"
+        >
           <!-- App Title -->
           <div class="flex items-center gap-3">
             <div
-              class="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#C01235] to-[#FF3B5C] flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-red-950/60 neon-glow-red"
+              class="w-11 h-11 rounded-xl bg-gradient-to-tr from-[#C01235] to-[#FF3B5C] flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-red-950/60 neon-glow-red"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -119,21 +168,21 @@
             </div>
             <div>
               <h1
-                class="text-lg font-bold tracking-wider text-white uppercase flex items-center gap-2"
+                class="text-xl font-bold tracking-widest text-white uppercase flex items-center gap-2"
               >
                 PLANEJAMENTO <span class="text-[#FF3B5C]">2026</span>
               </h1>
-              <p class="text-xs text-gray-400 hidden sm:block">
+              <p class="text-xs text-slate-400 font-medium tracking-wide">
                 Controle Financeiro Pessoal & Familiar
               </p>
             </div>
           </div>
 
           <!-- Actions Header -->
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-3">
             <button
               onclick="exportData()"
-              class="px-3 py-1.5 text-xs font-medium bg-[#1A1B28] hover:bg-[#252738] border border-[#252738] text-gray-300 hover:text-white rounded-lg transition flex items-center gap-1.5 shadow-sm"
+              class="px-4 py-2 text-[13px] font-medium bg-[#1A1B28] hover:bg-[#252738] border border-[#2A2B3D] text-slate-300 hover:text-white rounded-lg transition flex items-center gap-2 shadow-sm"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -149,11 +198,11 @@
                   d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
                 />
               </svg>
-              <span class="hidden md:inline">Backup</span> Exportar
+              <span>Backup Exportar</span>
             </button>
 
             <label
-              class="px-3 py-1.5 text-xs font-medium bg-[#1A1B28] hover:bg-[#252738] border border-[#252738] text-gray-300 hover:text-white rounded-lg transition cursor-pointer flex items-center gap-1.5 shadow-sm"
+              class="px-4 py-2 text-[13px] font-medium bg-[#1A1B28] hover:bg-[#252738] border border-[#2A2B3D] text-slate-300 hover:text-white rounded-lg transition cursor-pointer flex items-center gap-2 shadow-sm"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -169,7 +218,7 @@
                   d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
                 />
               </svg>
-              <span class="hidden md:inline">Restaurar</span> Importar
+              <span>Restaurar Importar</span>
               <input
                 type="file"
                 id="import-file"
@@ -181,7 +230,7 @@
 
             <button
               onclick="resetDataPrompt()"
-              class="px-2.5 py-1.5 text-xs font-medium bg-red-950/40 hover:bg-red-900/60 border border-red-800/50 text-red-300 rounded-lg transition"
+              class="px-3 py-2 text-sm font-medium bg-[#1A1B28] hover:bg-red-950/40 border border-[#2A2B3D] hover:border-red-900/50 text-slate-400 hover:text-red-400 rounded-lg transition"
               title="Restaurar dados padrão"
             >
               <svg
@@ -204,13 +253,13 @@
 
         <!-- Tab Navigation Links -->
         <nav
-          class="flex space-x-1 sm:space-x-4 overflow-x-auto custom-scrollbar py-2 border-t border-[#1E1F2E]"
+          class="flex space-x-2 overflow-x-auto custom-scrollbar pb-3 pt-1"
           id="tab-nav"
         >
           <button
             onclick="switchTab('mensal')"
             id="tab-btn-mensal"
-            class="tab-btn px-4 py-2 text-sm font-semibold rounded-lg text-white bg-[#FF3B5C] transition whitespace-nowrap flex items-center gap-2 shadow-md"
+            class="tab-btn active px-5 py-2.5 text-[13px] font-semibold rounded-lg transition whitespace-nowrap flex items-center gap-2"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -231,7 +280,7 @@
           <button
             onclick="switchTab('cartao')"
             id="tab-btn-cartao"
-            class="tab-btn px-4 py-2 text-sm font-medium rounded-lg text-gray-400 hover:text-white hover:bg-[#1A1B28] transition whitespace-nowrap flex items-center gap-2"
+            class="tab-btn px-5 py-2.5 text-[13px] font-medium rounded-lg transition whitespace-nowrap flex items-center gap-2"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -252,7 +301,7 @@
           <button
             onclick="switchTab('custos')"
             id="tab-btn-custos"
-            class="tab-btn px-4 py-2 text-sm font-medium rounded-lg text-gray-400 hover:text-white hover:bg-[#1A1B28] transition whitespace-nowrap flex items-center gap-2"
+            class="tab-btn px-5 py-2.5 text-[13px] font-medium rounded-lg transition whitespace-nowrap flex items-center gap-2"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -273,7 +322,7 @@
           <button
             onclick="switchTab('reserva')"
             id="tab-btn-reserva"
-            class="tab-btn px-4 py-2 text-sm font-medium rounded-lg text-gray-400 hover:text-white hover:bg-[#1A1B28] transition whitespace-nowrap flex items-center gap-2"
+            class="tab-btn px-5 py-2.5 text-[13px] font-medium rounded-lg transition whitespace-nowrap flex items-center gap-2"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -294,7 +343,7 @@
           <button
             onclick="switchTab('sonhos')"
             id="tab-btn-sonhos"
-            class="tab-btn px-4 py-2 text-sm font-medium rounded-lg text-gray-400 hover:text-white hover:bg-[#1A1B28] transition whitespace-nowrap flex items-center gap-2"
+            class="tab-btn px-5 py-2.5 text-[13px] font-medium rounded-lg transition whitespace-nowrap flex items-center gap-2"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -317,12 +366,12 @@
     </header>
 
     <!-- MAIN CONTAINER -->
-    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+    <main class="flex-1 max-w-[1400px] w-full mx-auto p-4 sm:p-6 lg:p-8">
       <!-- 1. ABA VISÃO MENSAL -->
       <section id="tab-content-mensal" class="tab-content space-y-6">
         <!-- Month Selector Carousel -->
         <div
-          class="card-panel rounded-2xl p-3 flex items-center justify-between overflow-x-auto custom-scrollbar gap-2"
+          class="card-panel rounded-2xl p-2.5 flex items-center justify-between overflow-x-auto custom-scrollbar gap-2"
           id="month-selector"
         >
           <!-- Buttons JAN-DEZ injected by JS -->
@@ -335,7 +384,7 @@
             class="card-panel rounded-2xl p-5 border-l-4 border-l-[#00E676] relative overflow-hidden neon-glow-green"
           >
             <div
-              class="flex justify-between items-center text-gray-400 text-xs font-semibold uppercase tracking-wider mb-2"
+              class="flex justify-between items-center text-slate-400 text-xs font-semibold uppercase tracking-wider mb-2"
             >
               <span>Total de Receitas</span>
               <div
@@ -363,7 +412,10 @@
             >
               R$ 0,00
             </div>
-            <div class="text-xs text-gray-500 mt-2" id="dash-receita-sub">
+            <div
+              class="text-xs text-slate-500 mt-2 font-mono"
+              id="dash-receita-sub"
+            >
               Previsto: R$ 0,00
             </div>
           </div>
@@ -373,7 +425,7 @@
             class="card-panel rounded-2xl p-5 border-l-4 border-l-[#FF3B5C] relative overflow-hidden neon-glow-red"
           >
             <div
-              class="flex justify-between items-center text-gray-400 text-xs font-semibold uppercase tracking-wider mb-2"
+              class="flex justify-between items-center text-slate-400 text-xs font-semibold uppercase tracking-wider mb-2"
             >
               <span>Total de Despesas</span>
               <div
@@ -401,7 +453,10 @@
             >
               R$ 0,00
             </div>
-            <div class="text-xs text-gray-500 mt-2" id="dash-despesa-sub">
+            <div
+              class="text-xs text-slate-500 mt-2 font-mono"
+              id="dash-despesa-sub"
+            >
               Previsto: R$ 0,00
             </div>
           </div>
@@ -411,7 +466,7 @@
             class="card-panel rounded-2xl p-5 border-l-4 border-l-[#00E5FF] relative overflow-hidden neon-glow-cyan"
           >
             <div
-              class="flex justify-between items-center text-gray-400 text-xs font-semibold uppercase tracking-wider mb-2"
+              class="flex justify-between items-center text-slate-400 text-xs font-semibold uppercase tracking-wider mb-2"
             >
               <span>Lucro Mensal (Saldo)</span>
               <div
@@ -439,19 +494,19 @@
             >
               R$ 0,00
             </div>
-            <div class="text-xs text-gray-500 mt-2" id="dash-saldo-sub">
+            <div class="text-xs text-slate-500 mt-2">
               Receita Real - Despesa Real
             </div>
           </div>
         </div>
 
-        <!-- NOVO: Gráfico de Evolução Anual -->
+        <!-- Gráfico de Evolução Anual (Bolsa de Valores Style) -->
         <div
           class="card-panel rounded-2xl p-5 mt-2 mb-2 relative w-full border border-[#252738]"
         >
           <div class="flex items-center justify-between mb-4">
             <h3 class="text-sm font-bold text-white flex items-center gap-2">
-              <span class="text-[#00E5FF]">📊</span> Evolução Anual Consolidada
+              <span class="text-[#00E5FF]">📊</span> Histórico de Fluxo de Caixa
               (Valores Reais)
             </h3>
           </div>
@@ -460,10 +515,10 @@
           </div>
         </div>
 
-        <p class="text-xs text-gray-400 italic flex items-center gap-1">
-          <span>💡 Dica:</span> Clique no ícone de <b>Lápis ✏️</b> ou dê um
-          <b>duplo-clique</b> em qualquer linha para editar rapidamente os
-          valores.
+        <p class="text-xs text-slate-400 italic flex items-center gap-1.5">
+          <span class="text-brand-cyan">💡 Dica:</span> Clique no ícone de
+          <b>Lápis ✏️</b> ou dê um <b>duplo-clique</b> em qualquer linha para
+          editar.
         </p>
 
         <!-- Two Columns: Despesas & Receitas -->
@@ -474,12 +529,14 @@
               class="flex items-center justify-between border-b border-[#252738] pb-3"
             >
               <div class="flex items-center gap-2">
-                <span class="w-3 h-3 rounded-full bg-[#FF3B5C]"></span>
+                <span
+                  class="w-3 h-3 rounded-full bg-[#FF3B5C] shadow-[0_0_10px_#FF3B5C]"
+                ></span>
                 <h3 class="text-lg font-bold text-white">Despesas & Contas</h3>
               </div>
               <button
                 onclick="openModalDespesa()"
-                class="px-3 py-1.5 text-xs font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition flex items-center gap-1 shadow-md shadow-red-950/50"
+                class="px-3 py-1.5 text-xs font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition flex items-center gap-1 shadow-[0_0_10px_rgba(255,59,92,0.3)]"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -500,9 +557,9 @@
             </div>
 
             <div class="overflow-x-auto custom-scrollbar">
-              <table class="w-full text-left text-sm text-gray-300">
+              <table class="w-full text-left text-[13px] text-slate-300">
                 <thead
-                  class="text-xs text-gray-400 uppercase bg-[#0E0F18] border-b border-[#252738]"
+                  class="text-xs text-slate-400 uppercase bg-[#0E0F18] border-b border-[#252738]"
                 >
                   <tr>
                     <th class="py-2.5 px-3">Venc.</th>
@@ -529,14 +586,16 @@
               class="flex items-center justify-between border-b border-[#252738] pb-3"
             >
               <div class="flex items-center gap-2">
-                <span class="w-3 h-3 rounded-full bg-[#00E676]"></span>
+                <span
+                  class="w-3 h-3 rounded-full bg-[#00E676] shadow-[0_0_10px_#00E676]"
+                ></span>
                 <h3 class="text-lg font-bold text-white">
                   Receitas & Entradas
                 </h3>
               </div>
               <button
                 onclick="openModalReceita()"
-                class="px-3 py-1.5 text-xs font-semibold bg-[#00E676] hover:bg-[#22EF89] text-gray-950 rounded-lg transition flex items-center gap-1 shadow-md shadow-green-950/50 font-bold"
+                class="px-3 py-1.5 text-xs font-bold bg-[#00E676] hover:bg-[#22EF89] text-gray-950 rounded-lg transition flex items-center gap-1 shadow-[0_0_10px_rgba(0,230,118,0.3)]"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -557,9 +616,9 @@
             </div>
 
             <div class="overflow-x-auto custom-scrollbar">
-              <table class="w-full text-left text-sm text-gray-300">
+              <table class="w-full text-left text-[13px] text-slate-300">
                 <thead
-                  class="text-xs text-gray-400 uppercase bg-[#0E0F18] border-b border-[#252738]"
+                  class="text-xs text-slate-400 uppercase bg-[#0E0F18] border-b border-[#252738]"
                 >
                   <tr>
                     <th class="py-2.5 px-3">Descrição</th>
@@ -588,17 +647,15 @@
           >
             <div>
               <h2 class="text-xl font-bold text-white flex items-center gap-2">
-                <span class="text-[#FF3B5C]">💳</span> Fatura Cartão CC Inter
-                (Matriz Anual)
+                <span class="text-[#FF3B5C]">💳</span> Matriz de Cartão CC Inter
               </h2>
-              <p class="text-xs text-gray-400">
-                Acompanhamento das parcelas e assinaturas mês a mês. Edite
-                qualquer item com um clique.
+              <p class="text-xs text-slate-400">
+                Acompanhamento das parcelas e assinaturas mês a mês.
               </p>
             </div>
             <button
               onclick="openModalCartao()"
-              class="px-4 py-2 text-xs font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition flex items-center gap-1.5 shadow-md shadow-red-950/50"
+              class="px-4 py-2 text-[13px] font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition flex items-center gap-1.5 shadow-[0_0_10px_rgba(255,59,92,0.3)]"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -620,16 +677,13 @@
 
           <div class="overflow-x-auto custom-scrollbar">
             <table
-              class="w-full text-left text-xs text-gray-300 whitespace-nowrap"
+              class="w-full text-left text-[12px] text-slate-300 whitespace-nowrap"
             >
               <thead
-                class="text-gray-400 uppercase bg-[#0E0F18] border-b border-[#252738]"
+                class="text-slate-400 uppercase bg-[#0E0F18] border-b border-[#252738]"
               >
                 <tr id="cartao-header-row">
-                  <th class="py-3 px-3">Categoria</th>
-                  <th class="py-3 px-3">Despesa / Item</th>
-                  <!-- Month Headers injected by JS -->
-                  <th class="py-3 px-2 text-right">Ação</th>
+                  <!-- Injected by JS -->
                 </tr>
               </thead>
               <tbody
@@ -640,7 +694,7 @@
               </tbody>
               <tfoot
                 id="cartao-footer"
-                class="bg-[#0E0F18] font-bold border-t-2 border-[#FF3B5C] text-white font-mono"
+                class="bg-[#0E0F18] font-bold border-t border-[#FF3B5C] text-white font-mono text-[13px]"
               >
                 <!-- Totals injected by JS -->
               </tfoot>
@@ -651,13 +705,13 @@
 
       <!-- 3. ABA CUSTOS FIXOS & ORÇAMENTO -->
       <section id="tab-content-custos" class="tab-content hidden space-y-6">
-        <!-- Budget Comparison Overview -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
           <div
-            class="card-panel rounded-2xl p-5 border-l-4 border-l-indigo-500"
+            class="card-panel rounded-2xl p-5 border-l-4 border-l-indigo-500 bg-[#11121C]"
           >
-            <span class="text-xs font-semibold text-gray-400 uppercase"
-              >Renda Fixa Familiar Estimada</span
+            <span
+              class="text-[11px] font-semibold text-slate-400 uppercase tracking-widest"
+              >Renda Estimada Média</span
             >
             <div
               class="text-2xl font-bold font-mono text-indigo-400 mt-1"
@@ -665,13 +719,16 @@
             >
               R$ 0,00
             </div>
-            <p class="text-xs text-gray-500 mt-1">
-              Base de cálculo mensal (Receita JAN)
+            <p class="text-xs text-slate-500 mt-1">
+              Base de cálculo (Receita JAN)
             </p>
           </div>
-          <div class="card-panel rounded-2xl p-5 border-l-4 border-l-[#FF3B5C]">
-            <span class="text-xs font-semibold text-gray-400 uppercase"
-              >Média de Custos Fixos</span
+          <div
+            class="card-panel rounded-2xl p-5 border-l-4 border-l-[#FF3B5C] bg-[#11121C]"
+          >
+            <span
+              class="text-[11px] font-semibold text-slate-400 uppercase tracking-widest"
+              >Soma Custos Fixos</span
             >
             <div
               class="text-2xl font-bold font-mono text-[#FF3B5C] mt-1"
@@ -679,15 +736,14 @@
             >
               R$ 0,00
             </div>
-            <p class="text-xs text-gray-500 mt-1">
-              Soma das despesas recorrentes
-            </p>
+            <p class="text-xs text-slate-500 mt-1">Total das despesas base</p>
           </div>
           <div
-            class="card-panel rounded-2xl p-5 border-l-4 border-l-[#00E676] neon-glow-green"
+            class="card-panel rounded-2xl p-5 border-l-4 border-l-[#00E676] neon-glow-green bg-[#11121C]"
           >
-            <span class="text-xs font-semibold text-gray-400 uppercase"
-              >Margem de Segurança / Diferença</span
+            <span
+              class="text-[11px] font-semibold text-slate-400 uppercase tracking-widest"
+              >Margem de Segurança</span
             >
             <div
               class="text-2xl font-bold font-mono text-[#00E676] mt-1"
@@ -695,23 +751,20 @@
             >
               R$ 0,00
             </div>
-            <p class="text-xs text-gray-500 mt-1">
-              Sobra livre para investimento/lazer
-            </p>
+            <p class="text-xs text-slate-500 mt-1">Diferença (Renda - Custo)</p>
           </div>
         </div>
 
-        <!-- Fixed Costs List & Add Button -->
         <div class="card-panel rounded-2xl p-5 space-y-4">
           <div
             class="flex items-center justify-between border-b border-[#252738] pb-3"
           >
             <h3 class="text-lg font-bold text-white flex items-center gap-2">
-              <span>🏡</span> Mapeamento de Custos Fixos Base
+              <span>🏡</span> Mapeamento de Custos Base
             </h3>
             <button
               onclick="openModalCustoFixo()"
-              class="px-3 py-1.5 text-xs font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition flex items-center gap-1"
+              class="px-3 py-1.5 text-xs font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition flex items-center gap-1 shadow-[0_0_10px_rgba(255,59,92,0.3)]"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -727,12 +780,11 @@
                   d="M12 4v16m8-8H4"
                 />
               </svg>
-              Adicionar Custo Base
+              Adicionar Custo
             </button>
           </div>
-
           <div
-            class="grid grid-cols-1 md:grid-cols-2 gap-4"
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
             id="custos-fixos-grid"
           >
             <!-- Category Cards injected by JS -->
@@ -742,19 +794,18 @@
 
       <!-- 4. ABA RESERVA (PORKINHO) -->
       <section id="tab-content-reserva" class="tab-content hidden space-y-6">
-        <!-- Balance Banner -->
         <div
           class="card-panel rounded-2xl p-6 bg-gradient-to-r from-[#181824] via-[#1F1426] to-[#181824] border border-[#3B1828] relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6 neon-glow-red"
         >
           <div class="flex items-center gap-4">
             <div
-              class="w-16 h-16 rounded-2xl bg-pink-500/10 border border-pink-500/30 flex items-center justify-center text-3xl"
+              class="w-16 h-16 rounded-2xl bg-pink-500/10 border border-pink-500/30 flex items-center justify-center text-3xl shadow-[0_0_15px_rgba(236,72,153,0.2)]"
             >
               🐷
             </div>
             <div>
               <span
-                class="text-xs uppercase font-bold text-pink-400 tracking-wider"
+                class="text-xs uppercase font-bold text-pink-400 tracking-widest"
                 >Reserva Financeira</span
               >
               <h2
@@ -763,47 +814,43 @@
               >
                 R$ 0,00
               </h2>
-              <p class="text-xs text-gray-400 mt-1">
-                Patrimônio acumulado no Porkinho
+              <p class="text-xs text-slate-400 mt-1">
+                Patrimônio acumulado atualizado
               </p>
             </div>
           </div>
-
-          <div class="flex items-center gap-3">
-            <button
-              onclick="openModalPorkinho()"
-              class="px-5 py-2.5 font-bold text-sm bg-gradient-to-r from-pink-600 to-[#FF3B5C] hover:from-pink-500 hover:to-[#FF5473] text-white rounded-xl transition shadow-lg shadow-pink-950/50 flex items-center gap-2"
+          <button
+            onclick="openModalPorkinho()"
+            class="px-5 py-2.5 font-bold text-[13px] bg-gradient-to-r from-pink-600 to-[#FF3B5C] hover:from-pink-500 hover:to-[#FF5473] text-white rounded-xl transition shadow-[0_0_15px_rgba(236,72,153,0.4)] flex items-center gap-2"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                />
-              </svg>
-              Nova Movimentação
-            </button>
-          </div>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+              />
+            </svg>
+            Nova Movimentação
+          </button>
         </div>
 
-        <!-- Ledger Table -->
         <div class="card-panel rounded-2xl p-5 space-y-4">
           <h3
             class="text-lg font-bold text-white border-b border-[#252738] pb-3"
           >
-            Extrato de Entradas, Resgates & Rendimentos
+            Histórico de Entradas e Saídas
           </h3>
           <div class="overflow-x-auto custom-scrollbar">
-            <table class="w-full text-left text-sm text-gray-300">
+            <table class="w-full text-left text-[13px] text-slate-300">
               <thead
-                class="text-xs text-gray-400 uppercase bg-[#0E0F18] border-b border-[#252738]"
+                class="text-xs text-slate-400 uppercase bg-[#0E0F18] border-b border-[#252738]"
               >
                 <tr>
                   <th class="py-3 px-3">Data / Mês</th>
@@ -830,13 +877,10 @@
             <h2 class="text-xl font-bold text-white flex items-center gap-2">
               <span>✨</span> Mural de Objetivos & Sonhos
             </h2>
-            <p class="text-xs text-gray-400">
-              Priorize conquistas e altere dados a qualquer momento.
-            </p>
           </div>
           <button
             onclick="openModalSonho()"
-            class="px-4 py-2 text-xs font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition flex items-center gap-1.5 shadow-md shadow-red-950/50"
+            class="px-4 py-2 text-[13px] font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition flex items-center gap-1.5 shadow-[0_0_10px_rgba(255,59,92,0.3)]"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -852,13 +896,12 @@
                 d="M12 4v16m8-8H4"
               />
             </svg>
-            Novo Item / Sonho
+            Novo Sonho / Meta
           </button>
         </div>
 
-        <!-- 4 Column Kanban Board -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-          <!-- Col 1: Essencial -->
+          <!-- Colunas de Sonhos -->
           <div class="card-panel rounded-2xl p-4 space-y-3 bg-[#11121C]">
             <div
               class="flex justify-between items-center border-b border-[#252738] pb-2"
@@ -866,19 +909,20 @@
               <h4
                 class="font-bold text-amber-400 text-sm flex items-center gap-1.5"
               >
-                <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+                <span
+                  class="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-[0_0_5px_#fbbf24]"
+                ></span>
                 Essencial
               </h4>
-              <span class="text-xs text-gray-500 font-mono" id="count-essencial"
+              <span
+                class="text-xs text-slate-500 font-mono"
+                id="count-essencial"
                 >0</span
               >
             </div>
-            <div id="col-essencial" class="space-y-3 min-h-[150px]">
-              <!-- Cards injected by JS -->
-            </div>
+            <div id="col-essencial" class="space-y-3 min-h-[150px]"></div>
           </div>
 
-          <!-- Col 2: Importante -->
           <div class="card-panel rounded-2xl p-4 space-y-3 bg-[#11121C]">
             <div
               class="flex justify-between items-center border-b border-[#252738] pb-2"
@@ -886,21 +930,20 @@
               <h4
                 class="font-bold text-blue-400 text-sm flex items-center gap-1.5"
               >
-                <span class="w-2.5 h-2.5 rounded-full bg-blue-400"></span>
+                <span
+                  class="w-2.5 h-2.5 rounded-full bg-blue-400 shadow-[0_0_5px_#60a5fa]"
+                ></span>
                 Importante
               </h4>
               <span
-                class="text-xs text-gray-500 font-mono"
+                class="text-xs text-slate-500 font-mono"
                 id="count-importante"
                 >0</span
               >
             </div>
-            <div id="col-importante" class="space-y-3 min-h-[150px]">
-              <!-- Cards injected by JS -->
-            </div>
+            <div id="col-importante" class="space-y-3 min-h-[150px]"></div>
           </div>
 
-          <!-- Col 3: Metas -->
           <div class="card-panel rounded-2xl p-4 space-y-3 bg-[#11121C]">
             <div
               class="flex justify-between items-center border-b border-[#252738] pb-2"
@@ -908,19 +951,18 @@
               <h4
                 class="font-bold text-purple-400 text-sm flex items-center gap-1.5"
               >
-                <span class="w-2.5 h-2.5 rounded-full bg-purple-400"></span>
+                <span
+                  class="w-2.5 h-2.5 rounded-full bg-purple-400 shadow-[0_0_5px_#c084fc]"
+                ></span>
                 Metas
               </h4>
-              <span class="text-xs text-gray-500 font-mono" id="count-metas"
+              <span class="text-xs text-slate-500 font-mono" id="count-metas"
                 >0</span
               >
             </div>
-            <div id="col-metas" class="space-y-3 min-h-[150px]">
-              <!-- Cards injected by JS -->
-            </div>
+            <div id="col-metas" class="space-y-3 min-h-[150px]"></div>
           </div>
 
-          <!-- Col 4: Sonhos Realizados -->
           <div
             class="card-panel rounded-2xl p-4 space-y-3 bg-[#11121C] border-[#00E676]/30"
           >
@@ -930,18 +972,18 @@
               <h4
                 class="font-bold text-[#00E676] text-sm flex items-center gap-1.5"
               >
-                <span class="w-2.5 h-2.5 rounded-full bg-[#00E676]"></span>
-                Sonhos Realizados 🎉
+                <span
+                  class="w-2.5 h-2.5 rounded-full bg-[#00E676] shadow-[0_0_5px_#00E676]"
+                ></span>
+                Realizados 🎉
               </h4>
               <span
-                class="text-xs text-gray-500 font-mono"
+                class="text-xs text-slate-500 font-mono"
                 id="count-realizados"
                 >0</span
               >
             </div>
-            <div id="col-realizados" class="space-y-3 min-h-[150px]">
-              <!-- Cards injected by JS -->
-            </div>
+            <div id="col-realizados" class="space-y-3 min-h-[150px]"></div>
           </div>
         </div>
       </section>
@@ -949,16 +991,15 @@
 
     <!-- MODALS -->
 
-    <!-- Modal Despesa (Adicionar / Editar) -->
     <div
       id="modal-despesa"
-      class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-4"
+      class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-4 backdrop-blur-sm"
     >
       <div
-        class="card-panel rounded-2xl max-w-md w-full p-6 space-y-4 relative border-red-900/40"
+        class="card-panel rounded-2xl max-w-md w-full p-6 space-y-4 relative border-red-900/40 shadow-2xl"
       >
         <h3 class="text-lg font-bold text-white flex items-center gap-2">
-          <span class="text-[#FF3B5C]" id="modal-despesa-title-icon">+</span>
+          <span class="text-[#FF3B5C]">+</span>
           <span id="modal-despesa-title">Nova Despesa</span> (<span
             id="modal-despesa-mes"
             >JAN</span
@@ -967,7 +1008,7 @@
         <form onsubmit="handleSaveDespesa(event)" class="space-y-3">
           <input type="hidden" id="despesa-edit-id" value="" />
           <div>
-            <label class="block text-xs font-semibold text-gray-400 mb-1"
+            <label class="block text-xs font-semibold text-slate-400 mb-1"
               >Dia do Vencimento</label
             >
             <input
@@ -979,7 +1020,7 @@
             />
           </div>
           <div>
-            <label class="block text-xs font-semibold text-gray-400 mb-1"
+            <label class="block text-xs font-semibold text-slate-400 mb-1"
               >Descrição</label
             >
             <input
@@ -991,7 +1032,7 @@
             />
           </div>
           <div>
-            <label class="block text-xs font-semibold text-gray-400 mb-1"
+            <label class="block text-xs font-semibold text-slate-400 mb-1"
               >Valor Previsto (R$)</label
             >
             <input
@@ -1004,7 +1045,7 @@
             />
           </div>
           <div>
-            <label class="block text-xs font-semibold text-gray-400 mb-1"
+            <label class="block text-xs font-semibold text-slate-400 mb-1"
               >Valor Real / Pago (R$)</label
             >
             <input
@@ -1023,7 +1064,7 @@
             />
             <label
               for="despesa-pago"
-              class="text-xs text-gray-300 cursor-pointer"
+              class="text-xs text-slate-300 cursor-pointer"
               >Marcar como Pago</label
             >
           </div>
@@ -1031,32 +1072,30 @@
             <button
               type="button"
               onclick="closeModal('modal-despesa')"
-              class="px-4 py-2 text-xs font-semibold text-gray-400 hover:text-white"
+              class="px-4 py-2 text-xs font-semibold text-slate-400 hover:text-white"
             >
               Cancelar
             </button>
             <button
               type="submit"
-              id="btn-save-despesa"
-              class="px-4 py-2 text-xs font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition"
+              class="px-4 py-2 text-xs font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition shadow-md"
             >
-              Salvar Despesa
+              Salvar
             </button>
           </div>
         </form>
       </div>
     </div>
 
-    <!-- Modal Receita (Adicionar / Editar) -->
     <div
       id="modal-receita"
-      class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-4"
+      class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-4 backdrop-blur-sm"
     >
       <div
-        class="card-panel rounded-2xl max-w-md w-full p-6 space-y-4 relative border-emerald-900/40"
+        class="card-panel rounded-2xl max-w-md w-full p-6 space-y-4 relative border-emerald-900/40 shadow-2xl"
       >
         <h3 class="text-lg font-bold text-white flex items-center gap-2">
-          <span class="text-[#00E676]" id="modal-receita-title-icon">+</span>
+          <span class="text-[#00E676]">+</span>
           <span id="modal-receita-title">Nova Receita</span> (<span
             id="modal-receita-mes"
             >JAN</span
@@ -1065,19 +1104,19 @@
         <form onsubmit="handleSaveReceita(event)" class="space-y-3">
           <input type="hidden" id="receita-edit-id" value="" />
           <div>
-            <label class="block text-xs font-semibold text-gray-400 mb-1"
+            <label class="block text-xs font-semibold text-slate-400 mb-1"
               >Descrição</label
             >
             <input
               type="text"
               id="receita-desc"
-              placeholder="Ex: Salário, Comissão..."
+              placeholder="Ex: Salário..."
               required
               class="w-full p-2.5 rounded-lg input-dark text-sm"
             />
           </div>
           <div>
-            <label class="block text-xs font-semibold text-gray-400 mb-1"
+            <label class="block text-xs font-semibold text-slate-400 mb-1"
               >Valor Previsto (R$)</label
             >
             <input
@@ -1090,7 +1129,7 @@
             />
           </div>
           <div>
-            <label class="block text-xs font-semibold text-gray-400 mb-1"
+            <label class="block text-xs font-semibold text-slate-400 mb-1"
               >Valor Real Recebido (R$)</label
             >
             <input
@@ -1105,62 +1144,60 @@
             <button
               type="button"
               onclick="closeModal('modal-receita')"
-              class="px-4 py-2 text-xs font-semibold text-gray-400 hover:text-white"
+              class="px-4 py-2 text-xs font-semibold text-slate-400 hover:text-white"
             >
               Cancelar
             </button>
             <button
               type="submit"
-              id="btn-save-receita"
-              class="px-4 py-2 text-xs font-semibold bg-[#00E676] hover:bg-[#22EF89] text-gray-950 font-bold rounded-lg transition"
+              class="px-4 py-2 text-xs font-bold bg-[#00E676] hover:bg-[#22EF89] text-gray-950 rounded-lg transition shadow-md"
             >
-              Salvar Receita
+              Salvar
             </button>
           </div>
         </form>
       </div>
     </div>
 
-    <!-- Modal Item Cartão (Adicionar / Editar) -->
     <div
       id="modal-cartao"
-      class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-4"
+      class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-4 backdrop-blur-sm"
     >
       <div
-        class="card-panel rounded-2xl max-w-md w-full p-6 space-y-4 relative border-red-900/40"
+        class="card-panel rounded-2xl max-w-md w-full p-6 space-y-4 relative border-red-900/40 shadow-2xl"
       >
         <h3 class="text-lg font-bold text-white flex items-center gap-2">
           <span class="text-[#FF3B5C]">💳</span>
-          <span id="modal-cartao-title">Adicionar Compra no Cartão</span>
+          <span id="modal-cartao-title">Adicionar no Cartão</span>
         </h3>
         <form onsubmit="handleSaveCartao(event)" class="space-y-3">
           <input type="hidden" id="cartao-edit-id" value="" />
           <div>
-            <label class="block text-xs font-semibold text-gray-400 mb-1"
+            <label class="block text-xs font-semibold text-slate-400 mb-1"
               >Categoria</label
             >
             <input
               type="text"
               id="cartao-cat"
-              placeholder="Ex: Assinaturas, Mercado, Lazer..."
+              placeholder="Ex: Assinaturas..."
               required
               class="w-full p-2.5 rounded-lg input-dark text-sm"
             />
           </div>
           <div>
-            <label class="block text-xs font-semibold text-gray-400 mb-1"
-              >Descrição do Item/Compra</label
+            <label class="block text-xs font-semibold text-slate-400 mb-1"
+              >Descrição</label
             >
             <input
               type="text"
               id="cartao-desc"
-              placeholder="Ex: Netflix, Pneu Carro..."
+              placeholder="Ex: Netflix..."
               required
               class="w-full p-2.5 rounded-lg input-dark text-sm"
             />
           </div>
           <div>
-            <label class="block text-xs font-semibold text-gray-400 mb-1"
+            <label class="block text-xs font-semibold text-slate-400 mb-1"
               >Valor Mensal Padronizado (R$)</label
             >
             <input
@@ -1173,7 +1210,7 @@
           </div>
           <div class="grid grid-cols-2 gap-3">
             <div>
-              <label class="block text-xs font-semibold text-gray-400 mb-1"
+              <label class="block text-xs font-semibold text-slate-400 mb-1"
                 >Mês Inicial</label
               >
               <select
@@ -1195,7 +1232,7 @@
               </select>
             </div>
             <div>
-              <label class="block text-xs font-semibold text-gray-400 mb-1"
+              <label class="block text-xs font-semibold text-slate-400 mb-1"
                 >Nº Parcelas</label
               >
               <input
@@ -1212,37 +1249,35 @@
             <button
               type="button"
               onclick="closeModal('modal-cartao')"
-              class="px-4 py-2 text-xs font-semibold text-gray-400 hover:text-white"
+              class="px-4 py-2 text-xs font-semibold text-slate-400 hover:text-white"
             >
               Cancelar
             </button>
             <button
               type="submit"
-              id="btn-save-cartao"
-              class="px-4 py-2 text-xs font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition"
+              class="px-4 py-2 text-xs font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition shadow-md"
             >
-              Salvar Item
+              Salvar
             </button>
           </div>
         </form>
       </div>
     </div>
 
-    <!-- Modal Custo Fixo Base -->
     <div
       id="modal-custo-fixo"
-      class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-4"
+      class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-4 backdrop-blur-sm"
     >
       <div
-        class="card-panel rounded-2xl max-w-md w-full p-6 space-y-4 relative"
+        class="card-panel rounded-2xl max-w-md w-full p-6 space-y-4 relative shadow-2xl"
       >
-        <h3 class="text-lg font-bold text-white">
-          <span id="modal-custo-title">Adicionar Custo Fixo Base</span>
+        <h3 class="text-lg font-bold text-white" id="modal-custo-title">
+          Adicionar Custo Base
         </h3>
         <form onsubmit="handleSaveCustoFixo(event)" class="space-y-3">
           <input type="hidden" id="custo-edit-id" value="" />
           <div>
-            <label class="block text-xs font-semibold text-gray-400 mb-1"
+            <label class="block text-xs font-semibold text-slate-400 mb-1"
               >Categoria</label
             >
             <select
@@ -1259,20 +1294,20 @@
             </select>
           </div>
           <div>
-            <label class="block text-xs font-semibold text-gray-400 mb-1"
+            <label class="block text-xs font-semibold text-slate-400 mb-1"
               >Descrição</label
             >
             <input
               type="text"
               id="custo-desc"
-              placeholder="Ex: Aluguel, Mercado Média..."
+              placeholder="Ex: Aluguel..."
               required
               class="w-full p-2.5 rounded-lg input-dark text-sm"
             />
           </div>
           <div>
-            <label class="block text-xs font-semibold text-gray-400 mb-1"
-              >Valor Médio Estimado (R$)</label
+            <label class="block text-xs font-semibold text-slate-400 mb-1"
+              >Valor Médio (R$)</label
             >
             <input
               type="number"
@@ -1287,14 +1322,13 @@
             <button
               type="button"
               onclick="closeModal('modal-custo-fixo')"
-              class="px-4 py-2 text-xs font-semibold text-gray-400 hover:text-white"
+              class="px-4 py-2 text-xs font-semibold text-slate-400 hover:text-white"
             >
               Cancelar
             </button>
             <button
               type="submit"
-              id="btn-save-custo"
-              class="px-4 py-2 text-xs font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition"
+              class="px-4 py-2 text-xs font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition shadow-md"
             >
               Salvar
             </button>
@@ -1303,35 +1337,34 @@
       </div>
     </div>
 
-    <!-- Modal Transação Porkinho -->
     <div
       id="modal-porkinho"
-      class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-4"
+      class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-4 backdrop-blur-sm"
     >
       <div
-        class="card-panel rounded-2xl max-w-md w-full p-6 space-y-4 relative border-pink-900/40"
+        class="card-panel rounded-2xl max-w-md w-full p-6 space-y-4 relative border-pink-900/40 shadow-2xl"
       >
         <h3 class="text-lg font-bold text-white flex items-center gap-2">
           <span>🐷</span>
-          <span id="modal-porkinho-title">Nova Movimentação na Reserva</span>
+          <span id="modal-porkinho-title">Movimentação na Reserva</span>
         </h3>
         <form onsubmit="handleSavePorkinho(event)" class="space-y-3">
           <input type="hidden" id="porkinho-edit-id" value="" />
           <div>
-            <label class="block text-xs font-semibold text-gray-400 mb-1"
+            <label class="block text-xs font-semibold text-slate-400 mb-1"
               >Data / Mês</label
             >
             <input
               type="text"
               id="porkinho-date"
-              placeholder="Ex: Jan/2026 ou 15/01"
+              placeholder="Ex: Jan/2026"
               required
               class="w-full p-2.5 rounded-lg input-dark text-sm"
             />
           </div>
           <div>
-            <label class="block text-xs font-semibold text-gray-400 mb-1"
-              >Tipo de Movimentação</label
+            <label class="block text-xs font-semibold text-slate-400 mb-1"
+              >Tipo</label
             >
             <select
               id="porkinho-tipo"
@@ -1343,19 +1376,19 @@
             </select>
           </div>
           <div>
-            <label class="block text-xs font-semibold text-gray-400 mb-1"
+            <label class="block text-xs font-semibold text-slate-400 mb-1"
               >Descrição</label
             >
             <input
               type="text"
               id="porkinho-desc"
-              placeholder="Ex: Sobra do Mês, Rendimento CDB..."
+              placeholder="Ex: Sobra Mês..."
               required
               class="w-full p-2.5 rounded-lg input-dark text-sm"
             />
           </div>
           <div>
-            <label class="block text-xs font-semibold text-gray-400 mb-1"
+            <label class="block text-xs font-semibold text-slate-400 mb-1"
               >Valor (R$)</label
             >
             <input
@@ -1371,14 +1404,13 @@
             <button
               type="button"
               onclick="closeModal('modal-porkinho')"
-              class="px-4 py-2 text-xs font-semibold text-gray-400 hover:text-white"
+              class="px-4 py-2 text-xs font-semibold text-slate-400 hover:text-white"
             >
               Cancelar
             </button>
             <button
               type="submit"
-              id="btn-save-porkinho"
-              class="px-4 py-2 text-xs font-semibold bg-pink-600 hover:bg-pink-500 text-white rounded-lg transition"
+              class="px-4 py-2 text-xs font-semibold bg-pink-600 hover:bg-pink-500 text-white rounded-lg transition shadow-md"
             >
               Salvar
             </button>
@@ -1387,34 +1419,32 @@
       </div>
     </div>
 
-    <!-- Modal Novo Sonho/Meta -->
     <div
       id="modal-sonho"
-      class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-4"
+      class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-4 backdrop-blur-sm"
     >
       <div
-        class="card-panel rounded-2xl max-w-md w-full p-6 space-y-4 relative"
+        class="card-panel rounded-2xl max-w-md w-full p-6 space-y-4 relative shadow-2xl"
       >
         <h3 class="text-lg font-bold text-white flex items-center gap-2">
-          <span>✨</span>
-          <span id="modal-sonho-title">Novo Item no Mural de Sonhos</span>
+          <span>✨</span> <span id="modal-sonho-title">Novo Item no Mural</span>
         </h3>
         <form onsubmit="handleSaveSonho(event)" class="space-y-3">
           <input type="hidden" id="sonho-edit-id" value="" />
           <div>
-            <label class="block text-xs font-semibold text-gray-400 mb-1"
-              >Título do Item/Conquista</label
+            <label class="block text-xs font-semibold text-slate-400 mb-1"
+              >Título</label
             >
             <input
               type="text"
               id="sonho-title-input"
-              placeholder="Ex: Purificador de Água, PS5..."
+              placeholder="Ex: PS5..."
               required
               class="w-full p-2.5 rounded-lg input-dark text-sm"
             />
           </div>
           <div>
-            <label class="block text-xs font-semibold text-gray-400 mb-1"
+            <label class="block text-xs font-semibold text-slate-400 mb-1"
               >Prioridade / Coluna</label
             >
             <select
@@ -1428,7 +1458,7 @@
             </select>
           </div>
           <div>
-            <label class="block text-xs font-semibold text-gray-400 mb-1"
+            <label class="block text-xs font-semibold text-slate-400 mb-1"
               >Valor Estimado (R$)</label
             >
             <input
@@ -1443,16 +1473,15 @@
             <button
               type="button"
               onclick="closeModal('modal-sonho')"
-              class="px-4 py-2 text-xs font-semibold text-gray-400 hover:text-white"
+              class="px-4 py-2 text-xs font-semibold text-slate-400 hover:text-white"
             >
               Cancelar
             </button>
             <button
               type="submit"
-              id="btn-save-sonho"
-              class="px-4 py-2 text-xs font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition"
+              class="px-4 py-2 text-xs font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition shadow-md"
             >
-              Salvar Sonho
+              Salvar
             </button>
           </div>
         </form>
@@ -1461,7 +1490,6 @@
 
     <!-- JS LOGIC -->
     <script>
-      // --- CONSTANTS & DEFAULT SEED DATA ---
       const MONTHS = [
         "JAN",
         "FEV",
@@ -1476,113 +1504,36 @@
         "NOV",
         "DEZ",
       ];
-      // ATUALIZADO para forçar recarregamento sem precisar limpar cache
       const STORAGE_KEY = "planejamento_2026_db_v2";
 
-      // Dados exatos da sua planilha espelhados do código anterior
-      const db = {"transacoes": [{"mes": "01", "tipo": "despesa", "descricao": "\u00c1GUA E ESGOTO", "previsto": 190.0, "real": 0, "status": "PENDENTE"}, {"mes": "01", "tipo": "receita", "descricao": "SALARIO MATHEUS", "previsto": 1165.0, "real": 1165.0}, {"mes": "01", "tipo": "despesa", "descricao": "INTERNET", "previsto": 150.0, "real": 179.81, "status": "PAGO"}, {"mes": "01", "tipo": "receita", "descricao": "SAL\u00c1RIO TAMARA", "previsto": 1411.65, "real": 964.0}, {"mes": "01", "tipo": "despesa", "descricao": "CELULARES M\u00d3VEIS", "previsto": 50.0, "real": 0, "status": "PENDENTE"}, {"mes": "01", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O TAMARA", "previsto": 550.0, "real": 550.0}, {"mes": "01", "tipo": "despesa", "descricao": "CC INTER FIXOS", "previsto": 2017.5, "real": 2017.5, "status": "PAGO"}, {"mes": "01", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O MATHEUS", "previsto": 550.0, "real": 550.0}, {"mes": "01", "tipo": "despesa", "descricao": "CC INTER EXTRAS", "previsto": 3510.36, "real": 3510.36, "status": "PAGO"}, {"mes": "01", "tipo": "receita", "descricao": "COMISS\u00c3O TAMARA", "previsto": 500.0, "real": 514.5}, {"mes": "01", "tipo": "despesa", "descricao": "LUZ", "previsto": 335.0, "real": 335.0, "status": "PAGO"}, {"mes": "01", "tipo": "receita", "descricao": "ALUGUEL AP\u00ca + CONDOMINIO", "previsto": 950.0, "real": 950.0}, {"mes": "01", "tipo": "despesa", "descricao": "ALIMENTA\u00c7\u00c3O", "previsto": 1100.0, "real": 1100.0, "status": "PAGO"}, {"mes": "01", "tipo": "receita", "descricao": "ADIANTAMENTO MATHEUS", "previsto": 895.0, "real": 895.0}, {"mes": "01", "tipo": "despesa", "descricao": "SEGURO CARRO", "previsto": 89.0, "real": 89.0, "status": "PAGO"}, {"mes": "01", "tipo": "receita", "descricao": "ADIANTAMENTO TAMARA", "previsto": 1093.0, "real": 766.0}, {"mes": "01", "tipo": "despesa", "descricao": "ULTRAG\u00c1S", "previsto": 140.0, "real": 70.0, "status": "PAGO"}, {"mes": "01", "tipo": "despesa", "descricao": "JURACY", "previsto": 400.0, "real": 400.0, "status": "PAGO"}, {"mes": "02", "tipo": "despesa", "descricao": "\u00c1GUA E ESGOTO", "previsto": 150.0, "real": 150.0, "status": "PAGO"}, {"mes": "02", "tipo": "receita", "descricao": "SALARIO MATHEUS", "previsto": 1167.0, "real": 1167.0}, {"mes": "02", "tipo": "despesa", "descricao": "INTERNET", "previsto": 119.0, "real": 119.0, "status": "PAGO"}, {"mes": "02", "tipo": "receita", "descricao": "SAL\u00c1RIO TAMARA", "previsto": 1300.0, "real": 1300.0}, {"mes": "02", "tipo": "despesa", "descricao": "CELULAR MATHEUS", "previsto": 62.56, "real": 62.56, "status": "PAGO"}, {"mes": "02", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O TAMARA", "previsto": 550.0, "real": 550.0}, {"mes": "02", "tipo": "despesa", "descricao": "CC INTER FIXOS", "previsto": 1565.0, "real": 1565.0, "status": "PAGO"}, {"mes": "02", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O MATHEUS", "previsto": 550.0, "real": 550.0}, {"mes": "02", "tipo": "despesa", "descricao": "CC INTER EXTRAS", "previsto": 3191.78, "real": 3191.78, "status": "PAGO"}, {"mes": "02", "tipo": "receita", "descricao": "COMISS\u00c3O TAMARA", "previsto": 556.0, "real": 556.0}, {"mes": "02", "tipo": "despesa", "descricao": "LUZ", "previsto": 300.0, "real": 300.0, "status": "PAGO"}, {"mes": "02", "tipo": "receita", "descricao": "ALUGUEL AP\u00ca + CONDOMINIO", "previsto": 950.0, "real": 950.0}, {"mes": "02", "tipo": "despesa", "descricao": "ALIMENTA\u00c7\u00c3O", "previsto": 1100.0, "real": 1100.0, "status": "PAGO"}, {"mes": "02", "tipo": "receita", "descricao": "ADIANTAMENTO MATHEUS", "previsto": 895.0, "real": 895.0}, {"mes": "02", "tipo": "despesa", "descricao": "SEGURO CARRO", "previsto": 89.0, "real": 89.0, "status": "PAGO"}, {"mes": "02", "tipo": "receita", "descricao": "ADIANTAMENTO TAMARA", "previsto": 1093.0, "real": 1093.0}, {"mes": "02", "tipo": "despesa", "descricao": "JURACY", "previsto": 400.0, "real": 400.0, "status": "PAGO"}, {"mes": "02", "tipo": "receita", "descricao": "JURACY", "previsto": 410.0, "real": 410.0}, {"mes": "02", "tipo": "despesa", "descricao": "ALUGUEL", "previsto": 1600.0, "real": 1600.0, "status": "PAGO"}, {"mes": "02", "tipo": "despesa", "descricao": "IPTV", "previsto": 35.0, "real": 35.0, "status": "PAGO"}, {"mes": "03", "tipo": "despesa", "descricao": "ALUGUEL", "previsto": 1600.0, "real": 1600.0, "status": "PAGO"}, {"mes": "03", "tipo": "receita", "descricao": "SALARIO MATHEUS", "previsto": 1165.0, "real": 1165.0}, {"mes": "03", "tipo": "despesa", "descricao": "LUZ E \u00c1GUA JU", "previsto": 296.0, "real": 296.0, "status": "PAGO"}, {"mes": "03", "tipo": "receita", "descricao": "SALARIO TAMARA", "previsto": 1400.0, "real": 1400.0}, {"mes": "03", "tipo": "despesa", "descricao": "CELULARES M\u00d3VEIS", "previsto": 95.0, "real": 95.0, "status": "PAGO"}, {"mes": "03", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O TAMARA", "previsto": 550.0, "real": 550.0}, {"mes": "03", "tipo": "despesa", "descricao": "CC INTER FIXOS", "previsto": 1000.0, "real": 1000.0, "status": "PAGO"}, {"mes": "03", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O MATHEUS", "previsto": 550.0, "real": 550.0}, {"mes": "03", "tipo": "despesa", "descricao": "CC INTER EXTRAS", "previsto": 3300.0, "real": 3425.0, "status": "PAGO"}, {"mes": "03", "tipo": "receita", "descricao": "COMISS\u00c3O TAMARA", "previsto": 510.0, "real": 510.0}, {"mes": "03", "tipo": "despesa", "descricao": "JURACY", "previsto": 400.0, "real": 400.0, "status": "PAGO"}, {"mes": "03", "tipo": "receita", "descricao": "ALUGUEL AP\u00ca + CONDOMINIO", "previsto": 950.0, "real": 950.0}, {"mes": "03", "tipo": "despesa", "descricao": "ALIMENTA\u00c7\u00c3O", "previsto": 1100.0, "real": 1100.0, "status": "PAGO"}, {"mes": "03", "tipo": "receita", "descricao": "ADIANTAMENTO MATHEUS", "previsto": 895.0, "real": 895.0}, {"mes": "03", "tipo": "despesa", "descricao": "SEGURO CARRO", "previsto": 89.0, "real": 89.0, "status": "PAGO"}, {"mes": "03", "tipo": "receita", "descricao": "ADIANTAMENTO TAMARA", "previsto": 1094.0, "real": 1094.0}, {"mes": "03", "tipo": "despesa", "descricao": "INTERNET JU (PG PARTE LUZ)", "previsto": 120.0, "real": 120.0, "status": "PAGO"}, {"mes": "03", "tipo": "receita", "descricao": "Resgate contas", "previsto": 1038.05, "real": 1038.05}, {"mes": "03", "tipo": "despesa", "descricao": "LUZ AP\u00ca", "previsto": 282.46, "real": 282.46, "status": "PAGO"}, {"mes": "03", "tipo": "despesa", "descricao": "IPVA", "previsto": 180.0, "real": 110.0, "status": "PAGO"}, {"mes": "04", "tipo": "despesa", "descricao": "ALUGUEL", "previsto": 1565.0, "real": 1565.0, "status": "PAGO"}, {"mes": "04", "tipo": "receita", "descricao": "SALARIO MATHEUS", "previsto": 1165.0, "real": 1165.0}, {"mes": "04", "tipo": "despesa", "descricao": "LUZ AP\u00ca", "previsto": 250.0, "real": 221.52, "status": "PAGO"}, {"mes": "04", "tipo": "receita", "descricao": "SALARIO TAMARA", "previsto": 1470.0, "real": 1470.0}, {"mes": "04", "tipo": "despesa", "descricao": "CELULARES M\u00d3VEIS", "previsto": 39.91, "real": 39.91, "status": "PAGO"}, {"mes": "04", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O TAMARA", "previsto": 550.0, "real": 550.0}, {"mes": "04", "tipo": "despesa", "descricao": "CC INTER FIXOS", "previsto": 980.0, "real": 980.0, "status": "PAGO"}, {"mes": "04", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O MATHEUS", "previsto": 550.0, "real": 550.0}, {"mes": "04", "tipo": "despesa", "descricao": "CC INTER EXTRAS", "previsto": 3678.17, "real": 3678.17, "status": "PAGO"}, {"mes": "04", "tipo": "receita", "descricao": "COMISS\u00c3O TAMARA", "previsto": 1029.0, "real": 1029.0}, {"mes": "04", "tipo": "despesa", "descricao": "JURACY", "previsto": 400.0, "real": 400.0, "status": "PAGO"}, {"mes": "04", "tipo": "receita", "descricao": "ALUGUEL AP\u00ca + CONDOMINIO", "previsto": 1000.0, "real": 1000.0}, {"mes": "04", "tipo": "despesa", "descricao": "ALIMENTA\u00c7\u00c3O", "previsto": 1100.0, "real": 1100.0, "status": "PAGO"}, {"mes": "04", "tipo": "receita", "descricao": "ADIANTAMENTO MATHEUS", "previsto": 895.0, "real": 895.0}, {"mes": "04", "tipo": "despesa", "descricao": "SEGURO CARRO", "previsto": 91.76, "real": 91.76, "status": "PAGO"}, {"mes": "04", "tipo": "receita", "descricao": "ADIANTAMENTO TAMARA", "previsto": 1094.0, "real": 1094.0}, {"mes": "04", "tipo": "despesa", "descricao": "IPTV", "previsto": 35.0, "real": 35.0, "status": "PAGO"}, {"mes": "04", "tipo": "despesa", "descricao": "HABITA\u00c7\u00c3O CAIXA", "previsto": 134.21, "real": 134.21, "status": "PAGO"}, {"mes": "04", "tipo": "despesa", "descricao": "IPVA", "previsto": 105.78, "real": 105.78, "status": "PAGO"}, {"mes": "05", "tipo": "despesa", "descricao": "ALUGUEL", "previsto": 800.0, "real": 800.0, "status": "PAGO"}, {"mes": "05", "tipo": "receita", "descricao": "SALARIO MATHEUS", "previsto": 1167.0, "real": 1167.0}, {"mes": "05", "tipo": "despesa", "descricao": "LUZ AP\u00ca", "previsto": 250.0, "real": 220.0, "status": "PAGO"}, {"mes": "05", "tipo": "receita", "descricao": "SALARIO TAMARA", "previsto": 1300.0, "real": 1300.0}, {"mes": "05", "tipo": "despesa", "descricao": "CELULARES M\u00d3VEIS", "previsto": 39.0, "real": 39.0, "status": "PAGO"}, {"mes": "05", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O TAMARA", "previsto": 550.0, "real": 550.0}, {"mes": "05", "tipo": "despesa", "descricao": "CC INTER FIXOS", "previsto": 600.0, "real": 600.0, "status": "PAGO"}, {"mes": "05", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O MATHEUS", "previsto": 550.0, "real": 550.0}, {"mes": "05", "tipo": "despesa", "descricao": "CC INTER EXTRAS", "previsto": 3018.21, "real": 3018.21, "status": "PAGO"}, {"mes": "05", "tipo": "receita", "descricao": "COMISS\u00c3O TAMARA", "previsto": 847.0, "real": 847.0}, {"mes": "05", "tipo": "despesa", "descricao": "JURACY", "previsto": 400.0, "real": 400.0, "status": "PAGO"}, {"mes": "05", "tipo": "receita", "descricao": "ALUGUEL AP\u00ca + CONDOMINIO", "previsto": 1000.0, "real": 1000.0}, {"mes": "05", "tipo": "despesa", "descricao": "ALIMENTA\u00c7\u00c3O", "previsto": 1100.0, "real": 1100.0, "status": "PAGO"}, {"mes": "05", "tipo": "receita", "descricao": "ADIANTAMENTO MATHEUS", "previsto": 895.0, "real": 895.0}, {"mes": "05", "tipo": "despesa", "descricao": "SEGURO CARRO", "previsto": 89.0, "real": 89.0, "status": "PAGO"}, {"mes": "05", "tipo": "receita", "descricao": "ADIANTAMENTO TAMARA", "previsto": 1093.0, "real": 1093.0}, {"mes": "05", "tipo": "despesa", "descricao": "IPTV", "previsto": 35.0, "real": 35.0, "status": "PAGO"}, {"mes": "05", "tipo": "despesa", "descricao": "HABITA\u00c7\u00c3O CAIXA", "previsto": 135.0, "real": 130.56, "status": "PAGO"}, {"mes": "05", "tipo": "despesa", "descricao": "IPVA", "previsto": 105.76, "real": 105.76, "status": "PAGO"}, {"mes": "05", "tipo": "despesa", "descricao": "ALUGUEL NOVO AP\u00ca", "previsto": 1500.0, "real": 1500.0, "status": "PAGO"}, {"mes": "06", "tipo": "despesa", "descricao": "ALUGUEL", "previsto": 1500.0, "real": 1500.0, "status": "PAGO"}, {"mes": "06", "tipo": "receita", "descricao": "SALARIO MATHEUS", "previsto": 1165.0, "real": 1165.0}, {"mes": "06", "tipo": "despesa", "descricao": "HABITA\u00c7\u00c3O CAIXA", "previsto": 128.06, "real": 128.06, "status": "PAGO"}, {"mes": "06", "tipo": "receita", "descricao": "SALARIO TAMARA", "previsto": 1000.0, "real": 1000.0}, {"mes": "06", "tipo": "despesa", "descricao": "INTERNET E CELULARES", "previsto": 135.88, "real": 135.88, "status": "PAGO"}, {"mes": "06", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O TAMARA", "previsto": 550.0, "real": 550.0}, {"mes": "06", "tipo": "despesa", "descricao": "IPTV", "previsto": 35.0, "real": 35.0, "status": "PAGO"}, {"mes": "06", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O MATHEUS", "previsto": 550.0, "real": 550.0}, {"mes": "06", "tipo": "despesa", "descricao": "SEGURO CARRO", "previsto": 89.0, "real": 89.0, "status": "PAGO"}, {"mes": "06", "tipo": "receita", "descricao": "COMISS\u00c3O TAMARA", "previsto": 1365.0, "real": 1365.0}, {"mes": "06", "tipo": "despesa", "descricao": "CC INTER FIXOS", "previsto": 700.0, "real": 700.0, "status": "PAGO"}, {"mes": "06", "tipo": "receita", "descricao": "ALUGUEL AP\u00ca + CONDOMINIO", "previsto": 1000.0, "real": 1000.0}, {"mes": "06", "tipo": "despesa", "descricao": "CC INTER EXTRAS", "previsto": 3345.0, "real": 3345.0, "status": "PAGO"}, {"mes": "06", "tipo": "receita", "descricao": "ADIANTAMENTO MATHEUS", "previsto": 895.0, "real": 895.0}, {"mes": "06", "tipo": "despesa", "descricao": "JURACY (1/10)", "previsto": 588.0, "real": 588.0, "status": "PAGO"}, {"mes": "06", "tipo": "receita", "descricao": "ADIANTAMENTO TAMARA", "previsto": 1093.0, "real": 1093.0}, {"mes": "06", "tipo": "despesa", "descricao": "ALIMENTA\u00c7\u00c3O", "previsto": 1100.0, "real": 1100.0, "status": "PAGO"}, {"mes": "06", "tipo": "receita", "descricao": "FAXINAS", "previsto": 0, "real": 330.0}, {"mes": "06", "tipo": "despesa", "descricao": "\u00c1GUA", "previsto": 150.0, "real": 150.0, "status": "PAGO"}, {"mes": "06", "tipo": "despesa", "descricao": "LUZ AP\u00ca", "previsto": 266.0, "real": 266.0, "status": "PAGO"}, {"mes": "06", "tipo": "despesa", "descricao": "CONDOMINIO", "previsto": 300.0, "real": 300.0, "status": "PAGO"}, {"mes": "06", "tipo": "despesa", "descricao": "G\u00c1S", "previsto": 79.0, "real": 79.0, "status": "PAGO"}, {"mes": "06", "tipo": "despesa", "descricao": "ALUGUEL ALAN", "previsto": 800.0, "real": 800.0, "status": "PAGO"}, {"mes": "06", "tipo": "despesa", "descricao": "LICENCIAMENTO", "previsto": 114.09, "real": 114.61, "status": "PAGO"}, {"mes": "06", "tipo": "despesa", "descricao": "MULTA", "previsto": 138.8, "real": 141.61, "status": "PAGO"}, {"mes": "06", "tipo": "despesa", "descricao": "IPVA", "previsto": 106.0, "real": 105.0, "status": "PAGO"}, {"mes": "06", "tipo": "receita", "descricao": "REAL", "previsto": 7948.0, "real": 0}, {"mes": "07", "tipo": "despesa", "descricao": "ALUGUEL", "previsto": 1500.0, "real": 1500.0, "status": "PAGO"}, {"mes": "07", "tipo": "receita", "descricao": "SALARIO MATHEUS", "previsto": 1165.0, "real": 1165.0}, {"mes": "07", "tipo": "despesa", "descricao": "\u00c1GUA", "previsto": 160.0, "real": 155.13, "status": "PAGO"}, {"mes": "07", "tipo": "receita", "descricao": "SALARIO TAMARA", "previsto": 1434.0, "real": 1434.0}, {"mes": "07", "tipo": "despesa", "descricao": "INTERNET E CELULAR", "previsto": 199.81, "real": 199.81, "status": "PAGO"}, {"mes": "07", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O TAMARA", "previsto": 550.0, "real": 550.0}, {"mes": "07", "tipo": "despesa", "descricao": "LUZ AP\u00ca", "previsto": 338.0, "real": 338.27, "status": "PAGO"}, {"mes": "07", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O MATHEUS", "previsto": 550.0, "real": 550.0}, {"mes": "07", "tipo": "despesa", "descricao": "CONDOMINIO", "previsto": 300.0, "real": 300.0, "status": "PAGO"}, {"mes": "07", "tipo": "receita", "descricao": "COMISS\u00c3O TAMARA", "previsto": 750.0, "real": 750.0}, {"mes": "07", "tipo": "despesa", "descricao": "CC INTER FIXOS", "previsto": 1600.0, "real": 1600.0, "status": "PAGO"}, {"mes": "07", "tipo": "despesa", "descricao": "CC INTER EXTRAS", "previsto": 2731.96, "real": 2731.96, "status": "PAGO"}, {"mes": "07", "tipo": "receita", "descricao": "ALUGUEL AP\u00ca + CONDOMINIO", "previsto": 1000.0, "real": 1000.0}, {"mes": "07", "tipo": "despesa", "descricao": "JURACY (2/10)", "previsto": 588.0, "real": 588.0, "status": "PAGO"}, {"mes": "07", "tipo": "receita", "descricao": "ADIANTAMENTO MATHEUS", "previsto": 895.0, "real": 895.0}, {"mes": "07", "tipo": "despesa", "descricao": "ALIMENTA\u00c7\u00c3O", "previsto": 1100.0, "real": 1100.0, "status": "PAGO"}, {"mes": "07", "tipo": "receita", "descricao": "ADIANTAMENTO TAMARA", "previsto": 1093.0, "real": 1093.0}, {"mes": "07", "tipo": "despesa", "descricao": "G\u00c1S", "previsto": 80.0, "real": 23.0, "status": "PAGO"}, {"mes": "07", "tipo": "despesa", "descricao": "SEGURO CARRO", "previsto": 89.68, "real": 89.68, "status": "PAGO"}, {"mes": "07", "tipo": "despesa", "descricao": "IPTV", "previsto": 35.0, "real": 35.0, "status": "PAGO"}, {"mes": "07", "tipo": "despesa", "descricao": "HABITA\u00c7\u00c3O CAIXA", "previsto": 124.34, "real": 124.34, "status": "PAGO"}, {"mes": "08", "tipo": "despesa", "descricao": "ALUGUEL", "previsto": 1500.0, "real": 1500.0, "status": "PAGO"}, {"mes": "08", "tipo": "receita", "descricao": "SALARIO MATHEUS", "previsto": 1165.0, "real": 1165.0}, {"mes": "08", "tipo": "despesa", "descricao": "\u00c1GUA", "previsto": 160.0, "real": 160.0, "status": "PAGO"}, {"mes": "08", "tipo": "receita", "descricao": "SALARIO TAMARA", "previsto": 974.0, "real": 974.0}, {"mes": "08", "tipo": "despesa", "descricao": "INTERNET E CELULAR", "previsto": 199.81, "real": 199.81, "status": "PAGO"}, {"mes": "08", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O TAMARA", "previsto": 550.0, "real": 550.0}, {"mes": "08", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O MATHEUS", "previsto": 550.0, "real": 550.0}, {"mes": "08", "tipo": "despesa", "descricao": "CONDOMINIO", "previsto": 300.0, "real": 300.0, "status": "PAGO"}, {"mes": "08", "tipo": "receita", "descricao": "COMISS\u00c3O TAMARA", "previsto": 650.0, "real": 650.0}, {"mes": "08", "tipo": "despesa", "descricao": "G\u00c1S", "previsto": 20.0, "real": 60.0, "status": "PAGO"}, {"mes": "08", "tipo": "receita", "descricao": "COMISS\u00c3O MATHEUS", "previsto": 90.0, "real": 90.0}, {"mes": "08", "tipo": "despesa", "descricao": "CC INTER FIXOS", "previsto": 1100.0, "real": 1100.0, "status": "PAGO"}, {"mes": "08", "tipo": "receita", "descricao": "ALUGUEL AP\u00ca + CONDOMINIO", "previsto": 1000.0, "real": 1000.0}, {"mes": "08", "tipo": "despesa", "descricao": "CC INTER EXTRAS", "previsto": 2900.0, "real": 2900.0, "status": "PAGO"}, {"mes": "08", "tipo": "receita", "descricao": "ADIANTAMENTO MATHEUS", "previsto": 895.0, "real": 895.0}, {"mes": "08", "tipo": "despesa", "descricao": "JURACY (3/10)", "previsto": 588.0, "real": 588.0, "status": "PAGO"}, {"mes": "08", "tipo": "receita", "descricao": "ADIANTAMENTO TAMARA", "previsto": 1200.0, "real": 1200.0}, {"mes": "08", "tipo": "despesa", "descricao": "ALIMENTA\u00c7\u00c3O", "previsto": 1100.0, "real": 1100.0, "status": "PAGO"}, {"mes": "08", "tipo": "despesa", "descricao": "SEGURO CARRO", "previsto": 84.0, "real": 84.0, "status": "PAGO"}, {"mes": "08", "tipo": "despesa", "descricao": "IPTV", "previsto": 35.0, "real": 35.0, "status": "PAGO"}, {"mes": "08", "tipo": "despesa", "descricao": "HABITA\u00c7\u00c3O CAIXA", "previsto": 120.6, "real": 120.6, "status": "PAGO"}, {"mes": "09", "tipo": "despesa", "descricao": "ALUGUEL", "previsto": 1500.0, "real": 1500.0, "status": "PAGO"}, {"mes": "09", "tipo": "receita", "descricao": "SALARIO MATHEUS", "previsto": 1165.0, "real": 1165.0}, {"mes": "09", "tipo": "despesa", "descricao": "\u00c1GUA", "previsto": 160.0, "real": 160.0, "status": "PAGO"}, {"mes": "09", "tipo": "receita", "descricao": "SALARIO TAMARA", "previsto": 1560.0, "real": 1560.0}, {"mes": "09", "tipo": "despesa", "descricao": "INTERNET E CELULAR", "previsto": 199.81, "real": 199.81, "status": "PAGO"}, {"mes": "09", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O TAMARA", "previsto": 550.0, "real": 550.0}, {"mes": "09", "tipo": "despesa", "descricao": "LUZ AP\u00ca", "previsto": 350.0, "real": 311.0, "status": "PAGO"}, {"mes": "09", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O MATHEUS", "previsto": 550.0, "real": 550.0}, {"mes": "09", "tipo": "despesa", "descricao": "CONDOMINIO", "previsto": 309.0, "real": 309.0, "status": "PAGO"}, {"mes": "09", "tipo": "receita", "descricao": "COMISS\u00c3O TAMARA", "previsto": 200.0, "real": 200.0}, {"mes": "09", "tipo": "despesa", "descricao": "G\u00c1S", "previsto": 80.0, "real": 101.0, "status": "PAGO"}, {"mes": "09", "tipo": "receita", "descricao": "COMISS\u00c3O MATHEUS", "previsto": 125.0, "real": 125.0}, {"mes": "09", "tipo": "despesa", "descricao": "CC INTER FIXOS", "previsto": 1100.0, "real": 1000.0, "status": "PAGO"}, {"mes": "09", "tipo": "receita", "descricao": "ALUGUEL AP\u00ca + CONDOMINIO", "previsto": 1000.0, "real": 1000.0}, {"mes": "09", "tipo": "despesa", "descricao": "CC INTER EXTRAS", "previsto": 3280.0, "real": 3280.0, "status": "PAGO"}, {"mes": "09", "tipo": "receita", "descricao": "AUXILIO TAMARA", "previsto": 2200.0, "real": 2200.0}, {"mes": "09", "tipo": "despesa", "descricao": "JURACY (4/10)", "previsto": 588.0, "real": 588.0, "status": "PAGO"}, {"mes": "09", "tipo": "receita", "descricao": "ADIANTAMENTO MATHEUS", "previsto": 895.0, "real": 895.0}, {"mes": "09", "tipo": "despesa", "descricao": "ALIMENTA\u00c7\u00c3O", "previsto": 1100.0, "real": 1100.0, "status": "PAGO"}, {"mes": "09", "tipo": "receita", "descricao": "ADIANTAMENTO TAMARA", "previsto": 1200.0, "real": 1200.0}, {"mes": "09", "tipo": "despesa", "descricao": "SEGURO CARRO", "previsto": 84.0, "real": 84.0, "status": "PAGO"}, {"mes": "09", "tipo": "despesa", "descricao": "IPTV", "previsto": 35.0, "real": 35.0, "status": "PAGO"}, {"mes": "09", "tipo": "despesa", "descricao": "HABITA\u00c7\u00c3O CAIXA", "previsto": 116.85, "real": 116.85, "status": "PAGO"}, {"mes": "10", "tipo": "despesa", "descricao": "ALUGUEL", "previsto": 1500.0, "real": 1500.0, "status": "PAGO"}, {"mes": "10", "tipo": "receita", "descricao": "SALARIO MATHEUS", "previsto": 1165.0, "real": 1165.0}, {"mes": "10", "tipo": "despesa", "descricao": "\u00c1GUA", "previsto": 158.0, "real": 158.0, "status": "PAGO"}, {"mes": "10", "tipo": "receita", "descricao": "SALARIO TAMARA", "previsto": 1520.0, "real": 1520.0}, {"mes": "10", "tipo": "despesa", "descricao": "INTERNET E CELULAR", "previsto": 199.8, "real": 199.81, "status": "PAGO"}, {"mes": "10", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O TAMARA", "previsto": 550.0, "real": 550.0}, {"mes": "10", "tipo": "despesa", "descricao": "LUZ AP\u00ca", "previsto": 408.0, "real": 408.0, "status": "PAGO"}, {"mes": "10", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O MATHEUS", "previsto": 550.0, "real": 550.0}, {"mes": "10", "tipo": "despesa", "descricao": "CONDOMINIO", "previsto": 309.0, "real": 309.0, "status": "PAGO"}, {"mes": "10", "tipo": "receita", "descricao": "COMISS\u00c3O TAMARA", "previsto": 300.0, "real": 300.0}, {"mes": "10", "tipo": "despesa", "descricao": "G\u00c1S", "previsto": 34.27, "real": 34.27, "status": "PAGO"}, {"mes": "10", "tipo": "receita", "descricao": "COMISS\u00c3O MATHEUS", "previsto": 199.0, "real": 199.0}, {"mes": "10", "tipo": "despesa", "descricao": "CC INTER FIXOS", "previsto": 1200.0, "real": 1200.0, "status": "PAGO"}, {"mes": "10", "tipo": "receita", "descricao": "ALUGUEL AP\u00ca + CONDOMINIO", "previsto": 1000.0, "real": 1000.0}, {"mes": "10", "tipo": "despesa", "descricao": "CC INTER EXTRAS", "previsto": 4339.61, "real": 4339.61, "status": "PAGO"}, {"mes": "10", "tipo": "receita", "descricao": "AUXILIO TAMARA", "previsto": 1590.0, "real": 1590.0}, {"mes": "10", "tipo": "despesa", "descricao": "JURACY (5/10)", "previsto": 588.0, "real": 588.0, "status": "PAGO"}, {"mes": "10", "tipo": "receita", "descricao": "ADIANTAMENTO MATHEUS", "previsto": 895.0, "real": 895.0}, {"mes": "10", "tipo": "despesa", "descricao": "ALIMENTA\u00c7\u00c3O", "previsto": 1100.0, "real": 1100.0, "status": "PAGO"}, {"mes": "10", "tipo": "receita", "descricao": "ADIANTAMENTO TAMARA", "previsto": 1200.0, "real": 1200.0}, {"mes": "10", "tipo": "despesa", "descricao": "SEGURO CARRO", "previsto": 84.0, "real": 84.0, "status": "PAGO"}, {"mes": "10", "tipo": "despesa", "descricao": "PASSEIO DRIFT (Bruno e Karine)", "previsto": 200.0, "real": 200.0, "status": "PAGO"}, {"mes": "10", "tipo": "despesa", "descricao": "AUXILIO PAI E M\u00c3E", "previsto": 122.2, "real": 122.2, "status": "PAGO"}, {"mes": "10", "tipo": "despesa", "descricao": "HABITA\u00c7\u00c3O CAIXA", "previsto": 115.54, "real": 115.54, "status": "PAGO"}, {"mes": "11", "tipo": "despesa", "descricao": "ALUGUEL", "previsto": 1500.0, "real": 1500.0, "status": "PAGO"}, {"mes": "11", "tipo": "receita", "descricao": "SALARIO MATHEUS", "previsto": 1165.0, "real": 1165.0}, {"mes": "11", "tipo": "despesa", "descricao": "\u00c1GUA", "previsto": 170.0, "real": 170.0, "status": "PAGO"}, {"mes": "11", "tipo": "receita", "descricao": "SALARIO TAMARA", "previsto": 1550.0, "real": 1550.0}, {"mes": "11", "tipo": "despesa", "descricao": "INTERNET E CELULAR", "previsto": 200.0, "real": 200.0, "status": "PAGO"}, {"mes": "11", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O TAMARA", "previsto": 550.0, "real": 550.0}, {"mes": "11", "tipo": "despesa", "descricao": "LUZ AP\u00ca", "previsto": 400.0, "real": 400.0, "status": "PAGO"}, {"mes": "11", "tipo": "receita", "descricao": "ALIMENTA\u00c7\u00c3O MATHEUS", "previsto": 550.0, "real": 550.0}, {"mes": "11", "tipo": "despesa", "descricao": "CONDOMINIO", "previsto": 300.0, "real": 300.0, "status": "PAGO"}, {"mes": "11", "tipo": "receita", "descricao": "COMISS\u00c3O TAMARA", "previsto": 500.0, "real": 500.0}, {"mes": "11", "tipo": "despesa", "descricao": "G\u00c1S", "previsto": 50.0, "real": 50.0, "status": "PAGO"}, {"mes": "11", "tipo": "receita", "descricao": "COMISS\u00c3O MATHEUS", "previsto": 200.0, "real": 200.0}, {"mes": "11", "tipo": "despesa", "descricao": "CC INTER FIXOS", "previsto": 1500.0, "real": 1500.0, "status": "PAGO"}, {"mes": "11", "tipo": "receita", "descricao": "ALUGUEL AP\u00ca + CONDOMINIO", "previsto": 1000.0, "real": 1000.0}, {"mes": "11", "tipo": "despesa", "descricao": "CC INTER EXTRAS", "previsto": 1100.0, "real": 1100.0, "status": "PAGO"}, {"mes": "11", "tipo": "receita", "descricao": "AUXILIO TAMARA", "previsto": 1590.0, "real": 1590.0}, {"mes": "11", "tipo": "despesa", "descricao": "JURACY (6/10)", "previsto": 588.0, "real": 588.0, "status": "PAGO"}, {"mes": "11", "tipo": "receita", "descricao": "ADIANTAMENTO MATHEUS", "previsto": 895.0, "real": 895.0}, {"mes": "11", "tipo": "despesa", "descricao": "ALIMENTA\u00c7\u00c3O", "previsto": 1100.0, "real": 1100.0, "status": "PAGO"}, {"mes": "11", "tipo": "receita", "descricao": "ADIANTAMENTO TAMARA", "previsto": 1200.0, "real": 1200.0}, {"mes": "11", "tipo": "despesa", "descricao": "SEGURO CARRO", "previsto": 89.0, "real": 89.0, "status": "PAGO"}, {"mes": "11", "tipo": "despesa", "descricao": "SECADORA", "previsto": 250.0, "real": 250.0, "status": "PAGO"}, {"mes": "11", "tipo": "despesa", "descricao": "AUXILIO PAI E M\u00c3E", "previsto": 150.0, "real": 150.0, "status": "PAGO"}, {"mes": "11", "tipo": "despesa", "descricao": "TV", "previsto": 20.0, "real": 20.0, "status": "PAGO"}, {"mes": "11", "tipo": "despesa", "descricao": "HABITA\u00c7\u00c3O CAIXA", "previsto": 128.0, "real": 128.0, "status": "PAGO"}], "cartao": [{"categoria": "APLICATIVOS", "descricao": "(08) GOOGLE ONE", "parcelas": {"01": 11.99, "02": 11.99, "03": 11.99, "04": 11.99, "05": 11.99, "06": 24.99, "07": 24.99, "08": 24.99, "09": 24.99, "10": 24.99, "11": 24.99, "12": 24.99}}, {"categoria": "APLICATIVOS", "descricao": "( 09) NETFLIX", "parcelas": {"01": 20.9, "02": 20.9, "03": 20.9, "04": 20.9, "05": 20.9, "06": 20.9, "07": 20.9, "08": 20.9, "09": 20.9, "10": 20.9, "11": 20.9, "12": 20.9}}, {"categoria": "ACADEMIA", "descricao": "(17) ACADEMIA", "parcelas": {"01": 105.0, "02": 210.0, "03": 279.8, "04": 279.8, "05": 279.8, "06": 319.8, "07": 319.8, "08": 319.8, "09": 319.8, "10": 319.8, "11": 279.8, "12": 279.8}}, {"categoria": "UTENS\u00cdLIOS", "descricao": "CAMAS CASAL E BELICHE", "parcelas": {"01": 0, "02": 0, "03": 0, "04": 0, "05": 0, "06": 218.79, "07": 218.79, "08": 218.79, "09": 218.79, "10": 218.79, "11": 218.79, "12": 218.78}}, {"categoria": "UTENS\u00cdLIOS", "descricao": "ITENS LOJ\u00c3O ASTRAL", "parcelas": {"01": 0, "02": 0, "03": 0, "04": 0, "05": 0, "06": 32.7, "07": 32.7, "08": 110.16, "09": 68.18, "10": 32.7, "11": 32.7, "12": 32.7}}, {"categoria": "UTENS\u00cdLIOS", "descricao": "MOACIR GELADEIRA", "parcelas": {"01": 0, "02": 0, "03": 0, "04": 0, "05": 0, "06": 134.95, "07": 134.95, "08": 134.95, "09": 134.95, "10": 134.95, "11": 134.95, "12": 134.95}}, {"categoria": "UTENS\u00cdLIOS", "descricao": "KOMPRAO MICROONDAS", "parcelas": {"01": 0, "02": 0, "03": 0, "04": 0, "05": 0, "06": 39.9, "07": 39.9, "08": 39.9, "09": 39.9, "10": 39.9, "11": 39.9, "12": 39.9}}, {"categoria": "UTENS\u00cdLIOS", "descricao": "COLCH\u00c3O DO HENRIQUE", "parcelas": {"01": 0, "02": 0, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 56.11, "09": 56.11, "10": 56.11, "11": 56.11, "12": 56.11}}, {"categoria": "LASER", "descricao": "BETO CARRERO", "parcelas": {"01": 0, "02": 0, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 33.3, "09": 33.3, "10": 33.3, "11": 33.3, "12": 33.6}}, {"categoria": "MANUTEN\u00c7\u00c3O", "descricao": "CARRO", "parcelas": {"01": 165.0, "02": 165.0, "03": 165.0, "04": 165.0, "05": 245.0, "06": 165.0, "07": 165.0, "08": 165.0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "ROUPAS", "descricao": "ROUPAS MATHEUS E TAMARA", "parcelas": {"01": 0, "02": 0, "03": 0, "04": 0, "05": 0, "06": 0, "07": 36.68, "08": 36.68, "09": 36.68, "10": 103.3, "11": 93.26, "12": 63.3}}, {"categoria": "UTENS\u00cdLIOS", "descricao": "PENTEADEIRA LINKBLU", "parcelas": {"01": 59.7, "02": 59.7, "03": 59.7, "04": 59.7, "05": 59.7, "06": 59.7, "07": 59.7, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "UTENS\u00cdLIOS", "descricao": "HAVAN", "parcelas": {"01": 37.49, "02": 37.49, "03": 37.49, "04": 37.49, "05": 37.49, "06": 37.49, "07": 37.49, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "UTENS\u00cdLIOS", "descricao": "HAVAN", "parcelas": {"01": 31.48, "02": 31.48, "03": 31.48, "04": 31.48, "05": 31.48, "06": 31.48, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "APLICATIVOS", "descricao": "(18) APP HTM", "parcelas": {"01": 23.92, "02": 23.92, "03": 23.92, "04": 23.92, "05": 23.92, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "LASER", "descricao": "AQUALOCKOS", "parcelas": {"01": 0, "02": 0, "03": 32.0, "04": 32.0, "05": 32.0, "06": 32.0, "07": 32.0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "ROUPAS", "descricao": "CAL\u00c7ADOS", "parcelas": {"01": 0, "02": 0, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 56.68, "10": 56.66, "11": 174.13, "12": 117.47}}, {"categoria": "UTENS\u00cdLIOS", "descricao": "PERFUME", "parcelas": {"01": 0, "02": 0, "03": 0, "04": 0, "05": 49.09, "06": 49.09, "07": 49.09, "08": 49.09, "09": 0, "10": 41.97, "11": 41.97, "12": 41.97}}, {"categoria": "UTENS\u00cdLIOS", "descricao": "ITENS CASA", "parcelas": {"01": 0, "02": 0, "03": 133.0, "04": 201.13, "05": 286.13, "06": 265.39, "07": 26.06, "08": 304.12, "09": 958.09, "10": 264.03, "11": 201.6, "12": 41.94}}, {"categoria": "MANUTEN\u00c7\u00c3O", "descricao": "FISIOTERAPIA", "parcelas": {"01": 0, "02": 0, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 136.35, "09": 136.35, "10": 136.35, "11": 0, "12": 0}}, {"categoria": "ROUPAS", "descricao": "VENTILADOR", "parcelas": {"01": 0, "02": 21.06, "03": 21.06, "04": 35.96, "05": 35.96, "06": 35.96, "07": 35.96, "08": 35.96, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "ROUPAS", "descricao": "SHOPEE (EUPHORIA)", "parcelas": {"01": 15.52, "02": 15.52, "03": 15.52, "04": 15.7, "05": 15.7, "06": 15.7, "07": 34.3, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "UTENS\u00cdLIOS", "descricao": "SHOPEE (livro)", "parcelas": {"01": 0, "02": 12.87, "03": 12.87, "04": 19.46, "05": 19.46, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "ROUPAS", "descricao": "SHOPEE", "parcelas": {"01": 9.89, "02": 11.92, "03": 11.91, "04": 12.08, "05": 12.08, "06": 0, "07": 11.0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "UTENS\u00cdLIOS", "descricao": "SHOPEE", "parcelas": {"01": 0, "02": 0, "03": 0, "04": 0, "05": 22.67, "06": 22.67, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "ROUPAS", "descricao": "SHOPEE (MOP)", "parcelas": {"01": 0, "02": 10.66, "03": 36.74, "04": 33.92, "05": 33.92, "06": 0, "07": 14.61, "08": 14.61, "09": 48.34, "10": 249.74, "11": 183.78, "12": 77.27}}, {"categoria": "UTENS\u00cdLIOS", "descricao": "MAGALU TV CASA NOVA", "parcelas": {"01": 8.88, "02": 8.88, "03": 0, "04": 0, "05": 0, "06": 224.5, "07": 224.5, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "UTENS\u00cdLIOS", "descricao": "HAVAN (PANELA E ETC)", "parcelas": {"01": 110.0, "02": 110.0, "03": 61.56, "04": 61.56, "05": 61.56, "06": 61.56, "07": 61.56, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "UTENS\u00cdLIOS", "descricao": "HAVAN (MATERIAL ESCOLAR)", "parcelas": {"01": 0, "02": 63.27, "03": 63.27, "04": 63.27, "05": 63.27, "06": 63.27, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "COMBUST\u00cdVEL", "descricao": "CARRO", "parcelas": {"01": 300.0, "02": 500.0, "03": 350.0, "04": 409.35, "05": 350.0, "06": 413.26, "07": 160.0, "08": 220.0, "09": 380.0, "10": 160.0, "11": 178.6, "12": 28.6}}, {"categoria": "FARMACIA", "descricao": "FARMACIA", "parcelas": {"01": 39.9, "02": 40.0, "03": 15.0, "04": 135.44, "05": 272.1, "06": 193.28, "07": 281.93, "08": 188.22, "09": 122.81, "10": 128.21, "11": 152.39, "12": 0}}, {"categoria": "MERCADO", "descricao": "ALIMENTA\u00c7\u00c3O", "parcelas": {"01": 0, "02": 0, "03": 2430.0, "04": 2261.23, "05": 1409.6, "06": 1659.3, "07": 2007.19, "08": 1786.61, "09": 1811.69, "10": 2797.46, "11": 818.22, "12": 0}}, {"categoria": "LASER", "descricao": "SA\u00cdDAS", "parcelas": {"01": 0, "02": 582.0, "03": 470.0, "04": 801.73, "05": 222.67, "06": 248.59, "07": 309.0, "08": 118.8, "09": 736.3, "10": 166.0, "11": 7.0, "12": 0}}, {"categoria": "12", "descricao": "KOERICH", "parcelas": {"01": 86.75, "02": 86.75, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "15", "descricao": "SHOPEE", "parcelas": {"01": 66.63, "02": 66.63, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "2025-12-26 00:00:00", "descricao": "PERFUMES", "parcelas": {"01": 66.36, "02": 66.36, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "nan", "descricao": "SHOPEE", "parcelas": {"01": 37.55, "02": 37.55, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "22", "descricao": "MERCADO LIVRE", "parcelas": {"01": 35.18, "02": 35.18, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "17", "descricao": "MERCADO LIVRE", "parcelas": {"01": 30.58, "02": 30.58, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "22", "descricao": "STUDIO Z", "parcelas": {"01": 29.99, "02": 29.99, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "2025-12-27 00:00:00", "descricao": "JOIAS", "parcelas": {"01": 29.98, "02": 29.98, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "18", "descricao": "MERCADO LIVRE", "parcelas": {"01": 28.23, "02": 28.23, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "nan", "descricao": "SHOPEE", "parcelas": {"01": 23.77, "02": 23.77, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "5", "descricao": "SHOPEE", "parcelas": {"01": 74.36, "02": 23.26, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "nan", "descricao": "SHOPEE", "parcelas": {"01": 22.02, "02": 22.02, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "nan", "descricao": "SHOPEE", "parcelas": {"01": 21.1, "02": 21.1, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "15", "descricao": "SHOPEE", "parcelas": {"01": 13.1, "02": 13.1, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "15", "descricao": "FARMACIA", "parcelas": {"01": 40.8, "02": 0, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "12", "descricao": "KARATE", "parcelas": {"01": 44.24, "02": 0, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "12", "descricao": "STUDIO Z", "parcelas": {"01": 29.99, "02": 0, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "25", "descricao": "SUPER INDAIAL", "parcelas": {"01": 32.82, "02": 0, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "13", "descricao": "KOERICH", "parcelas": {"01": 36.11, "02": 0, "03": 0, "04": 0, "05": 0, "06": 0, "07": 0, "08": 0, "09": 0, "10": 0, "11": 0, "12": 0}}, {"categoria": "UTENS\u00cdLIOS", "descricao": "LAVANDERIA", "parcelas": {"01": 0, "02": 0, "03": 50.0, "04": 105.93, "05": 111.52, "06": 64.79, "07": 34.0, "08": 16.9, "09": 16.9, "10": 33.98, "11": 0, "12": 0}}], "porkinho": [{"mes": "01", "tipo": "aporte", "descricao": "Saldo inicial", "valor": 9100.0}, {"mes": "02", "tipo": "aporte", "descricao": "Saldo inicial", "valor": 9531.04}, {"mes": "03", "tipo": "aporte", "descricao": "Saldo inicial", "valor": 8206.04}, {"mes": "04", "tipo": "aporte", "descricao": "Saldo inicial", "valor": 7201.99}, {"mes": "05", "tipo": "aporte", "descricao": "Saldo inicial", "valor": 6697.75}, {"mes": "06", "tipo": "aporte", "descricao": "Saldo inicial", "valor": 5837.95}, {"mes": "01", "tipo": "aporte", "descricao": "F\u00e9rias Tamara", "valor": 603.0}, {"mes": "02", "tipo": "resgate", "descricao": "Resgate contas", "valor": 1270.0}, {"mes": "03", "tipo": "resgate", "descricao": "Resgate contas", "valor": 1038.05}, {"mes": "04", "tipo": "resgate", "descricao": "Resgate contas", "valor": 520.0}, {"mes": "05", "tipo": "resgate", "descricao": "Resgate contas", "valor": 880.0}, {"mes": "06", "tipo": "resgate", "descricao": "Resgate contas", "valor": 840.0}, {"mes": "01", "tipo": "resgate", "descricao": "Resgate contas", "valor": 1300.0}, {"mes": "02", "tipo": "resgate", "descricao": "Resgate contas", "valor": 100.0}, {"mes": "06", "tipo": "resgate", "descricao": "Resgate contas", "valor": 2350.86}, {"mes": "01", "tipo": "aporte", "descricao": "FGTS anivers\u00e1rio", "valor": 1076.0}, {"mes": "06", "tipo": "aporte", "descricao": "Cr\u00e9dito", "valor": 140.0}, {"mes": "01", "tipo": "rendimento", "descricao": "Rendimento m\u00eas", "valor": 52.04}, {"mes": "02", "tipo": "rendimento", "descricao": "Rendimento m\u00eas", "valor": 45.0}, {"mes": "03", "tipo": "rendimento", "descricao": "Rendimento M\u00eas", "valor": 34.0}, {"mes": "04", "tipo": "rendimento", "descricao": "Rendimento m\u00eas", "valor": 15.76}, {"mes": "05", "tipo": "rendimento", "descricao": "Rendimento m\u00eas", "valor": 20.2}, {"mes": "06", "tipo": "rendimento", "descricao": "Rendimento m\u00eas", "valor": 28.0}, {"mes": "01", "tipo": "aporte", "descricao": "Saldo inicial", "valor": 2815.09}, {"mes": "02", "tipo": "aporte", "descricao": "Saldo inicial", "valor": 2193.09}, {"mes": "03", "tipo": "aporte", "descricao": "Saldo inicial", "valor": 4431.82}, {"mes": "04", "tipo": "aporte", "descricao": "Saldo inicial", "valor": 10116.83}, {"mes": "05", "tipo": "aporte", "descricao": "Saldo inicial", "valor": 9431.83}, {"mes": "06", "tipo": "aporte", "descricao": "Saldo inicial", "valor": 9431.83}, {"mes": "01", "tipo": "resgate", "descricao": "Resgate contas", "valor": 650.0}, {"mes": "02", "tipo": "aporte", "descricao": "13\u00b0 Matheus", "valor": 1100.0}, {"mes": "03", "tipo": "aporte", "descricao": "INSS", "valor": 9048.93}, {"mes": "04", "tipo": "resgate", "descricao": "Dentista", "valor": 600.0}, {"mes": "06", "tipo": "aporte", "descricao": "13\u00b0 Tamara", "valor": 1500.0}, {"mes": "02", "tipo": "aporte", "descricao": "13\u00b0 Tamara", "valor": 1624.0}, {"mes": "03", "tipo": "resgate", "descricao": "Compra m\u00e1quina", "valor": 1969.0}, {"mes": "04", "tipo": "resgate", "descricao": "Roupas tribo", "valor": 200.0}, {"mes": "06", "tipo": "aporte", "descricao": "13\u00b0 Matheus", "valor": 890.0}, {"mes": "02", "tipo": "resgate", "descricao": "Resgate contas", "valor": 645.0}, {"mes": "03", "tipo": "resgate", "descricao": "Aluguel", "valor": 1500.0}, {"mes": "01", "tipo": "rendimento", "descricao": "Rendimento m\u00eas", "valor": 28.0}, {"mes": "02", "tipo": "rendimento", "descricao": "Rendimento m\u00eas", "valor": 159.73}, {"mes": "03", "tipo": "rendimento", "descricao": "Rendimento M\u00eas", "valor": 105.08}, {"mes": "04", "tipo": "rendimento", "descricao": "Rendimento m\u00eas", "valor": 115.0}], "sonhos": [{"categoria": "essencial", "descricao": "Cabides"}, {"categoria": "essencial", "descricao": "Colchonete"}, {"categoria": "essencial", "descricao": "Pratos"}, {"categoria": "essencial", "descricao": "Tenis Matheus"}, {"categoria": "essencial", "descricao": "Tenis Tamara"}, {"categoria": "importante", "descricao": "Manuten\u00e7\u00e3o do carro"}, {"categoria": "importante", "descricao": "Cadeira escrit\u00f3rio"}, {"categoria": "importante", "descricao": "Panelas"}, {"categoria": "importante", "descricao": "Dentista"}, {"categoria": "importante", "descricao": "Pneu"}, {"categoria": "metas", "descricao": "Purificador de \u00e1gua"}, {"categoria": "metas", "descricao": "Cord\u00e3o led quarto casal"}, {"categoria": "metas", "descricao": "Bicicleta"}, {"categoria": "metas", "descricao": "Ps5"}, {"categoria": "metas", "descricao": "Gta 6"}, {"categoria": "realizados", "descricao": "M\u00e1quina de lavar"}, {"categoria": "realizados", "descricao": "Colch\u00e3o do Henrique"}, {"categoria": "realizados", "descricao": "Aparelho barba"}, {"categoria": "realizados", "descricao": "Torradeira"}, {"categoria": "realizados", "descricao": "Varal sacada"}, {"categoria": "realizados", "descricao": "Air frier"}, {"categoria": "realizados", "descricao": "Ventilador"}, {"categoria": "realizados", "descricao": "Secadora"}, {"categoria": "realizados", "descricao": "Meias"}, {"categoria": "realizados", "descricao": "Joelheira"}, {"categoria": "realizados", "descricao": "Suporte copos sof\u00e1"}, {"categoria": "realizados", "descricao": "Mesa escritorio"}, {"categoria": "realizados", "descricao": "Fone ouvido"}, {"categoria": "realizados", "descricao": "M\u00e3o francesa prateleira Henrique"}], "custos_fixos": [{"descricao": "ALUGUEL", "categoria": "Moradia", "valor": 1500.0}, {"descricao": "\u00c1GUA", "categoria": "Moradia", "valor": 160.0}, {"descricao": "INTERNET E CELULAR", "categoria": "Moradia", "valor": 200.0}, {"descricao": "LUZ AP\u00ca", "categoria": "Moradia", "valor": 350.0}, {"descricao": "CONDOM\u00cdNIO", "categoria": "Moradia", "valor": 300.0}, {"descricao": "G\u00c1S", "categoria": "Moradia", "valor": 50.0}, {"descricao": "JURACY (2027)", "categoria": "Parcelas/D\u00edvidas", "valor": 588.0}, {"descricao": "ALIMENTA\u00c7\u00c3O", "categoria": "Alimenta\u00e7\u00e3o", "valor": 1100.0}, {"descricao": "SEGURO CARRO", "categoria": "Transporte", "valor": 89.0}, {"descricao": "IPTV", "categoria": "Assinaturas", "valor": 35.0}, {"descricao": "HABITA\u00c7\u00c3O CAIXA", "categoria": "Moradia/Financiamento", "valor": 128.0}, {"descricao": "(08) GOOGLE ONE", "categoria": "Assinaturas", "valor": 24.99}, {"descricao": "(09) NETFLIX", "categoria": "Assinaturas", "valor": 20.0}, {"descricao": "(17) ACADEMIA", "categoria": "Educa\u00e7\u00e3o/Exerc\u00edcio", "valor": 319.8}, {"descricao": "GASOLINA", "categoria": "Transporte", "valor": 200.0}, {"descricao": "ALIMENTA\u00c7\u00c3O", "categoria": "Alimenta\u00e7\u00e3o", "valor": 1850.0}, {"descricao": "FARM\u00c1CIA", "categoria": "Sa\u00fade", "valor": 40.0}]};
-
       function getDefaultData() {
-        const monthMap = {"01":"JAN", "02":"FEV", "03":"MAR", "04":"ABR", "05":"MAI", "06":"JUN", "07":"JUL", "08":"AGO", "09":"SET", "10":"OUT", "11":"NOV", "12":"DEZ"};
         const monthlyData = {};
-        
         MONTHS.forEach((m) => {
           monthlyData[m] = { expenses: [], incomes: [] };
         });
-
-        // 1. Parse Transações (Receitas e Despesas)
-        let eId = 1, iId = 1;
-        db.transacoes.forEach(t => {
-            let mName = monthMap[t.mes];
-            if (!mName) return;
-            if (t.tipo === 'despesa') {
-                monthlyData[mName].expenses.push({
-                    id: "e_" + (eId++),
-                    venc: "--", // A planilha original não possuía dia do vencimento extraído
-                    desc: t.descricao,
-                    previsto: t.previsto,
-                    real: t.real,
-                    pago: (t.status === "PAGO")
-                });
-            } else {
-                monthlyData[mName].incomes.push({
-                    id: "i_" + (iId++),
-                    desc: t.descricao,
-                    previsto: t.previsto,
-                    real: t.real
-                });
-            }
-        });
-
-        // 2. Parse Cartão CC Inter
-        let cId = 1;
-        const cardItems = db.cartao.map(c => {
-            let vals = {};
-            MONTHS.forEach(m => vals[m] = 0); // inicializa tudo zero
-            Object.keys(c.parcelas).forEach(k => {
-                if(monthMap[k]) vals[monthMap[k]] = c.parcelas[k];
-            });
-            // Filtra o nome de categorias estranhas vindas do Python/Pandas
-            let catLimpada = (c.categoria === "nan" || !isNaN(c.categoria) || c.categoria.includes("2025")) ? "Diversos" : c.categoria;
-            return {
-                id: "c_" + (cId++),
-                category: catLimpada,
-                desc: c.descricao,
-                values: vals
-            };
-        });
-
-        // 3. Parse Custos Fixos Base
-        let fId = 1;
-        const fixedCosts = db.custos_fixos.map(f => ({
-            id: "f_" + (fId++),
-            category: f.categoria,
-            desc: f.descricao,
-            value: f.valor
-        }));
-
-        // 4. Parse Porkinho
-        let pId = 1;
-        const porkinho = {
-            transactions: db.porkinho.map(p => ({
-                id: "p_" + (pId++),
-                date: monthMap[p.mes] ? monthMap[p.mes] + "/2026" : p.mes,
-                type: p.tipo,
-                desc: p.descricao,
-                amount: p.valor
-            }))
-        };
-
-        // 5. Parse Sonhos
-        let dId = 1;
-        const dreams = db.sonhos.map(s => ({
-            id: "d_" + (dId++),
-            title: s.descricao,
-            col: s.categoria,
-            val: 0 // Valor zerado inicialmente (como na planilha base original)
-        }));
-
         return {
           selectedMonth: "JAN",
           activeTab: "mensal",
           monthlyData: monthlyData,
-          cardItems: cardItems,
-          fixedCosts: fixedCosts,
-          porkinho: porkinho,
-          dreams: dreams,
+          cardItems: [],
+          fixedCosts: [],
+          porkinho: { transactions: [] },
+          dreams: [],
         };
       }
 
-      // App State
       let state = {};
-      let monthlyChartInstance = null;
 
-      // --- INIT ---
       function initApp() {
         const saved = localStorage.getItem(STORAGE_KEY);
         if (saved) {
           try {
             state = JSON.parse(saved);
+            if (!state.porkinho) state.porkinho = { transactions: [] };
+            if (!state.porkinho.transactions) state.porkinho.transactions = [];
+            if (!state.dreams) state.dreams = [];
+            if (!state.fixedCosts) state.fixedCosts = [];
+            if (!state.cardItems) state.cardItems = [];
           } catch (e) {
             state = getDefaultData();
           }
@@ -1605,6 +1556,7 @@
         renderCustos();
         renderPorkinho();
         renderSonhos();
+        updateMonthlyChart();
       }
 
       function formatBRL(val) {
@@ -1614,7 +1566,6 @@
         });
       }
 
-      // --- TAB NAVIGATION ---
       function switchTab(tab) {
         state.activeTab = tab;
         saveState();
@@ -1622,23 +1573,21 @@
         document
           .querySelectorAll(".tab-content")
           .forEach((el) => el.classList.add("hidden"));
-
-        document.querySelectorAll(".tab-btn").forEach((btn) => {
-          btn.classList.remove("bg-[#FF3B5C]", "text-white", "shadow-md");
-          btn.classList.add("text-gray-400");
-        });
+        document
+          .querySelectorAll(".tab-btn")
+          .forEach((btn) => btn.classList.remove("active"));
 
         const targetContent = document.getElementById(`tab-content-${tab}`);
         const targetBtn = document.getElementById(`tab-btn-${tab}`);
 
         if (targetContent) targetContent.classList.remove("hidden");
-        if (targetBtn) {
-          targetBtn.classList.add("bg-[#FF3B5C]", "text-white", "shadow-md");
-          targetBtn.classList.remove("text-gray-400");
+        if (targetBtn) targetBtn.classList.add("active");
+
+        if (tab === "mensal") {
+          updateMonthlyChart();
         }
       }
 
-      // --- VISÃO MENSAL ---
       function renderMonthSelector() {
         const container = document.getElementById("month-selector");
         container.innerHTML = "";
@@ -1646,10 +1595,10 @@
         MONTHS.forEach((m) => {
           const btn = document.createElement("button");
           const isSelected = state.selectedMonth === m;
-          btn.className = `px-4 py-2 rounded-xl font-bold text-xs font-mono transition flex-1 text-center whitespace-nowrap ${
+          btn.className = `px-5 py-2 rounded-xl font-bold text-xs font-mono transition flex-1 text-center whitespace-nowrap ${
             isSelected
-              ? "bg-[#FF3B5C] text-white shadow-lg shadow-red-950/60 border border-red-500"
-              : "bg-[#10111A] text-gray-400 hover:text-white hover:bg-[#1C1D2A] border border-[#252738]"
+              ? "bg-[#FF3B5C] text-white shadow-[0_0_15px_rgba(255,59,92,0.4)] border border-[#FF3B5C]"
+              : "bg-transparent text-slate-400 hover:text-white hover:bg-[#1A1B28] border border-transparent"
           }`;
           btn.innerText = m;
           btn.onclick = () => {
@@ -1669,318 +1618,477 @@
           incomes: [],
         };
 
-        // Expenses Table
-        const tbodyExpenses = document.getElementById("table-despesas-body");
-        tbodyExpenses.innerHTML = "";
-
-        let totalExpPrevisto = 0;
-        let totalExpReal = 0;
+        const tbodyExp = document.getElementById("table-despesas-body");
+        tbodyExp.innerHTML = "";
+        let totExpPrev = 0,
+          totExpReal = 0;
 
         mData.expenses.forEach((item) => {
-          totalExpPrevisto += parseFloat(item.previsto || 0);
-          totalExpReal += parseFloat(item.real || 0);
+          totExpPrev += parseFloat(item.previsto || 0);
+          totExpReal += parseFloat(item.real || 0);
 
           const tr = document.createElement("tr");
-          tr.className = "editable-row transition";
+          tr.className = "editable-row";
           tr.ondblclick = () => editExpense(item.id);
           tr.innerHTML = `
-                    <td class="py-2.5 px-3 font-mono text-xs text-gray-400">${item.venc || "--"}</td>
-                    <td class="py-2.5 px-3 font-semibold text-gray-200">${item.desc}</td>
-                    <td class="py-2.5 px-3 font-mono text-gray-400">${formatBRL(item.previsto)}</td>
-                    <td class="py-2.5 px-3 font-mono font-bold ${item.pago ? "text-[#00E676]" : "text-[#FF3B5C]"}">${formatBRL(item.real)}</td>
-                    <td class="py-2.5 px-3 text-center">
-                        <button onclick="event.stopPropagation(); toggleExpenseStatus('${item.id}')" class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-md transition ${
-                          item.pago
-                            ? "bg-[#00E676]/15 text-[#00E676] border border-[#00E676]/30"
-                            : "bg-red-500/15 text-red-400 border border-red-500/30 hover:bg-red-500/30"
-                        }">
-                            ${item.pago ? "PAGO" : "PENDENTE"}
-                        </button>
-                    </td>
-                    <td class="py-2.5 px-2 text-right">
-                        <div class="flex items-center justify-end gap-1">
-                            <button onclick="event.stopPropagation(); editExpense('${item.id}')" class="text-gray-400 hover:text-white p-1" title="Editar">
-                                ✏️
-                            </button>
-                            <button onclick="event.stopPropagation(); deleteExpense('${item.id}')" class="text-gray-500 hover:text-red-400 p-1" title="Excluir">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                </svg>
-                            </button>
-                        </div>
-                    </td>
-                `;
-          tbodyExpenses.appendChild(tr);
+            <td class="py-3 px-3 font-mono text-xs text-slate-400">${item.venc || "--"}</td>
+            <td class="py-3 px-3 font-semibold text-slate-200">${item.desc}</td>
+            <td class="py-3 px-3 font-mono text-slate-400">${formatBRL(item.previsto)}</td>
+            <td class="py-3 px-3 font-mono font-bold ${item.pago ? "text-[#00E676]" : "text-[#FF3B5C]"}">${formatBRL(item.real)}</td>
+            <td class="py-3 px-3 text-center">
+              <button onclick="event.stopPropagation(); toggleExpenseStatus('${item.id}')" class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded transition ${
+                item.pago
+                  ? "bg-[#00E676]/10 text-[#00E676] border border-[#00E676]/30"
+                  : "bg-red-500/10 text-red-400 border border-red-500/30"
+              }">${item.pago ? "PAGO" : "PENDENTE"}</button>
+            </td>
+            <td class="py-3 px-2 text-right">
+              <div class="flex items-center justify-end gap-1">
+                <button onclick="event.stopPropagation(); editExpense('${item.id}')" class="text-slate-400 hover:text-white p-1">✏️</button>
+                <button onclick="event.stopPropagation(); deleteExpense('${item.id}')" class="text-slate-500 hover:text-red-400 p-1">🗑️</button>
+              </div>
+            </td>
+          `;
+          tbodyExp.appendChild(tr);
         });
 
-        // Incomes Table
-        const tbodyIncomes = document.getElementById("table-receitas-body");
-        tbodyIncomes.innerHTML = "";
-
-        let totalIncPrevisto = 0;
-        let totalIncReal = 0;
+        const tbodyInc = document.getElementById("table-receitas-body");
+        tbodyInc.innerHTML = "";
+        let totIncPrev = 0,
+          totIncReal = 0;
 
         mData.incomes.forEach((item) => {
-          totalIncPrevisto += parseFloat(item.previsto || 0);
-          totalIncReal += parseFloat(item.real || 0);
+          totIncPrev += parseFloat(item.previsto || 0);
+          totIncReal += parseFloat(item.real || 0);
 
           const tr = document.createElement("tr");
-          tr.className = "editable-row transition";
+          tr.className = "editable-row";
           tr.ondblclick = () => editIncome(item.id);
           tr.innerHTML = `
-                    <td class="py-2.5 px-3 font-semibold text-gray-200">${item.desc}</td>
-                    <td class="py-2.5 px-3 font-mono text-gray-400">${formatBRL(item.previsto)}</td>
-                    <td class="py-2.5 px-3 font-mono font-bold text-[#00E676]">${formatBRL(item.real)}</td>
-                    <td class="py-2.5 px-2 text-right">
-                        <div class="flex items-center justify-end gap-1">
-                            <button onclick="event.stopPropagation(); editIncome('${item.id}')" class="text-gray-400 hover:text-white p-1" title="Editar">
-                                ✏️
-                            </button>
-                            <button onclick="event.stopPropagation(); deleteIncome('${item.id}')" class="text-gray-500 hover:text-red-400 p-1" title="Excluir">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                </svg>
-                            </button>
-                        </div>
-                    </td>
-                `;
-          tbodyIncomes.appendChild(tr);
+            <td class="py-3 px-3 font-semibold text-slate-200">${item.desc}</td>
+            <td class="py-3 px-3 font-mono text-slate-400">${formatBRL(item.previsto)}</td>
+            <td class="py-3 px-3 font-mono font-bold text-[#00E676]">${formatBRL(item.real)}</td>
+            <td class="py-3 px-2 text-right">
+              <div class="flex items-center justify-end gap-1">
+                <button onclick="event.stopPropagation(); editIncome('${item.id}')" class="text-slate-400 hover:text-white p-1">✏️</button>
+                <button onclick="event.stopPropagation(); deleteIncome('${item.id}')" class="text-slate-500 hover:text-red-400 p-1">🗑️</button>
+              </div>
+            </td>
+          `;
+          tbodyInc.appendChild(tr);
         });
 
-        // Calculate Dashboard
-        const saldo = totalIncReal - totalExpReal;
-
         document.getElementById("dash-receita").innerText =
-          formatBRL(totalIncReal);
+          formatBRL(totIncReal);
         document.getElementById("dash-receita-sub").innerText =
-          `Previsto: ${formatBRL(totalIncPrevisto)}`;
-
+          `Previsto: ${formatBRL(totIncPrev)}`;
         document.getElementById("dash-despesa").innerText =
-          formatBRL(totalExpReal);
+          formatBRL(totExpReal);
         document.getElementById("dash-despesa-sub").innerText =
-          `Previsto: ${formatBRL(totalExpPrevisto)}`;
+          `Previsto: ${formatBRL(totExpPrev)}`;
 
-        const dashSaldoEl = document.getElementById("dash-saldo");
-        dashSaldoEl.innerText = formatBRL(saldo);
-        if (saldo < 0) {
-          dashSaldoEl.className = "text-3xl font-bold font-mono text-red-500";
-        } else {
-          dashSaldoEl.className = "text-3xl font-bold font-mono text-[#00E5FF]";
-        }
-
-        renderChart();
+        const saldo = totIncReal - totExpReal;
+        const saldoEl = document.getElementById("dash-saldo");
+        saldoEl.innerText = formatBRL(saldo);
+        saldoEl.className = `text-3xl font-bold font-mono ${saldo >= 0 ? "text-[#00E5FF]" : "text-[#FF3B5C]"}`;
       }
 
-      function renderChart() {
+      function renderCartao() {
+        const theadRow = document.getElementById("cartao-header-row");
+        theadRow.innerHTML =
+          `<th class="py-3 px-3">Categoria</th><th class="py-3 px-3">Despesa / Item</th>` +
+          MONTHS.map((m) => `<th class="py-3 px-2 text-center">${m}</th>`).join(
+            "",
+          ) +
+          `<th class="py-3 px-2 text-right">Ação</th>`;
+
+        const tbody = document.getElementById("cartao-body");
+        tbody.innerHTML = "";
+        const totalsByMonth = {};
+        MONTHS.forEach((m) => (totalsByMonth[m] = 0));
+
+        state.cardItems.forEach((item) => {
+          const tr = document.createElement("tr");
+          tr.className = "editable-row";
+          let monthsHtml = MONTHS.map((m) => {
+            const val = item.values[m] || 0;
+            totalsByMonth[m] += val;
+            return `<td class="py-3 px-2 text-center font-mono ${val > 0 ? "text-slate-200" : "text-slate-600"}">${val > 0 ? formatBRL(val).replace("R$", "").trim() : "-"}</td>`;
+          }).join("");
+
+          tr.innerHTML = `
+            <td class="py-3 px-3 font-semibold text-[#00E5FF]">${item.category}</td>
+            <td class="py-3 px-3 text-slate-200">${item.desc}</td>
+            ${monthsHtml}
+            <td class="py-3 px-2 text-right">
+              <button onclick="deleteCardItem('${item.id}')" class="text-slate-500 hover:text-red-400 p-1">🗑️</button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+
+        const tfoot = document.getElementById("cartao-footer");
+        let grandTotal = 0;
+        let footMonthsHtml = MONTHS.map((m) => {
+          grandTotal += totalsByMonth[m];
+          return `<td class="py-3 px-2 text-center text-[#FF3B5C]">${formatBRL(totalsByMonth[m]).replace("R$", "").trim()}</td>`;
+        }).join("");
+
+        tfoot.innerHTML = `<tr><td colspan="2" class="py-3 px-3 uppercase text-right text-slate-400">Total Fatura:</td>${footMonthsHtml}<td class="py-3 px-2 text-right text-white">${formatBRL(grandTotal)}</td></tr>`;
+      }
+
+      function renderCustos() {
+        const grid = document.getElementById("custos-fixos-grid");
+        grid.innerHTML = "";
+        let totalFixo = 0;
+
+        state.fixedCosts.forEach((item) => {
+          totalFixo += parseFloat(item.value || 0);
+          const card = document.createElement("div");
+          card.className =
+            "card-panel rounded-xl p-4 flex items-center justify-between bg-[#11121C] hover:bg-[#1A1B28] transition";
+          card.innerHTML = `
+            <div>
+              <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">${item.category}</span>
+              <h4 class="font-bold text-white text-sm mt-1">${item.desc}</h4>
+              <p class="font-mono text-[#FF3B5C] text-sm font-semibold mt-0.5">${formatBRL(item.value)}</p>
+            </div>
+            <div class="flex items-center gap-1">
+              <button onclick="editCustoFixo('${item.id}')" class="text-slate-400 hover:text-white p-1">✏️</button>
+              <button onclick="deleteCustoFixo('${item.id}')" class="text-slate-500 hover:text-red-400 p-1">🗑️</button>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+
+        const rendaEst = (state.monthlyData["JAN"]?.incomes || []).reduce(
+          (acc, i) => acc + parseFloat(i.real || i.previsto || 0),
+          0,
+        );
+        document.getElementById("custos-renda-estimada").innerText =
+          formatBRL(rendaEst);
+        document.getElementById("custos-total-fixo").innerText =
+          formatBRL(totalFixo);
+
+        const margem = rendaEst - totalFixo;
+        const margemEl = document.getElementById("custos-margem");
+        margemEl.innerText = formatBRL(margem);
+        margemEl.className = `text-2xl font-bold font-mono mt-1 ${margem >= 0 ? "text-[#00E676]" : "text-[#FF3B5C]"}`;
+      }
+
+      function renderPorkinho() {
+        const tbody = document.getElementById("porkinho-body");
+        tbody.innerHTML = "";
+        let total = 0;
+
+        const trans = state.porkinho?.transactions || [];
+
+        trans.forEach((t) => {
+          const val = parseFloat(t.amount || 0);
+          if (t.type === "resgate") {
+            total -= val;
+          } else {
+            total += val;
+          }
+
+          const tr = document.createElement("tr");
+          tr.className = "editable-row";
+          let badge =
+            t.type === "resgate"
+              ? "bg-red-500/10 text-red-400 border-red-500/30"
+              : t.type === "rendimento"
+                ? "bg-[#00E5FF]/10 text-[#00E5FF] border-[#00E5FF]/30"
+                : "bg-[#00E676]/10 text-[#00E676] border-[#00E676]/30";
+          tr.innerHTML = `
+            <td class="py-3 px-3 font-mono text-xs text-slate-400">${t.date}</td>
+            <td class="py-3 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase border ${badge}">${t.type}</span></td>
+            <td class="py-3 px-3 font-semibold text-slate-200">${t.desc}</td>
+            <td class="py-3 px-3 font-mono font-bold ${t.type === "resgate" ? "text-red-400" : "text-[#00E676]"}">${t.type === "resgate" ? "- " : "+ "}${formatBRL(val)}</td>
+            <td class="py-3 px-2 text-right">
+              <button onclick="deletePorkinho('${t.id}')" class="text-slate-500 hover:text-red-400 p-1">🗑️</button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+        document.getElementById("porkinho-saldo-total").innerText =
+          formatBRL(total);
+      }
+
+      function renderSonhos() {
+        const cols = {
+          essencial: "col-essencial",
+          importante: "col-importante",
+          metas: "col-metas",
+          realizados: "col-realizados",
+        };
+        const counts = {
+          essencial: "count-essencial",
+          importante: "count-importante",
+          metas: "count-metas",
+          realizados: "count-realizados",
+        };
+
+        Object.keys(cols).forEach((k) => {
+          document.getElementById(cols[k]).innerHTML = "";
+          document.getElementById(counts[k]).innerText = "0";
+        });
+
+        const list = state.dreams || [];
+        const counters = {
+          essencial: 0,
+          importante: 0,
+          metas: 0,
+          realizados: 0,
+        };
+
+        list.forEach((d) => {
+          const colKey = d.col || "essencial";
+          counters[colKey]++;
+
+          const card = document.createElement("div");
+          card.className =
+            "card-panel rounded-xl p-3 bg-[#151621] border border-[#252738] flex items-center justify-between";
+          card.innerHTML = `
+            <div>
+              <p class="text-[13px] font-semibold text-white">${d.title}</p>
+              ${d.val ? `<span class="font-mono text-xs text-[#00E5FF]">${formatBRL(d.val)}</span>` : ""}
+            </div>
+            <div class="flex items-center gap-1">
+              <button onclick="editSonho('${d.id}')" class="text-slate-400 hover:text-white p-1 text-xs">✏️</button>
+              <button onclick="deleteSonho('${d.id}')" class="text-slate-500 hover:text-red-400 p-1 text-xs">🗑️</button>
+            </div>
+          `;
+          const target = document.getElementById(
+            cols[colKey] || cols.essencial,
+          );
+          if (target) target.appendChild(card);
+        });
+
+        Object.keys(counters).forEach((k) => {
+          document.getElementById(counts[k]).innerText = counters[k];
+        });
+      }
+
+      // --- CHART.JS EVOLUÇÃO ANUAL (BOLSA DE VALORES + SALDO) ---
+      function updateMonthlyChart() {
         const ctx = document.getElementById("monthlyChart");
         if (!ctx) return;
 
-        const labels = MONTHS;
-        const receitasData = [];
-        const despesasData = [];
-        const saldosData = [];
+        const revenues = [];
+        const expenses = [];
+        const balances = [];
 
         MONTHS.forEach((m) => {
           const mData = state.monthlyData[m] || { expenses: [], incomes: [] };
-          let tInc = 0,
-            tExp = 0;
-          mData.incomes.forEach((i) => (tInc += parseFloat(i.real || 0)));
-          mData.expenses.forEach((e) => (tExp += parseFloat(e.real || 0)));
-          receitasData.push(tInc);
-          despesasData.push(tExp);
-          saldosData.push(tInc - tExp);
+          const rev = mData.incomes.reduce(
+            (acc, i) => acc + parseFloat(i.real || 0),
+            0,
+          );
+          const exp = mData.expenses.reduce(
+            (acc, e) => acc + parseFloat(e.real || 0),
+            0,
+          );
+
+          revenues.push(rev);
+          expenses.push(exp);
+          balances.push(rev - exp);
         });
 
-        if (monthlyChartInstance) {
-          monthlyChartInstance.destroy();
+        if (window.monthlyChartInstance) {
+          window.monthlyChartInstance.destroy();
         }
 
-        Chart.defaults.color = "#94a3b8";
-        Chart.defaults.font.family = "'Inter', sans-serif";
+        const ctx2d = ctx.getContext("2d");
 
-        monthlyChartInstance = new Chart(ctx, {
-          type: "bar",
+        const gradientGreen = ctx2d.createLinearGradient(0, 0, 0, 300);
+        gradientGreen.addColorStop(0, "rgba(0, 230, 118, 0.3)");
+        gradientGreen.addColorStop(1, "rgba(0, 230, 118, 0.0)");
+
+        const gradientRed = ctx2d.createLinearGradient(0, 0, 0, 300);
+        gradientRed.addColorStop(0, "rgba(255, 59, 92, 0.3)");
+        gradientRed.addColorStop(1, "rgba(255, 59, 92, 0.0)");
+
+        const gradientCyan = ctx2d.createLinearGradient(0, 0, 0, 300);
+        gradientCyan.addColorStop(0, "rgba(0, 229, 255, 0.3)");
+        gradientCyan.addColorStop(1, "rgba(0, 229, 255, 0.0)");
+
+        window.monthlyChartInstance = new Chart(ctx, {
+          type: "line",
           data: {
-            labels: labels,
+            labels: MONTHS,
             datasets: [
               {
-                label: "Receitas",
-                data: receitasData,
-                backgroundColor: "rgba(0, 230, 118, 0.15)",
+                label: "Receitas Reais",
+                data: revenues,
                 borderColor: "#00E676",
-                borderWidth: 1.5,
-                borderRadius: 4,
-              },
-              {
-                label: "Despesas",
-                data: despesasData,
-                backgroundColor: "rgba(255, 59, 92, 0.15)",
-                borderColor: "#FF3B5C",
-                borderWidth: 1.5,
-                borderRadius: 4,
-              },
-              {
-                type: "line",
-                label: "Saldo (Lucro)",
-                data: saldosData,
-                borderColor: "#00E5FF",
-                backgroundColor: "#00E5FF",
-                borderWidth: 2.5,
-                tension: 0.4, // Curva suave
+                backgroundColor: gradientGreen,
+                borderWidth: 2,
                 pointBackgroundColor: "#0B0C10",
+                pointBorderColor: "#00E676",
                 pointBorderWidth: 2,
                 pointRadius: 4,
                 pointHoverRadius: 6,
+                pointHoverBackgroundColor: "#00E676",
+                fill: true,
+                tension: 0.3,
+              },
+              {
+                label: "Despesas Reais",
+                data: expenses,
+                borderColor: "#FF3B5C",
+                backgroundColor: gradientRed,
+                borderWidth: 2,
+                pointBackgroundColor: "#0B0C10",
+                pointBorderColor: "#FF3B5C",
+                pointBorderWidth: 2,
+                pointRadius: 4,
+                pointHoverRadius: 6,
+                pointHoverBackgroundColor: "#FF3B5C",
+                fill: true,
+                tension: 0.3,
+              },
+              {
+                label: "Saldo (Lucro/Prejuízo)",
+                data: balances,
+                borderColor: "#00E5FF",
+                backgroundColor: gradientCyan,
+                borderWidth: 2,
+                pointBackgroundColor: "#0B0C10",
+                pointBorderColor: "#00E5FF",
+                pointBorderWidth: 2,
+                pointRadius: 4,
+                pointHoverRadius: 6,
+                pointHoverBackgroundColor: "#00E5FF",
+                fill: true,
+                tension: 0.3,
               },
             ],
           },
           options: {
             responsive: true,
             maintainAspectRatio: false,
-            interaction: {
-              mode: "index",
-              intersect: false,
-            },
+            interaction: { mode: "index", intersect: false },
             plugins: {
               legend: {
-                position: "top",
-                labels: { usePointStyle: true, boxWidth: 8, padding: 15 },
+                labels: {
+                  color: "#e2e8f0",
+                  font: { family: "Inter", size: 12 },
+                  usePointStyle: true,
+                  boxWidth: 8,
+                },
               },
               tooltip: {
-                backgroundColor: "rgba(21, 22, 33, 0.95)",
+                backgroundColor: "rgba(15, 16, 24, 0.95)",
                 titleColor: "#fff",
                 bodyColor: "#e2e8f0",
                 borderColor: "#252738",
                 borderWidth: 1,
-                padding: 10,
+                padding: 12,
+                displayColors: true,
+                usePointStyle: true,
                 callbacks: {
                   label: function (context) {
                     let label = context.dataset.label || "";
                     if (label) label += ": ";
-                    if (context.parsed.y !== null) {
+                    if (context.parsed.y !== null)
                       label += new Intl.NumberFormat("pt-BR", {
                         style: "currency",
                         currency: "BRL",
                       }).format(context.parsed.y);
-                    }
                     return label;
                   },
                 },
               },
             },
             scales: {
-              y: {
-                grid: { color: "#1E1F2E", drawBorder: false },
+              x: {
+                grid: {
+                  color: "#1E1F2E",
+                  borderDash: [4, 4],
+                  drawBorder: false,
+                },
                 ticks: {
-                  callback: function (value) {
-                    return value === 0 ? "R$ 0" : value / 1000 + "k"; // Formatação limpa
-                  },
+                  color: "#64748b",
+                  font: { family: "JetBrains Mono", size: 11 },
                 },
               },
-              x: {
-                grid: { display: false, drawBorder: false },
+              y: {
+                grid: {
+                  color: "#1E1F2E",
+                  borderDash: [4, 4],
+                  drawBorder: false,
+                },
+                ticks: {
+                  color: "#64748b",
+                  font: { family: "JetBrains Mono", size: 11 },
+                  callback: function (value) {
+                    return Math.abs(value) >= 1000
+                      ? "R$ " + (value / 1000).toFixed(1) + "k"
+                      : "R$ " + value;
+                  },
+                },
               },
             },
           },
         });
       }
 
-      function toggleExpenseStatus(id) {
-        const currentM = state.selectedMonth;
-        const exp = state.monthlyData[currentM].expenses.find(
-          (x) => x.id === id,
-        );
-        if (exp) {
-          exp.pago = !exp.pago;
-          saveState();
-          renderMensal();
-        }
+      function openModal(id) {
+        document.getElementById(id).classList.remove("hidden");
+        document.getElementById(id).classList.add("flex");
+      }
+      function closeModal(id) {
+        document.getElementById(id).classList.remove("flex");
+        document.getElementById(id).classList.add("hidden");
       }
 
-      function deleteExpense(id) {
-        const currentM = state.selectedMonth;
-        state.monthlyData[currentM].expenses = state.monthlyData[
-          currentM
-        ].expenses.filter((x) => x.id !== id);
-        saveState();
-        renderMensal();
-      }
-
-      function deleteIncome(id) {
-        const currentM = state.selectedMonth;
-        state.monthlyData[currentM].incomes = state.monthlyData[
-          currentM
-        ].incomes.filter((x) => x.id !== id);
-        saveState();
-        renderMensal();
-      }
-
-      // --- EDIT DESPESA & RECEITA ---
-      function openModalDespesa() {
-        document.getElementById("despesa-edit-id").value = "";
-        document.getElementById("modal-despesa-title").innerText =
-          "Nova Despesa";
-        document.getElementById("modal-despesa-title-icon").innerText = "+";
-        document.getElementById("btn-save-despesa").innerText =
-          "Salvar Despesa";
-        document.getElementById("despesa-venc").value = "";
-        document.getElementById("despesa-desc").value = "";
-        document.getElementById("despesa-previsto").value = "";
-        document.getElementById("despesa-real").value = "";
-        document.getElementById("despesa-pago").checked = false;
-        openModal("modal-despesa");
-      }
-
-      function editExpense(id) {
-        const currentM = state.selectedMonth;
-        const exp = state.monthlyData[currentM].expenses.find(
-          (x) => x.id === id,
-        );
-        if (exp) {
-          document.getElementById("despesa-edit-id").value = exp.id;
+      function openModalDespesa(item = null) {
+        document.getElementById("modal-despesa-mes").innerText =
+          state.selectedMonth;
+        if (item) {
           document.getElementById("modal-despesa-title").innerText =
             "Editar Despesa";
-          document.getElementById("modal-despesa-title-icon").innerText = "✏️";
-          document.getElementById("btn-save-despesa").innerText =
-            "Atualizar Despesa";
-          document.getElementById("despesa-venc").value = exp.venc || "";
-          document.getElementById("despesa-desc").value = exp.desc || "";
-          document.getElementById("despesa-previsto").value =
-            exp.previsto || "";
-          document.getElementById("despesa-real").value = exp.real || "";
-          document.getElementById("despesa-pago").checked = !!exp.pago;
-          openModal("modal-despesa");
+          document.getElementById("despesa-edit-id").value = item.id;
+          document.getElementById("despesa-venc").value = item.venc || "";
+          document.getElementById("despesa-desc").value = item.desc;
+          document.getElementById("despesa-previsto").value = item.previsto;
+          document.getElementById("despesa-real").value = item.real;
+          document.getElementById("despesa-pago").checked = item.pago;
+        } else {
+          document.getElementById("modal-despesa-title").innerText =
+            "Nova Despesa";
+          document.getElementById("despesa-edit-id").value = "";
+          document.getElementById("despesa-venc").value = "10";
+          document.getElementById("despesa-desc").value = "";
+          document.getElementById("despesa-previsto").value = "";
+          document.getElementById("despesa-real").value = "";
+          document.getElementById("despesa-pago").checked = false;
         }
+        openModal("modal-despesa");
       }
-
       function handleSaveDespesa(e) {
         e.preventDefault();
-        const currentM = state.selectedMonth;
-        const editId = document.getElementById("despesa-edit-id").value;
-
-        const venc = document.getElementById("despesa-venc").value || "--";
+        const id = document.getElementById("despesa-edit-id").value;
+        const venc = document.getElementById("despesa-venc").value;
         const desc = document.getElementById("despesa-desc").value;
-        const previsto = parseFloat(
-          document.getElementById("despesa-previsto").value || 0,
-        );
-        const real = parseFloat(
-          document.getElementById("despesa-real").value || 0,
-        );
+        const previsto =
+          parseFloat(document.getElementById("despesa-previsto").value) || 0;
+        const real =
+          parseFloat(document.getElementById("despesa-real").value) || 0;
         const pago = document.getElementById("despesa-pago").checked;
 
-        if (editId) {
-          const exp = state.monthlyData[currentM].expenses.find(
-            (x) => x.id === editId,
-          );
-          if (exp) {
-            exp.venc = venc;
-            exp.desc = desc;
-            exp.previsto = previsto;
-            exp.real = real;
-            exp.pago = pago;
+        const mData = state.monthlyData[state.selectedMonth];
+        if (id) {
+          const item = mData.expenses.find((x) => x.id === id);
+          if (item) {
+            item.venc = venc;
+            item.desc = desc;
+            item.previsto = previsto;
+            item.real = real;
+            item.pago = pago;
           }
         } else {
-          state.monthlyData[currentM].expenses.push({
+          mData.expenses.push({
             id: "e_" + Date.now(),
             venc,
             desc,
@@ -1989,330 +2097,167 @@
             pago,
           });
         }
-
         saveState();
         renderMensal();
         closeModal("modal-despesa");
+        updateMonthlyChart();
       }
-
-      function openModalReceita() {
-        document.getElementById("receita-edit-id").value = "";
-        document.getElementById("modal-receita-title").innerText =
-          "Nova Receita";
-        document.getElementById("modal-receita-title-icon").innerText = "+";
-        document.getElementById("btn-save-receita").innerText =
-          "Salvar Receita";
-        document.getElementById("receita-desc").value = "";
-        document.getElementById("receita-previsto").value = "";
-        document.getElementById("receita-real").value = "";
-        openModal("modal-receita");
-      }
-
-      function editIncome(id) {
-        const currentM = state.selectedMonth;
-        const inc = state.monthlyData[currentM].incomes.find(
+      function editExpense(id) {
+        const item = state.monthlyData[state.selectedMonth].expenses.find(
           (x) => x.id === id,
         );
-        if (inc) {
-          document.getElementById("receita-edit-id").value = inc.id;
-          document.getElementById("modal-receita-title").innerText =
-            "Editar Receita";
-          document.getElementById("modal-receita-title-icon").innerText = "✏️";
-          document.getElementById("btn-save-receita").innerText =
-            "Atualizar Receita";
-          document.getElementById("receita-desc").value = inc.desc || "";
-          document.getElementById("receita-previsto").value =
-            inc.previsto || "";
-          document.getElementById("receita-real").value = inc.real || "";
-          openModal("modal-receita");
+        if (item) openModalDespesa(item);
+      }
+      function deleteExpense(id) {
+        state.monthlyData[state.selectedMonth].expenses = state.monthlyData[
+          state.selectedMonth
+        ].expenses.filter((x) => x.id !== id);
+        saveState();
+        renderMensal();
+        updateMonthlyChart();
+      }
+      function toggleExpenseStatus(id) {
+        const item = state.monthlyData[state.selectedMonth].expenses.find(
+          (x) => x.id === id,
+        );
+        if (item) {
+          item.pago = !item.pago;
+          saveState();
+          renderMensal();
         }
       }
 
+      function openModalReceita(item = null) {
+        document.getElementById("modal-receita-mes").innerText =
+          state.selectedMonth;
+        if (item) {
+          document.getElementById("modal-receita-title").innerText =
+            "Editar Receita";
+          document.getElementById("receita-edit-id").value = item.id;
+          document.getElementById("receita-desc").value = item.desc;
+          document.getElementById("receita-previsto").value = item.previsto;
+          document.getElementById("receita-real").value = item.real;
+        } else {
+          document.getElementById("modal-receita-title").innerText =
+            "Nova Receita";
+          document.getElementById("receita-edit-id").value = "";
+          document.getElementById("receita-desc").value = "";
+          document.getElementById("receita-previsto").value = "";
+          document.getElementById("receita-real").value = "";
+        }
+        openModal("modal-receita");
+      }
       function handleSaveReceita(e) {
         e.preventDefault();
-        const currentM = state.selectedMonth;
-        const editId = document.getElementById("receita-edit-id").value;
-
+        const id = document.getElementById("receita-edit-id").value;
         const desc = document.getElementById("receita-desc").value;
-        const previsto = parseFloat(
-          document.getElementById("receita-previsto").value || 0,
-        );
-        const real = parseFloat(
-          document.getElementById("receita-real").value || 0,
-        );
+        const previsto =
+          parseFloat(document.getElementById("receita-previsto").value) || 0;
+        const real =
+          parseFloat(document.getElementById("receita-real").value) || 0;
 
-        if (editId) {
-          const inc = state.monthlyData[currentM].incomes.find(
-            (x) => x.id === editId,
-          );
-          if (inc) {
-            inc.desc = desc;
-            inc.previsto = previsto;
-            inc.real = real;
+        const mData = state.monthlyData[state.selectedMonth];
+        if (id) {
+          const item = mData.incomes.find((x) => x.id === id);
+          if (item) {
+            item.desc = desc;
+            item.previsto = previsto;
+            item.real = real;
           }
         } else {
-          state.monthlyData[currentM].incomes.push({
-            id: "i_" + Date.now(),
-            desc,
-            previsto,
-            real,
-          });
+          mData.incomes.push({ id: "i_" + Date.now(), desc, previsto, real });
         }
-
         saveState();
         renderMensal();
         closeModal("modal-receita");
+        updateMonthlyChart();
       }
-
-      // --- CARTÃO CC INTER ---
-      function renderCartao() {
-        const headerRow = document.getElementById("cartao-header-row");
-        const tbody = document.getElementById("cartao-body");
-        const tfoot = document.getElementById("cartao-footer");
-
-        headerRow.innerHTML = `
-                <th class="py-3 px-3">Categoria</th>
-                <th class="py-3 px-3">Despesa / Item</th>
-                ${MONTHS.map((m) => `<th class="py-3 px-2 text-center">${m}</th>`).join("")}
-                <th class="py-3 px-2 text-right">Ação</th>
-            `;
-
-        tbody.innerHTML = "";
-        const monthTotals = {};
-        MONTHS.forEach((m) => (monthTotals[m] = 0));
-
-        state.cardItems.forEach((item) => {
-          const tr = document.createElement("tr");
-          tr.className = "editable-row transition";
-          tr.ondblclick = () => editCardItem(item.id);
-
-          let monthCols = "";
-          MONTHS.forEach((m) => {
-            const val = parseFloat(item.values[m] || 0);
-            monthTotals[m] += val;
-            monthCols += `
-                        <td class="py-2.5 px-2 text-center ${val > 0 ? "text-gray-200 font-semibold" : "text-gray-600"}">
-                            ${val > 0 ? val.toFixed(2) : "-"}
-                        </td>
-                    `;
-          });
-
-          tr.innerHTML = `
-                    <td class="py-2.5 px-3 font-sans text-xs text-gray-400">${item.category}</td>
-                    <td class="py-2.5 px-3 font-sans font-semibold text-white">${item.desc}</td>
-                    ${monthCols}
-                    <td class="py-2.5 px-2 text-right">
-                        <div class="flex items-center justify-end gap-1">
-                            <button onclick="event.stopPropagation(); editCardItem('${item.id}')" class="text-gray-400 hover:text-white p-1" title="Editar">✏️</button>
-                            <button onclick="event.stopPropagation(); deleteCardItem('${item.id}')" class="text-gray-500 hover:text-red-400 p-1" title="Excluir">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                </svg>
-                            </button>
-                        </div>
-                    </td>
-                `;
-          tbody.appendChild(tr);
-        });
-
-        tfoot.innerHTML = `
-                <tr>
-                    <td colspan="2" class="py-3 px-3 uppercase text-xs tracking-wider text-[#FF3B5C]">Total Fatura R$</td>
-                    ${MONTHS.map((m) => `<td class="py-3 px-2 text-center text-[#00E676]">${monthTotals[m].toFixed(2)}</td>`).join("")}
-                    <td></td>
-                </tr>
-            `;
+      function editIncome(id) {
+        const item = state.monthlyData[state.selectedMonth].incomes.find(
+          (x) => x.id === id,
+        );
+        if (item) openModalReceita(item);
+      }
+      function deleteIncome(id) {
+        state.monthlyData[state.selectedMonth].incomes = state.monthlyData[
+          state.selectedMonth
+        ].incomes.filter((x) => x.id !== id);
+        saveState();
+        renderMensal();
+        updateMonthlyChart();
       }
 
       function openModalCartao() {
         document.getElementById("cartao-edit-id").value = "";
-        document.getElementById("modal-cartao-title").innerText =
-          "Adicionar Compra no Cartão";
-        document.getElementById("btn-save-cartao").innerText = "Salvar Item";
         document.getElementById("cartao-cat").value = "";
         document.getElementById("cartao-desc").value = "";
         document.getElementById("cartao-valor").value = "";
+        document.getElementById("cartao-mes-inicio").value = "JAN";
+        document.getElementById("cartao-parcelas").value = "12";
         openModal("modal-cartao");
       }
-
-      function editCardItem(id) {
-        const item = state.cardItems.find((x) => x.id === id);
-        if (item) {
-          document.getElementById("cartao-edit-id").value = item.id;
-          document.getElementById("modal-cartao-title").innerText =
-            "Editar Item no Cartão";
-          document.getElementById("btn-save-cartao").innerText =
-            "Atualizar Item";
-          document.getElementById("cartao-cat").value = item.category || "";
-          document.getElementById("cartao-desc").value = item.desc || "";
-
-          // Calculate representative monthly val
-          const nonZeroValues = Object.values(item.values).filter((v) => v > 0);
-          const avgVal = nonZeroValues.length ? nonZeroValues[0] : 0;
-          document.getElementById("cartao-valor").value = avgVal || "";
-
-          openModal("modal-cartao");
-        }
-      }
-
       function handleSaveCartao(e) {
         e.preventDefault();
-        const editId = document.getElementById("cartao-edit-id").value;
         const cat = document.getElementById("cartao-cat").value;
         const desc = document.getElementById("cartao-desc").value;
-        const valor = parseFloat(
-          document.getElementById("cartao-valor").value || 0,
-        );
+        const val =
+          parseFloat(document.getElementById("cartao-valor").value) || 0;
         const startMonth = document.getElementById("cartao-mes-inicio").value;
-        const parcelas = parseInt(
-          document.getElementById("cartao-parcelas").value || 12,
-        );
+        const numParcelas =
+          parseInt(document.getElementById("cartao-parcelas").value) || 12;
 
-        if (editId) {
-          const item = state.cardItems.find((x) => x.id === editId);
-          if (item) {
-            item.category = cat;
-            item.desc = desc;
-            if (valor > 0) {
-              const startIdx = MONTHS.indexOf(startMonth);
-              MONTHS.forEach((m, idx) => {
-                if (idx >= startIdx && idx < startIdx + parcelas) {
-                  item.values[m] = valor;
-                } else {
-                  item.values[m] = 0;
-                }
-              });
-            }
-          }
-        } else {
-          const startIdx = MONTHS.indexOf(startMonth);
-          const valuesObj = {};
-          MONTHS.forEach((m, idx) => {
-            valuesObj[m] =
-              idx >= startIdx && idx < startIdx + parcelas ? valor : 0;
-          });
-          state.cardItems.push({
-            id: "c_" + Date.now(),
-            category: cat,
-            desc: desc,
-            values: valuesObj,
-          });
+        let vals = {};
+        MONTHS.forEach((m) => (vals[m] = 0));
+        let startIndex = MONTHS.indexOf(startMonth);
+        if (startIndex === -1) startIndex = 0;
+        for (
+          let i = 0;
+          i < numParcelas && startIndex + i < MONTHS.length;
+          i++
+        ) {
+          vals[MONTHS[startIndex + i]] = val;
         }
 
+        state.cardItems.push({
+          id: "c_" + Date.now(),
+          category: cat,
+          desc: desc,
+          values: vals,
+        });
         saveState();
         renderCartao();
         closeModal("modal-cartao");
       }
-
       function deleteCardItem(id) {
         state.cardItems = state.cardItems.filter((x) => x.id !== id);
         saveState();
         renderCartao();
       }
 
-      // --- CUSTOS FIXOS ---
-      function renderCustos() {
-        const sampleIncomes = state.monthlyData["JAN"]
-          ? state.monthlyData["JAN"].incomes
-          : [];
-        const avgIncome = sampleIncomes.reduce(
-          (acc, curr) => acc + parseFloat(curr.previsto || 0),
-          0,
-        );
-        const totalFixed = state.fixedCosts.reduce(
-          (acc, curr) => acc + parseFloat(curr.value || 0),
-          0,
-        );
-        const margem = avgIncome - totalFixed;
-
-        document.getElementById("custos-renda-estimada").innerText =
-          formatBRL(avgIncome);
-        document.getElementById("custos-total-fixo").innerText =
-          formatBRL(totalFixed);
-        document.getElementById("custos-margem").innerText = formatBRL(margem);
-
-        const grouped = {};
-        state.fixedCosts.forEach((item) => {
-          if (!grouped[item.category]) grouped[item.category] = [];
-          grouped[item.category].push(item);
-        });
-
-        const grid = document.getElementById("custos-fixos-grid");
-        grid.innerHTML = "";
-
-        Object.keys(grouped).forEach((cat) => {
-          const items = grouped[cat];
-          const catTotal = items.reduce(
-            (a, c) => a + parseFloat(c.value || 0),
-            0,
-          );
-
-          const card = document.createElement("div");
-          card.className =
-            "card-panel rounded-xl p-4 bg-[#10111A] border border-[#252738]";
-          card.innerHTML = `
-                    <div class="flex justify-between items-center border-b border-[#252738] pb-2 mb-3">
-                        <h4 class="font-bold text-white text-sm">${cat}</h4>
-                        <span class="font-mono text-xs text-[#FF3B5C] font-bold">${formatBRL(catTotal)}</span>
-                    </div>
-                    <ul class="space-y-2 text-xs text-gray-300">
-                        ${items
-                          .map(
-                            (i) => `
-                            <li class="flex justify-between items-center p-1 hover:bg-[#1A1B28] rounded cursor-pointer transition" onclick="editFixedCost('${i.id}')">
-                                <span>${i.desc}</span>
-                                <div class="flex items-center gap-2">
-                                    <span class="font-mono text-gray-300 font-semibold">${formatBRL(i.value)}</span>
-                                    <button onclick="event.stopPropagation(); editFixedCost('${i.id}')" class="text-gray-400 hover:text-white" title="Editar">✏️</button>
-                                    <button onclick="event.stopPropagation(); deleteFixedCost('${i.id}')" class="text-gray-500 hover:text-red-400 font-bold" title="Excluir">×</button>
-                                </div>
-                            </li>
-                        `,
-                          )
-                          .join("")}
-                    </ul>
-                `;
-          grid.appendChild(card);
-        });
-      }
-
-      function openModalCustoFixo() {
-        document.getElementById("custo-edit-id").value = "";
-        document.getElementById("modal-custo-title").innerText =
-          "Adicionar Custo Fixo Base";
-        document.getElementById("btn-save-custo").innerText =
-          "Salvar Custo Base";
-        document.getElementById("custo-desc").value = "";
-        document.getElementById("custo-valor").value = "";
-        openModal("modal-custo-fixo");
-      }
-
-      function editFixedCost(id) {
-        const item = state.fixedCosts.find((x) => x.id === id);
+      function openModalCustoFixo(item = null) {
         if (item) {
           document.getElementById("custo-edit-id").value = item.id;
-          document.getElementById("modal-custo-title").innerText =
-            "Editar Custo Fixo";
-          document.getElementById("btn-save-custo").innerText = "Atualizar";
-          document.getElementById("custo-cat").value =
-            item.category || "Moradia";
-          document.getElementById("custo-desc").value = item.desc || "";
-          document.getElementById("custo-valor").value = item.value || "";
-          openModal("modal-custo-fixo");
+          document.getElementById("custo-cat").value = item.category;
+          document.getElementById("custo-desc").value = item.desc;
+          document.getElementById("custo-valor").value = item.value;
+        } else {
+          document.getElementById("custo-edit-id").value = "";
+          document.getElementById("custo-cat").value = "Moradia";
+          document.getElementById("custo-desc").value = "";
+          document.getElementById("custo-valor").value = "";
         }
+        openModal("modal-custo-fixo");
       }
-
       function handleSaveCustoFixo(e) {
         e.preventDefault();
-        const editId = document.getElementById("custo-edit-id").value;
+        const id = document.getElementById("custo-edit-id").value;
         const category = document.getElementById("custo-cat").value;
         const desc = document.getElementById("custo-desc").value;
-        const value = parseFloat(
-          document.getElementById("custo-valor").value || 0,
-        );
+        const value =
+          parseFloat(document.getElementById("custo-valor").value) || 0;
 
-        if (editId) {
-          const item = state.fixedCosts.find((x) => x.id === editId);
+        if (id) {
+          const item = state.fixedCosts.find((x) => x.id === id);
           if (item) {
             item.category = category;
             item.desc = desc;
@@ -2326,135 +2271,52 @@
             value,
           });
         }
-
         saveState();
         renderCustos();
         closeModal("modal-custo-fixo");
       }
-
-      function deleteFixedCost(id) {
+      function editCustoFixo(id) {
+        const item = state.fixedCosts.find((x) => x.id === id);
+        if (item) openModalCustoFixo(item);
+      }
+      function deleteCustoFixo(id) {
         state.fixedCosts = state.fixedCosts.filter((x) => x.id !== id);
         saveState();
         renderCustos();
       }
 
-      // --- RESERVA (PORKINHO) ---
-      function renderPorkinho() {
-        const tbody = document.getElementById("porkinho-body");
-        tbody.innerHTML = "";
-
-        let totalPorkinho = 0;
-
-        state.porkinho.transactions.forEach((tx) => {
-          const amount = parseFloat(tx.amount || 0);
-          if (tx.type === "resgate") {
-            totalPorkinho -= amount;
-          } else {
-            totalPorkinho += amount;
-          }
-
-          const tr = document.createElement("tr");
-          tr.className = "editable-row transition";
-          tr.ondblclick = () => editPorkinhoTx(tx.id);
-
-          let badge = "";
-          let colorClass = "";
-
-          if (tx.type === "aporte") {
-            badge = `<span class="px-2 py-0.5 text-[10px] bg-[#00E676]/20 text-[#00E676] rounded font-bold">Aporte</span>`;
-            colorClass = "text-[#00E676]";
-          } else if (tx.type === "rendimento") {
-            badge = `<span class="px-2 py-0.5 text-[10px] bg-[#00E5FF]/20 text-[#00E5FF] rounded font-bold">Rendimento</span>`;
-            colorClass = "text-[#00E5FF]";
-          } else {
-            badge = `<span class="px-2 py-0.5 text-[10px] bg-red-500/20 text-red-400 rounded font-bold">Resgate</span>`;
-            colorClass = "text-red-400";
-          }
-
-          tr.innerHTML = `
-                    <td class="py-2.5 px-3 font-mono text-xs text-gray-400">${tx.date}</td>
-                    <td class="py-2.5 px-3">${badge}</td>
-                    <td class="py-2.5 px-3 font-semibold text-gray-200">${tx.desc}</td>
-                    <td class="py-2.5 px-3 font-mono font-bold ${colorClass}">${tx.type === "resgate" ? "-" : "+"} ${formatBRL(amount)}</td>
-                    <td class="py-2.5 px-2 text-right">
-                        <div class="flex items-center justify-end gap-1">
-                            <button onclick="event.stopPropagation(); editPorkinhoTx('${tx.id}')" class="text-gray-400 hover:text-white p-1" title="Editar">✏️</button>
-                            <button onclick="event.stopPropagation(); deletePorkinhoTx('${tx.id}')" class="text-gray-500 hover:text-red-400 p-1" title="Excluir">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                </svg>
-                            </button>
-                        </div>
-                    </td>
-                `;
-          tbody.appendChild(tr);
-        });
-
-        document.getElementById("porkinho-saldo-total").innerText =
-          formatBRL(totalPorkinho);
-      }
-
       function openModalPorkinho() {
         document.getElementById("porkinho-edit-id").value = "";
-        document.getElementById("modal-porkinho-title").innerText =
-          "Nova Movimentação na Reserva";
-        document.getElementById("btn-save-porkinho").innerText =
-          "Salvar Movimentação";
-        document.getElementById("porkinho-date").value = "";
+        document.getElementById("porkinho-date").value =
+          state.selectedMonth + "/2026";
+        document.getElementById("porkinho-tipo").value = "aporte";
         document.getElementById("porkinho-desc").value = "";
         document.getElementById("porkinho-valor").value = "";
         openModal("modal-porkinho");
       }
-
-      function editPorkinhoTx(id) {
-        const tx = state.porkinho.transactions.find((x) => x.id === id);
-        if (tx) {
-          document.getElementById("porkinho-edit-id").value = tx.id;
-          document.getElementById("modal-porkinho-title").innerText =
-            "Editar Movimentação";
-          document.getElementById("btn-save-porkinho").innerText = "Atualizar";
-          document.getElementById("porkinho-date").value = tx.date || "";
-          document.getElementById("porkinho-tipo").value = tx.type || "aporte";
-          document.getElementById("porkinho-desc").value = tx.desc || "";
-          document.getElementById("porkinho-valor").value = tx.amount || "";
-          openModal("modal-porkinho");
-        }
-      }
-
       function handleSavePorkinho(e) {
         e.preventDefault();
-        const editId = document.getElementById("porkinho-edit-id").value;
         const date = document.getElementById("porkinho-date").value;
         const type = document.getElementById("porkinho-tipo").value;
         const desc = document.getElementById("porkinho-desc").value;
-        const amount = parseFloat(
-          document.getElementById("porkinho-valor").value || 0,
-        );
+        const amount =
+          parseFloat(document.getElementById("porkinho-valor").value) || 0;
 
-        if (editId) {
-          const tx = state.porkinho.transactions.find((x) => x.id === editId);
-          if (tx) {
-            tx.date = date;
-            tx.type = type;
-            tx.desc = desc;
-            tx.amount = amount;
-          }
-        } else {
-          state.porkinho.transactions.push({
-            id: "p_" + Date.now(),
-            date,
-            type,
-            desc,
-            amount,
-          });
-        }
+        if (!state.porkinho) state.porkinho = { transactions: [] };
+        if (!state.porkinho.transactions) state.porkinho.transactions = [];
 
+        state.porkinho.transactions.push({
+          id: "p_" + Date.now(),
+          date,
+          type,
+          desc,
+          amount,
+        });
         saveState();
         renderPorkinho();
         closeModal("modal-porkinho");
       }
-
-      function deletePorkinhoTx(id) {
+      function deletePorkinho(id) {
         state.porkinho.transactions = state.porkinho.transactions.filter(
           (x) => x.id !== id,
         );
@@ -2462,191 +2324,93 @@
         renderPorkinho();
       }
 
-      // --- MURAL DE SONHOS ---
-      function renderSonhos() {
-        const cols = {
-          essencial: document.getElementById("col-essencial"),
-          importante: document.getElementById("col-importante"),
-          metas: document.getElementById("col-metas"),
-          realizados: document.getElementById("col-realizados"),
-        };
-
-        const counts = { essencial: 0, importante: 0, metas: 0, realizados: 0 };
-        Object.keys(cols).forEach((k) => (cols[k].innerHTML = ""));
-
-        state.dreams.forEach((dream) => {
-          counts[dream.col] = (counts[dream.col] || 0) + 1;
-
-          const card = document.createElement("div");
-          card.className =
-            "card-panel rounded-xl p-3 bg-[#151621] border border-[#252738] space-y-2 relative group hover:border-[#FF3B5C] transition cursor-pointer";
-          card.ondblclick = () => editDream(dream.id);
-
-          card.innerHTML = `
-                    <div class="flex justify-between items-start">
-                        <h5 class="text-xs font-bold text-gray-200">${dream.title}</h5>
-                        <div class="flex items-center gap-1">
-                            <button onclick="event.stopPropagation(); editDream('${dream.id}')" class="text-gray-400 hover:text-white text-xs" title="Editar">✏️</button>
-                            <button onclick="event.stopPropagation(); deleteDream('${dream.id}')" class="text-gray-600 hover:text-red-400 text-xs font-bold" title="Excluir">×</button>
-                        </div>
-                    </div>
-                    ${dream.val ? `<div class="text-xs font-mono text-gray-400 font-semibold">${formatBRL(dream.val)}</div>` : ""}
-                    
-                    <div class="flex items-center justify-between pt-2 border-t border-[#252738] text-[10px]">
-                        <select onchange="event.stopPropagation(); moveDream('${dream.id}', this.value)" class="bg-[#0E0F18] text-gray-300 border border-[#252738] rounded px-1.5 py-1 text-[10px] cursor-pointer">
-                            <option value="essencial" ${dream.col === "essencial" ? "selected" : ""}>Essencial</option>
-                            <option value="importante" ${dream.col === "importante" ? "selected" : ""}>Importante</option>
-                            <option value="metas" ${dream.col === "metas" ? "selected" : ""}>Metas</option>
-                            <option value="realizados" ${dream.col === "realizados" ? "selected" : ""}>Realizado 🎉</option>
-                        </select>
-                    </div>
-                `;
-
-          if (cols[dream.col]) cols[dream.col].appendChild(card);
-        });
-
-        Object.keys(counts).forEach((k) => {
-          const el = document.getElementById(`count-${k}`);
-          if (el) el.innerText = counts[k];
-        });
-      }
-
-      function openModalSonho() {
-        document.getElementById("sonho-edit-id").value = "";
-        document.getElementById("modal-sonho-title").innerText =
-          "Novo Item no Mural de Sonhos";
-        document.getElementById("btn-save-sonho").innerText = "Salvar Sonho";
-        document.getElementById("sonho-title-input").value = "";
-        document.getElementById("sonho-val").value = "";
+      function openModalSonho(item = null) {
+        if (item) {
+          document.getElementById("sonho-edit-id").value = item.id;
+          document.getElementById("sonho-title-input").value = item.title;
+          document.getElementById("sonho-col").value = item.col;
+          document.getElementById("sonho-val").value = item.val || "";
+        } else {
+          document.getElementById("sonho-edit-id").value = "";
+          document.getElementById("sonho-title-input").value = "";
+          document.getElementById("sonho-col").value = "essencial";
+          document.getElementById("sonho-val").value = "";
+        }
         openModal("modal-sonho");
       }
-
-      function editDream(id) {
-        const dream = state.dreams.find((x) => x.id === id);
-        if (dream) {
-          document.getElementById("sonho-edit-id").value = dream.id;
-          document.getElementById("modal-sonho-title").innerText =
-            "Editar Item no Mural";
-          document.getElementById("btn-save-sonho").innerText =
-            "Atualizar Item";
-          document.getElementById("sonho-title-input").value =
-            dream.title || "";
-          document.getElementById("sonho-col").value = dream.col || "essencial";
-          document.getElementById("sonho-val").value = dream.val || "";
-          openModal("modal-sonho");
-        }
-      }
-
       function handleSaveSonho(e) {
         e.preventDefault();
-        const editId = document.getElementById("sonho-edit-id").value;
+        const id = document.getElementById("sonho-edit-id").value;
         const title = document.getElementById("sonho-title-input").value;
         const col = document.getElementById("sonho-col").value;
-        const val = parseFloat(document.getElementById("sonho-val").value || 0);
+        const val = parseFloat(document.getElementById("sonho-val").value) || 0;
 
-        if (editId) {
-          const dream = state.dreams.find((x) => x.id === editId);
-          if (dream) {
-            dream.title = title;
-            dream.col = col;
-            dream.val = val;
+        if (id) {
+          const item = state.dreams.find((x) => x.id === id);
+          if (item) {
+            item.title = title;
+            item.col = col;
+            item.val = val;
           }
         } else {
-          state.dreams.push({
-            id: "d_" + Date.now(),
-            title,
-            col,
-            val,
-          });
+          state.dreams.push({ id: "d_" + Date.now(), title, col, val });
         }
-
         saveState();
         renderSonhos();
         closeModal("modal-sonho");
       }
-
-      function moveDream(id, targetCol) {
-        const dream = state.dreams.find((x) => x.id === id);
-        if (dream) {
-          dream.col = targetCol;
-          saveState();
-          renderSonhos();
-        }
+      function editSonho(id) {
+        const item = state.dreams.find((x) => x.id === id);
+        if (item) openModalSonho(item);
       }
-
-      function deleteDream(id) {
+      function deleteSonho(id) {
         state.dreams = state.dreams.filter((x) => x.id !== id);
         saveState();
         renderSonhos();
       }
 
-      // --- MODAL UTILS ---
-      function openModal(id) {
-        document.getElementById("modal-despesa-mes").innerText =
-          state.selectedMonth;
-        document.getElementById("modal-receita-mes").innerText =
-          state.selectedMonth;
-
-        const m = document.getElementById(id);
-        if (m) {
-          m.classList.remove("hidden");
-          m.classList.add("flex");
-        }
-      }
-
-      function closeModal(id) {
-        const m = document.getElementById(id);
-        if (m) {
-          m.classList.add("hidden");
-          m.classList.remove("flex");
-        }
-      }
-
-      // --- BACKUP EXPORT / IMPORT ---
       function exportData() {
         const dataStr =
           "data:text/json;charset=utf-8," +
           encodeURIComponent(JSON.stringify(state, null, 2));
-        const dlAnchorElem = document.createElement("a");
-        dlAnchorElem.setAttribute("href", dataStr);
-        dlAnchorElem.setAttribute(
+        const a = document.createElement("a");
+        a.setAttribute("href", dataStr);
+        a.setAttribute(
           "download",
-          `Planejamento_Financeiro_2026_Backup_${new Date().toISOString().slice(0, 10)}.json`,
+          `planejamento_2026_backup_${new Date().toISOString().slice(0, 10)}.json`,
         );
-        document.body.appendChild(dlAnchorElem);
-        dlAnchorElem.click();
-        dlAnchorElem.remove();
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
       }
-
       function importData(event) {
         const fileReader = new FileReader();
-        fileReader.onload = function (e) {
-          try {
-            const imported = JSON.parse(e.target.result);
-            if (imported && imported.monthlyData) {
-              state = imported;
-              saveState();
-              renderApp();
-            }
-          } catch (err) {
-            console.error(err);
-          }
-        };
         if (event.target.files[0]) {
-          fileReader.readAsText(event.target.files[0]);
+          fileReader.readAsText(event.target.files[0], "UTF-8");
+          fileReader.onload = (e) => {
+            try {
+              state = JSON.parse(e.target.result);
+              saveState();
+              initApp();
+              alert("Dados restaurados com sucesso!");
+            } catch (error) {
+              alert("Erro ao importar arquivo.");
+            }
+          };
+        }
+      }
+      function resetDataPrompt() {
+        if (
+          confirm(
+            "Deseja realmente apagar tudo e restaurar os dados originais (padrão)?",
+          )
+        ) {
+          localStorage.removeItem(STORAGE_KEY);
+          initApp();
         }
       }
 
-      function resetDataPrompt() {
-        state = getDefaultData();
-        saveState();
-        renderApp();
-      }
-
-      // START ON WINDOW LOAD
-      window.onload = function () {
-        initApp();
-      };
+      window.onload = initApp;
     </script>
   </body>
 </html>
