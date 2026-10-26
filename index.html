@@ -2,25 +2,53 @@
 <html lang="pt-BR" class="dark">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <title>Controle Financeiro 2026</title>
-
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='115' fill='%230B0C10' stroke='%23252738' stroke-width='16'/%3E%3Cpath d='M130 380 L230 250 L310 290 L400 150' stroke='%2300E5FF' stroke-width='42' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='400' cy='150' r='35' fill='%23FF3B5C' style='filter: drop-shadow(0 0 12px rgba(255, 59, 92, 0.8));'/%3E%3Cpath d='M130 420 L400 420' stroke='%231D1E2C' stroke-width='16' stroke-linecap='round'/%3E%3C/svg%3E"
-    />
-    <link rel="apple-touch-icon" href="icon.png" />
+    
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta
-      name="apple-mobile-web-app-status-bar-style"
-      content="black-translucent"
-    />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Finance 2026" />
     <meta name="theme-color" content="#0B0C10" />
+
+    <!-- SCRIPT AVANÇADO: GERA O ÍCONE PNG (TRADER) EM TEMPO REAL PARA IPHONE E ANDROID -->
+    <script>
+      (function() {
+        const svgCode = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+          <rect width="512" height="512" rx="115" fill="#FF3B5C" />
+          <rect x="110" y="310" width="50" height="90" fill="#ffffff" fill-opacity="0.4" />
+          <rect x="200" y="230" width="50" height="170" fill="#ffffff" fill-opacity="0.6" />
+          <rect x="290" y="150" width="50" height="250" fill="#ffffff" fill-opacity="0.8" />
+          <rect x="380" y="70" width="50" height="330" fill="#ffffff" fill-opacity="1" />
+          <polyline points="70,350 160,250 250,300 420,100" stroke="#ffffff" stroke-width="24" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+          <polyline points="320,100 420,100 420,200" stroke="#ffffff" stroke-width="24" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>`;
+        
+        const svgUrl = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svgCode);
+        document.write('<link rel="icon" type="image/svg+xml" href="' + svgUrl + '">');
+        
+        const img = new Image();
+        img.onload = function() {
+          const canvas = document.createElement("canvas");
+          canvas.width = 512; canvas.height = 512;
+          canvas.getContext("2d").drawImage(img, 0, 0);
+          const pngUrl = canvas.toDataURL("image/png");
+          
+          // Força o iPhone a reconhecer a imagem PNG criada
+          const linkApple = document.createElement("link");
+          linkApple.rel = "apple-touch-icon";
+          linkApple.href = pngUrl;
+          document.head.appendChild(linkApple);
+          
+          // Força o Android a reconhecer as medidas corretas
+          const linkAndroid = document.createElement("link");
+          linkAndroid.rel = "icon";
+          linkAndroid.sizes = "192x192";
+          linkAndroid.href = pngUrl;
+          document.head.appendChild(linkAndroid);
+        };
+        img.src = svgUrl;
+      })();
+    </script>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -32,14 +60,11 @@
           extend: {
             colors: {
               brand: {
-                red: "#FF3B5C",
-                redHover: "#FF5473",
-                green: "#00E676",
-                greenHover: "#22EF89",
+                red: "#FF3B5C", redHover: "#FF5473",
+                green: "#00E676", greenHover: "#22EF89",
                 cyan: "#00E5FF",
                 darkBg: "#0B0C10",
-                cardBg: "#151621",
-                cardBgHover: "#1D1E2C",
+                cardBg: "#151621", cardBgHover: "#1D1E2C",
                 border: "#252738",
               },
             },
@@ -51,349 +76,116 @@
         },
       };
     </script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
 
     <style>
-      body {
-        background-color: #0b0c10;
-        color: #e2e8f0;
-        font-family: "Inter", sans-serif;
-        overscroll-behavior-y: none;
-      }
-      .neon-glow-red {
-        box-shadow: 0 0 18px rgba(255, 59, 92, 0.25);
-      }
-      .neon-glow-green {
-        box-shadow: 0 0 18px rgba(0, 230, 118, 0.25);
-      }
-      .neon-glow-cyan {
-        box-shadow: 0 0 18px rgba(0, 229, 255, 0.22);
-      }
-      .card-panel {
-        background-color: #151621;
-        border: 1px solid #252738;
-      }
-      .custom-scrollbar::-webkit-scrollbar {
-        height: 6px;
-        width: 6px;
-      }
-      .custom-scrollbar::-webkit-scrollbar-track {
-        background: #0d0e17;
-      }
-      .custom-scrollbar::-webkit-scrollbar-thumb {
-        background: #2d3048;
-        border-radius: 4px;
-      }
-      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-        background: #ff3b5c;
-      }
-      .input-dark {
-        background-color: #0e0f18;
-        border: 1px solid #252738;
-        color: #f1f5f9;
-        font-size: 16px !important;
-      }
-      @media (min-width: 640px) {
-        .input-dark {
-          font-size: 14px !important;
-        }
-      }
-      .input-dark:focus {
-        outline: none;
-        border-color: #ff3b5c;
-        box-shadow: 0 0 10px rgba(255, 59, 92, 0.35);
-      }
-      .editable-row {
-        cursor: pointer;
-        transition: background-color 0.15s ease-in-out;
-      }
-      .editable-row:hover {
-        background-color: #1d1e2d !important;
-      }
-      .tab-btn.active {
-        background-color: #ff3b5c;
-        color: white;
-        box-shadow: 0 4px 14px 0 rgba(255, 59, 92, 0.39);
-      }
-      .tab-btn:not(.active) {
-        background-color: transparent;
-        color: #94a3b8;
-      }
-      .tab-btn:not(.active):hover {
-        background-color: #1a1b28;
-        color: #f1f5f9;
-      }
+      body { background-color: #0b0c10; color: #e2e8f0; font-family: "Inter", sans-serif; overscroll-behavior-y: none; }
+      .neon-glow-red { box-shadow: 0 0 18px rgba(255, 59, 92, 0.25); }
+      .neon-glow-green { box-shadow: 0 0 18px rgba(0, 230, 118, 0.25); }
+      .neon-glow-cyan { box-shadow: 0 0 18px rgba(0, 229, 255, 0.22); }
+      .card-panel { background-color: #151621; border: 1px solid #252738; }
+      .custom-scrollbar::-webkit-scrollbar { height: 6px; width: 6px; }
+      .custom-scrollbar::-webkit-scrollbar-track { background: #0d0e17; }
+      .custom-scrollbar::-webkit-scrollbar-thumb { background: #2d3048; border-radius: 4px; }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #ff3b5c; }
+      .input-dark { background-color: #0e0f18; border: 1px solid #252738; color: #f1f5f9; font-size: 16px !important; }
+      @media (min-width: 640px) { .input-dark { font-size: 14px !important; } }
+      .input-dark:focus { outline: none; border-color: #ff3b5c; box-shadow: 0 0 10px rgba(255, 59, 92, 0.35); }
+      .editable-row { cursor: pointer; transition: background-color 0.15s ease-in-out; }
+      .editable-row:hover { background-color: #1d1e2d !important; }
+      .tab-btn.active { background-color: #ff3b5c; color: white; box-shadow: 0 4px 14px 0 rgba(255, 59, 92, 0.39); }
+      .tab-btn:not(.active) { background-color: transparent; color: #94a3b8; }
+      .tab-btn:not(.active):hover { background-color: #1a1b28; color: #f1f5f9; }
     </style>
   </head>
   <body class="min-h-screen flex flex-col custom-scrollbar">
+    
     <!-- HEADER -->
-    <header
-      class="bg-[#10111A] border-b border-[#1E1F2E] sticky top-0 z-40 backdrop-blur-md bg-opacity-95"
-    >
+    <header class="bg-[#10111A] border-b border-[#1E1F2E] sticky top-0 z-40 backdrop-blur-md bg-opacity-95">
       <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div
-          class="flex flex-col sm:flex-row sm:items-center justify-between py-4 gap-4"
-        >
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between py-4 gap-4">
           <div class="flex items-center gap-3">
-            <div
-              class="w-11 h-11 rounded-xl bg-gradient-to-tr from-[#C01235] to-[#FF3B5C] flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-red-950/60 neon-glow-red"
-            >
-              <!-- NOVO ÍCONE: Gráfico de Barras com Seta de Alta (Estilo Trader) -->
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <!-- Barras de crescimento (opacidades diferentes) -->
-                <rect
-                  x="4"
-                  y="14"
-                  width="4"
-                  height="6"
-                  fill="currentColor"
-                  fill-opacity="0.3"
-                  stroke="none"
-                />
-                <rect
-                  x="10"
-                  y="9"
-                  width="4"
-                  height="11"
-                  fill="currentColor"
-                  fill-opacity="0.6"
-                  stroke="none"
-                />
-                <rect
-                  x="16"
-                  y="4"
-                  width="4"
-                  height="16"
-                  fill="currentColor"
-                  fill-opacity="1"
-                  stroke="none"
-                />
-                <!-- Seta de tendência (rompendo o gráfico) -->
+            <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-[#C01235] to-[#FF3B5C] flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-red-950/60 neon-glow-red">
+              <!-- Ícone Trader Personalizado Header -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="14" width="4" height="6" fill="currentColor" fill-opacity="0.3" stroke="none" />
+                <rect x="10" y="9" width="4" height="11" fill="currentColor" fill-opacity="0.6" stroke="none" />
+                <rect x="16" y="4" width="4" height="16" fill="currentColor" fill-opacity="1" stroke="none" />
                 <polyline points="1 16 7 10 12 14 23 3" stroke-width="2.5" />
                 <polyline points="16 3 23 3 23 10" stroke-width="2.5" />
-                <!-- Linha base -->
                 <line x1="2" y1="20" x2="22" y2="20" stroke-width="2" />
               </svg>
             </div>
             <div>
-              <h1
-                class="text-xl font-bold tracking-widest text-white uppercase flex items-center gap-2"
-              >
+              <h1 class="text-xl font-bold tracking-widest text-white uppercase flex items-center gap-2">
                 PLANEJAMENTO <span class="text-[#FF3B5C]">2026</span>
               </h1>
-              <p
-                class="text-[11px] sm:text-xs text-slate-400 font-medium tracking-wide"
-              >
+              <p class="text-[11px] sm:text-xs text-slate-400 font-medium tracking-wide">
                 Controle Financeiro Pessoal & Familiar
               </p>
             </div>
           </div>
           <div class="flex items-center gap-2 sm:gap-3">
-            <button
-              onclick="exportData()"
-              class="px-3 py-2 text-xs sm:text-[13px] font-medium bg-[#1A1B28] hover:bg-[#252738] border border-[#2A2B3D] text-slate-300 hover:text-white rounded-lg transition flex items-center gap-2 shadow-sm"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-4 w-4 text-[#FF3B5C]"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-                />
+            <!-- Botões de Backup que garantem a sincronização entre PC e Android -->
+            <button onclick="exportData()" class="px-3 py-2 text-xs sm:text-[13px] font-medium bg-[#1A1B28] hover:bg-[#252738] border border-[#2A2B3D] text-slate-300 hover:text-white rounded-lg transition flex items-center gap-2 shadow-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-[#FF3B5C]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
               </svg>
-              <span class="hidden sm:inline">Backup Exportar</span
-              ><span class="sm:hidden">Exportar</span>
+              <span class="hidden sm:inline">Backup Exportar</span><span class="sm:hidden">Exportar</span>
             </button>
-            <label
-              class="px-3 py-2 text-xs sm:text-[13px] font-medium bg-[#1A1B28] hover:bg-[#252738] border border-[#2A2B3D] text-slate-300 hover:text-white rounded-lg transition cursor-pointer flex items-center gap-2 shadow-sm"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-4 w-4 text-[#00E676]"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-                />
+            <label class="px-3 py-2 text-xs sm:text-[13px] font-medium bg-[#1A1B28] hover:bg-[#252738] border border-[#2A2B3D] text-slate-300 hover:text-white rounded-lg transition cursor-pointer flex items-center gap-2 shadow-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-[#00E676]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
               </svg>
-              <span class="hidden sm:inline">Restaurar Importar</span
-              ><span class="sm:hidden">Importar</span>
-              <input
-                type="file"
-                id="import-file"
-                accept=".json"
-                class="hidden"
-                onchange="importData(event)"
-              />
+              <span class="hidden sm:inline">Restaurar Importar</span><span class="sm:hidden">Importar</span>
+              <input type="file" id="import-file" accept=".json" class="hidden" onchange="importData(event)" />
             </label>
-            <button
-              onclick="resetDataPrompt()"
-              class="px-3 py-2 text-sm font-medium bg-[#1A1B28] hover:bg-red-950/40 border border-[#2A2B3D] hover:border-red-900/50 text-slate-400 hover:text-red-400 rounded-lg transition"
-              title="Restaurar dados padrão"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-4 w-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                />
+            <button onclick="resetDataPrompt()" class="px-3 py-2 text-sm font-medium bg-[#1A1B28] hover:bg-red-950/40 border border-[#2A2B3D] hover:border-red-900/50 text-slate-400 hover:text-red-400 rounded-lg transition" title="Restaurar dados padrão">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
               </svg>
             </button>
           </div>
         </div>
         <!-- TABS -->
-        <nav
-          class="flex space-x-2 overflow-x-auto custom-scrollbar pb-3 pt-1"
-          id="tab-nav"
-        >
-          <button
-            onclick="switchTab('mensal')"
-            id="tab-btn-mensal"
-            class="tab-btn active px-5 py-2.5 text-[13px] font-semibold rounded-lg transition whitespace-nowrap flex items-center gap-2"
-          >
-            Visão Mensal
-          </button>
-          <button
-            onclick="switchTab('cartao')"
-            id="tab-btn-cartao"
-            class="tab-btn px-5 py-2.5 text-[13px] font-medium rounded-lg transition whitespace-nowrap flex items-center gap-2"
-          >
-            Cartão CC Inter
-          </button>
-          <button
-            onclick="switchTab('custos')"
-            id="tab-btn-custos"
-            class="tab-btn px-5 py-2.5 text-[13px] font-medium rounded-lg transition whitespace-nowrap flex items-center gap-2"
-          >
-            Custos Fixos
-          </button>
-          <button
-            onclick="switchTab('reserva')"
-            id="tab-btn-reserva"
-            class="tab-btn px-5 py-2.5 text-[13px] font-medium rounded-lg transition whitespace-nowrap flex items-center gap-2"
-          >
-            Reserva (Porkinho)
-          </button>
-          <button
-            onclick="switchTab('sonhos')"
-            id="tab-btn-sonhos"
-            class="tab-btn px-5 py-2.5 text-[13px] font-medium rounded-lg transition whitespace-nowrap flex items-center gap-2"
-          >
-            Mural de Sonhos
-          </button>
+        <nav class="flex space-x-2 overflow-x-auto custom-scrollbar pb-3 pt-1" id="tab-nav">
+          <button onclick="switchTab('mensal')" id="tab-btn-mensal" class="tab-btn active px-5 py-2.5 text-[13px] font-semibold rounded-lg transition whitespace-nowrap flex items-center gap-2">Visão Mensal</button>
+          <button onclick="switchTab('cartao')" id="tab-btn-cartao" class="tab-btn px-5 py-2.5 text-[13px] font-medium rounded-lg transition whitespace-nowrap flex items-center gap-2">Cartão CC Inter</button>
+          <button onclick="switchTab('custos')" id="tab-btn-custos" class="tab-btn px-5 py-2.5 text-[13px] font-medium rounded-lg transition whitespace-nowrap flex items-center gap-2">Custos Fixos</button>
+          <button onclick="switchTab('reserva')" id="tab-btn-reserva" class="tab-btn px-5 py-2.5 text-[13px] font-medium rounded-lg transition whitespace-nowrap flex items-center gap-2">Reserva (Porkinho)</button>
+          <button onclick="switchTab('sonhos')" id="tab-btn-sonhos" class="tab-btn px-5 py-2.5 text-[13px] font-medium rounded-lg transition whitespace-nowrap flex items-center gap-2">Mural de Sonhos</button>
         </nav>
       </div>
     </header>
 
     <!-- MAIN CONTAINER -->
     <main class="flex-1 max-w-[1400px] w-full mx-auto p-4 sm:p-6 lg:p-8">
+      
       <!-- ABA 1: VISÃO MENSAL -->
       <section id="tab-content-mensal" class="tab-content space-y-6">
-        <div
-          class="card-panel rounded-2xl p-2.5 flex items-center justify-between overflow-x-auto custom-scrollbar gap-2"
-          id="month-selector"
-        ></div>
+        <div class="card-panel rounded-2xl p-2.5 flex items-center justify-between overflow-x-auto custom-scrollbar gap-2" id="month-selector"></div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-          <div
-            class="card-panel rounded-2xl p-5 border-l-4 border-l-[#00E676] relative overflow-hidden neon-glow-green"
-          >
-            <div
-              class="flex justify-between items-center text-slate-400 text-xs font-semibold uppercase tracking-wider mb-2"
-            >
-              <span>Total de Receitas</span>
-            </div>
-            <div
-              class="text-3xl font-bold font-mono text-[#00E676]"
-              id="dash-receita"
-            >
-              R$ 0,00
-            </div>
-            <div
-              class="text-xs text-slate-500 mt-2 font-mono"
-              id="dash-receita-sub"
-            >
-              Previsto: R$ 0,00
-            </div>
+          <div class="card-panel rounded-2xl p-5 border-l-4 border-l-[#00E676] relative overflow-hidden neon-glow-green">
+            <div class="flex justify-between items-center text-slate-400 text-xs font-semibold uppercase tracking-wider mb-2"><span>Total de Receitas</span></div>
+            <div class="text-3xl font-bold font-mono text-[#00E676]" id="dash-receita">R$ 0,00</div>
+            <div class="text-xs text-slate-500 mt-2 font-mono" id="dash-receita-sub">Previsto: R$ 0,00</div>
           </div>
-          <div
-            class="card-panel rounded-2xl p-5 border-l-4 border-l-[#FF3B5C] relative overflow-hidden neon-glow-red"
-          >
-            <div
-              class="flex justify-between items-center text-slate-400 text-xs font-semibold uppercase tracking-wider mb-2"
-            >
-              <span>Total de Despesas</span>
-            </div>
-            <div
-              class="text-3xl font-bold font-mono text-[#FF3B5C]"
-              id="dash-despesa"
-            >
-              R$ 0,00
-            </div>
-            <div
-              class="text-xs text-slate-500 mt-2 font-mono"
-              id="dash-despesa-sub"
-            >
-              Previsto: R$ 0,00
-            </div>
+          <div class="card-panel rounded-2xl p-5 border-l-4 border-l-[#FF3B5C] relative overflow-hidden neon-glow-red">
+            <div class="flex justify-between items-center text-slate-400 text-xs font-semibold uppercase tracking-wider mb-2"><span>Total de Despesas</span></div>
+            <div class="text-3xl font-bold font-mono text-[#FF3B5C]" id="dash-despesa">R$ 0,00</div>
+            <div class="text-xs text-slate-500 mt-2 font-mono" id="dash-despesa-sub">Previsto: R$ 0,00</div>
           </div>
-          <div
-            class="card-panel rounded-2xl p-5 border-l-4 border-l-[#00E5FF] relative overflow-hidden neon-glow-cyan"
-          >
-            <div
-              class="flex justify-between items-center text-slate-400 text-xs font-semibold uppercase tracking-wider mb-2"
-            >
-              <span>Lucro Mensal (Saldo)</span>
-            </div>
-            <div
-              class="text-3xl font-bold font-mono text-[#00E5FF]"
-              id="dash-saldo"
-            >
-              R$ 0,00
-            </div>
-            <div class="text-xs text-slate-500 mt-2">
-              Receita Real - Despesa Real
-            </div>
+          <div class="card-panel rounded-2xl p-5 border-l-4 border-l-[#00E5FF] relative overflow-hidden neon-glow-cyan">
+            <div class="flex justify-between items-center text-slate-400 text-xs font-semibold uppercase tracking-wider mb-2"><span>Lucro Mensal (Saldo)</span></div>
+            <div class="text-3xl font-bold font-mono text-[#00E5FF]" id="dash-saldo">R$ 0,00</div>
+            <div class="text-xs text-slate-500 mt-2">Receita Real - Despesa Real</div>
           </div>
         </div>
 
-        <div
-          class="card-panel rounded-2xl p-5 mt-2 mb-2 relative w-full border border-[#252738]"
-        >
+        <div class="card-panel rounded-2xl p-5 mt-2 mb-2 relative w-full border border-[#252738]">
           <div class="flex items-center justify-between mb-4">
-            <h3 class="text-sm font-bold text-white flex items-center gap-2">
-              <span class="text-[#00E5FF]">📈</span> Terminal de Fluxo (Visão
-              Trader)
-            </h3>
+            <h3 class="text-sm font-bold text-white flex items-center gap-2"><span class="text-[#00E5FF]">📈</span> Terminal de Fluxo (Visão Trader)</h3>
           </div>
           <div class="w-full h-[280px]">
             <canvas id="monthlyChart"></canvas>
@@ -401,88 +193,41 @@
         </div>
 
         <p class="text-xs text-slate-400 italic flex items-center gap-1.5">
-          <span class="text-brand-cyan">💡 Dica:</span> Clique no ícone de
-          <b>Lápis ✏️</b> ou dê um <b>duplo-clique</b> na linha para editar.
+          <span class="text-brand-cyan">💡 Dica:</span> Clique no ícone de <b>Lápis ✏️</b> ou dê um <b>duplo-clique</b> na linha para editar.
         </p>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div class="card-panel rounded-2xl p-5 space-y-4 overflow-hidden">
-            <div
-              class="flex items-center justify-between border-b border-[#252738] pb-3"
-            >
+            <div class="flex items-center justify-between border-b border-[#252738] pb-3">
               <div class="flex items-center gap-2">
-                <span
-                  class="w-3 h-3 rounded-full bg-[#FF3B5C] shadow-[0_0_10px_#FF3B5C]"
-                ></span>
+                <span class="w-3 h-3 rounded-full bg-[#FF3B5C] shadow-[0_0_10px_#FF3B5C]"></span>
                 <h3 class="text-lg font-bold text-white">Despesas & Contas</h3>
               </div>
-              <button
-                onclick="openModalDespesa()"
-                class="px-3 py-1.5 text-xs font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition flex items-center gap-1 shadow-[0_0_10px_rgba(255,59,92,0.3)]"
-              >
-                Nova Despesa
-              </button>
+              <button onclick="openModalDespesa()" class="px-3 py-1.5 text-xs font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition flex items-center gap-1 shadow-[0_0_10px_rgba(255,59,92,0.3)]">Nova Despesa</button>
             </div>
             <div class="overflow-x-auto custom-scrollbar">
-              <table
-                class="w-full text-left text-[13px] text-slate-300 whitespace-nowrap"
-              >
-                <thead
-                  class="text-xs text-slate-400 uppercase bg-[#0E0F18] border-b border-[#252738]"
-                >
-                  <tr>
-                    <th class="py-2.5 px-3">Venc.</th>
-                    <th class="py-2.5 px-3">Descrição</th>
-                    <th class="py-2.5 px-3">Previsto</th>
-                    <th class="py-2.5 px-3">Real</th>
-                    <th class="py-2.5 px-3 text-center">Status</th>
-                    <th class="py-2.5 px-2 text-right">Ação</th>
-                  </tr>
+              <table class="w-full text-left text-[13px] text-slate-300 whitespace-nowrap">
+                <thead class="text-xs text-slate-400 uppercase bg-[#0E0F18] border-b border-[#252738]">
+                  <tr><th class="py-2.5 px-3">Venc.</th><th class="py-2.5 px-3">Descrição</th><th class="py-2.5 px-3">Previsto</th><th class="py-2.5 px-3">Real</th><th class="py-2.5 px-3 text-center">Status</th><th class="py-2.5 px-2 text-right">Ação</th></tr>
                 </thead>
-                <tbody
-                  id="table-despesas-body"
-                  class="divide-y divide-[#1E1F2E]"
-                ></tbody>
+                <tbody id="table-despesas-body" class="divide-y divide-[#1E1F2E]"></tbody>
               </table>
             </div>
           </div>
           <div class="card-panel rounded-2xl p-5 space-y-4 overflow-hidden">
-            <div
-              class="flex items-center justify-between border-b border-[#252738] pb-3"
-            >
+            <div class="flex items-center justify-between border-b border-[#252738] pb-3">
               <div class="flex items-center gap-2">
-                <span
-                  class="w-3 h-3 rounded-full bg-[#00E676] shadow-[0_0_10px_#00E676]"
-                ></span>
-                <h3 class="text-lg font-bold text-white">
-                  Receitas & Entradas
-                </h3>
+                <span class="w-3 h-3 rounded-full bg-[#00E676] shadow-[0_0_10px_#00E676]"></span>
+                <h3 class="text-lg font-bold text-white">Receitas & Entradas</h3>
               </div>
-              <button
-                onclick="openModalReceita()"
-                class="px-3 py-1.5 text-xs font-bold bg-[#00E676] hover:bg-[#22EF89] text-gray-950 rounded-lg transition flex items-center gap-1 shadow-[0_0_10px_rgba(0,230,118,0.3)]"
-              >
-                Nova Receita
-              </button>
+              <button onclick="openModalReceita()" class="px-3 py-1.5 text-xs font-bold bg-[#00E676] hover:bg-[#22EF89] text-gray-950 rounded-lg transition flex items-center gap-1 shadow-[0_0_10px_rgba(0,230,118,0.3)]">Nova Receita</button>
             </div>
             <div class="overflow-x-auto custom-scrollbar">
-              <table
-                class="w-full text-left text-[13px] text-slate-300 whitespace-nowrap"
-              >
-                <thead
-                  class="text-xs text-slate-400 uppercase bg-[#0E0F18] border-b border-[#252738]"
-                >
-                  <tr>
-                    <th class="py-2.5 px-3">Descrição</th>
-                    <th class="py-2.5 px-3">Previsto</th>
-                    <th class="py-2.5 px-3">Real</th>
-                    <th class="py-2.5 px-2 text-right">Ação</th>
-                  </tr>
+              <table class="w-full text-left text-[13px] text-slate-300 whitespace-nowrap">
+                <thead class="text-xs text-slate-400 uppercase bg-[#0E0F18] border-b border-[#252738]">
+                  <tr><th class="py-2.5 px-3">Descrição</th><th class="py-2.5 px-3">Previsto</th><th class="py-2.5 px-3">Real</th><th class="py-2.5 px-2 text-right">Ação</th></tr>
                 </thead>
-                <tbody
-                  id="table-receitas-body"
-                  class="divide-y divide-[#1E1F2E]"
-                ></tbody>
+                <tbody id="table-receitas-body" class="divide-y divide-[#1E1F2E]"></tbody>
               </table>
             </div>
           </div>
@@ -492,41 +237,18 @@
       <!-- ABA 2: CARTÃO -->
       <section id="tab-content-cartao" class="tab-content hidden space-y-6">
         <div class="card-panel rounded-2xl p-5 space-y-4">
-          <div
-            class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#252738] pb-4"
-          >
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#252738] pb-4">
             <div>
-              <h2 class="text-xl font-bold text-white">
-                💳 Matriz de Cartão CC Inter
-              </h2>
-              <p class="text-xs text-slate-400">
-                Acompanhamento das parcelas mês a mês.
-              </p>
+              <h2 class="text-xl font-bold text-white">💳 Matriz de Cartão CC Inter</h2>
+              <p class="text-xs text-slate-400">Acompanhamento das parcelas mês a mês.</p>
             </div>
-            <button
-              onclick="openModalCartao()"
-              class="px-4 py-2 text-[13px] font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition shadow-[0_0_10px_rgba(255,59,92,0.3)]"
-            >
-              Nova Compra / Assinatura
-            </button>
+            <button onclick="openModalCartao()" class="px-4 py-2 text-[13px] font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition shadow-[0_0_10px_rgba(255,59,92,0.3)]">Nova Compra / Assinatura</button>
           </div>
           <div class="overflow-x-auto custom-scrollbar">
-            <table
-              class="w-full text-left text-[12px] text-slate-300 whitespace-nowrap"
-            >
-              <thead
-                class="text-slate-400 uppercase bg-[#0E0F18] border-b border-[#252738]"
-              >
-                <tr id="cartao-header-row"></tr>
-              </thead>
-              <tbody
-                id="cartao-body"
-                class="divide-y divide-[#1E1F2E] font-mono"
-              ></tbody>
-              <tfoot
-                id="cartao-footer"
-                class="bg-[#0E0F18] font-bold border-t border-[#FF3B5C] text-white font-mono text-[13px]"
-              ></tfoot>
+            <table class="w-full text-left text-[12px] text-slate-300 whitespace-nowrap">
+              <thead class="text-slate-400 uppercase bg-[#0E0F18] border-b border-[#252738]"><tr id="cartao-header-row"></tr></thead>
+              <tbody id="cartao-body" class="divide-y divide-[#1E1F2E] font-mono"></tbody>
+              <tfoot id="cartao-footer" class="bg-[#0E0F18] font-bold border-t border-[#FF3B5C] text-white font-mono text-[13px]"></tfoot>
             </table>
           </div>
         </div>
@@ -535,122 +257,48 @@
       <!-- ABA 3: CUSTOS FIXOS -->
       <section id="tab-content-custos" class="tab-content hidden space-y-6">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-          <div
-            class="card-panel rounded-2xl p-5 border-l-4 border-l-indigo-500 bg-[#11121C]"
-          >
-            <span class="text-[11px] font-semibold text-slate-400 uppercase"
-              >Renda Estimada (JAN)</span
-            >
-            <div
-              class="text-2xl font-bold font-mono text-indigo-400 mt-1"
-              id="custos-renda-estimada"
-            >
-              R$ 0,00
-            </div>
+          <div class="card-panel rounded-2xl p-5 border-l-4 border-l-indigo-500 bg-[#11121C]">
+            <span class="text-[11px] font-semibold text-slate-400 uppercase">Renda Estimada (JAN)</span>
+            <div class="text-2xl font-bold font-mono text-indigo-400 mt-1" id="custos-renda-estimada">R$ 0,00</div>
           </div>
-          <div
-            class="card-panel rounded-2xl p-5 border-l-4 border-l-[#FF3B5C] bg-[#11121C]"
-          >
-            <span class="text-[11px] font-semibold text-slate-400 uppercase"
-              >Soma Custos Fixos</span
-            >
-            <div
-              class="text-2xl font-bold font-mono text-[#FF3B5C] mt-1"
-              id="custos-total-fixo"
-            >
-              R$ 0,00
-            </div>
+          <div class="card-panel rounded-2xl p-5 border-l-4 border-l-[#FF3B5C] bg-[#11121C]">
+            <span class="text-[11px] font-semibold text-slate-400 uppercase">Soma Custos Fixos</span>
+            <div class="text-2xl font-bold font-mono text-[#FF3B5C] mt-1" id="custos-total-fixo">R$ 0,00</div>
           </div>
-          <div
-            class="card-panel rounded-2xl p-5 border-l-4 border-l-[#00E676] neon-glow-green bg-[#11121C]"
-          >
-            <span class="text-[11px] font-semibold text-slate-400 uppercase"
-              >Margem de Segurança</span
-            >
-            <div
-              class="text-2xl font-bold font-mono text-[#00E676] mt-1"
-              id="custos-margem"
-            >
-              R$ 0,00
-            </div>
+          <div class="card-panel rounded-2xl p-5 border-l-4 border-l-[#00E676] neon-glow-green bg-[#11121C]">
+            <span class="text-[11px] font-semibold text-slate-400 uppercase">Margem de Segurança</span>
+            <div class="text-2xl font-bold font-mono text-[#00E676] mt-1" id="custos-margem">R$ 0,00</div>
           </div>
         </div>
         <div class="card-panel rounded-2xl p-5 space-y-4">
-          <div
-            class="flex items-center justify-between border-b border-[#252738] pb-3"
-          >
-            <h3 class="text-lg font-bold text-white">
-              🏡 Mapeamento de Custos Base
-            </h3>
-            <button
-              onclick="openModalCustoFixo()"
-              class="px-3 py-1.5 text-xs font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition shadow-[0_0_10px_rgba(255,59,92,0.3)]"
-            >
-              Adicionar Custo
-            </button>
+          <div class="flex items-center justify-between border-b border-[#252738] pb-3">
+            <h3 class="text-lg font-bold text-white">🏡 Mapeamento de Custos Base</h3>
+            <button onclick="openModalCustoFixo()" class="px-3 py-1.5 text-xs font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition shadow-[0_0_10px_rgba(255,59,92,0.3)]">Adicionar Custo</button>
           </div>
-          <div
-            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
-            id="custos-fixos-grid"
-          ></div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="custos-fixos-grid"></div>
         </div>
       </section>
 
       <!-- ABA 4: RESERVA (PORKINHO) -->
       <section id="tab-content-reserva" class="tab-content hidden space-y-6">
-        <div
-          class="card-panel rounded-2xl p-6 bg-gradient-to-r from-[#181824] via-[#1F1426] to-[#181824] border border-[#3B1828] relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6 neon-glow-red"
-        >
+        <div class="card-panel rounded-2xl p-6 bg-gradient-to-r from-[#181824] via-[#1F1426] to-[#181824] border border-[#3B1828] relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6 neon-glow-red">
           <div class="flex items-center gap-4">
-            <div
-              class="w-16 h-16 rounded-2xl bg-pink-500/10 border border-pink-500/30 flex items-center justify-center text-3xl"
-            >
-              🐷
-            </div>
+            <div class="w-16 h-16 rounded-2xl bg-pink-500/10 border border-pink-500/30 flex items-center justify-center text-3xl">🐷</div>
             <div>
-              <span class="text-xs uppercase font-bold text-pink-400"
-                >Reserva Financeira</span
-              >
-              <h2
-                class="text-3xl font-bold font-mono text-white mt-0.5"
-                id="porkinho-saldo-total"
-              >
-                R$ 0,00
-              </h2>
+              <span class="text-xs uppercase font-bold text-pink-400">Reserva Financeira</span>
+              <h2 class="text-3xl font-bold font-mono text-white mt-0.5" id="porkinho-saldo-total">R$ 0,00</h2>
             </div>
           </div>
-          <button
-            onclick="openModalPorkinho()"
-            class="px-5 py-2.5 font-bold text-[13px] bg-gradient-to-r from-pink-600 to-[#FF3B5C] hover:from-pink-500 hover:to-[#FF5473] text-white rounded-xl transition shadow-[0_0_15px_rgba(236,72,153,0.4)]"
-          >
-            Nova Movimentação
-          </button>
+          <button onclick="openModalPorkinho()" class="px-5 py-2.5 font-bold text-[13px] bg-gradient-to-r from-pink-600 to-[#FF3B5C] hover:from-pink-500 hover:to-[#FF5473] text-white rounded-xl transition shadow-[0_0_15px_rgba(236,72,153,0.4)]">Nova Movimentação</button>
         </div>
         <div class="card-panel rounded-2xl p-5 space-y-4">
-          <h3
-            class="text-lg font-bold text-white border-b border-[#252738] pb-3"
-          >
-            Histórico
-          </h3>
+          <h3 class="text-lg font-bold text-white border-b border-[#252738] pb-3">Histórico</h3>
           <div class="overflow-x-auto custom-scrollbar">
-            <table
-              class="w-full text-left text-[13px] text-slate-300 whitespace-nowrap"
-            >
-              <thead
-                class="text-xs text-slate-400 uppercase bg-[#0E0F18] border-b border-[#252738]"
-              >
-                <tr>
-                  <th class="py-3 px-3">Mês</th>
-                  <th class="py-3 px-3">Tipo</th>
-                  <th class="py-3 px-3">Descrição</th>
-                  <th class="py-3 px-3">Valor</th>
-                  <th class="py-3 px-2 text-right">Ação</th>
-                </tr>
+            <table class="w-full text-left text-[13px] text-slate-300 whitespace-nowrap">
+              <thead class="text-xs text-slate-400 uppercase bg-[#0E0F18] border-b border-[#252738]">
+                <tr><th class="py-3 px-3">Mês</th><th class="py-3 px-3">Tipo</th><th class="py-3 px-3">Descrição</th><th class="py-3 px-3">Valor</th><th class="py-3 px-2 text-right">Ação</th></tr>
               </thead>
-              <tbody
-                id="porkinho-body"
-                class="divide-y divide-[#1E1F2E]"
-              ></tbody>
+              <tbody id="porkinho-body" class="divide-y divide-[#1E1F2E]"></tbody>
             </table>
           </div>
         </div>
@@ -658,68 +306,25 @@
 
       <!-- ABA 5: SONHOS -->
       <section id="tab-content-sonhos" class="tab-content hidden space-y-6">
-        <div
-          class="flex flex-col sm:flex-row sm:items-center justify-between gap-4"
-        >
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <h2 class="text-xl font-bold text-white">✨ Mural de Objetivos</h2>
-          <button
-            onclick="openModalSonho()"
-            class="px-4 py-2 text-[13px] font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition shadow-[0_0_10px_rgba(255,59,92,0.3)]"
-          >
-            Novo Sonho / Meta
-          </button>
+          <button onclick="openModalSonho()" class="px-4 py-2 text-[13px] font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition shadow-[0_0_10px_rgba(255,59,92,0.3)]">Novo Sonho / Meta</button>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           <div class="card-panel rounded-2xl p-4 space-y-3 bg-[#11121C]">
-            <div
-              class="flex justify-between items-center border-b border-[#252738] pb-2"
-            >
-              <h4 class="font-bold text-amber-400 text-sm">Essencial</h4>
-              <span
-                class="text-xs text-slate-500 font-mono"
-                id="count-essencial"
-                >0</span
-              >
-            </div>
+            <div class="flex justify-between items-center border-b border-[#252738] pb-2"><h4 class="font-bold text-amber-400 text-sm">Essencial</h4><span class="text-xs text-slate-500 font-mono" id="count-essencial">0</span></div>
             <div id="col-essencial" class="space-y-3 min-h-[150px]"></div>
           </div>
           <div class="card-panel rounded-2xl p-4 space-y-3 bg-[#11121C]">
-            <div
-              class="flex justify-between items-center border-b border-[#252738] pb-2"
-            >
-              <h4 class="font-bold text-blue-400 text-sm">Importante</h4>
-              <span
-                class="text-xs text-slate-500 font-mono"
-                id="count-importante"
-                >0</span
-              >
-            </div>
+            <div class="flex justify-between items-center border-b border-[#252738] pb-2"><h4 class="font-bold text-blue-400 text-sm">Importante</h4><span class="text-xs text-slate-500 font-mono" id="count-importante">0</span></div>
             <div id="col-importante" class="space-y-3 min-h-[150px]"></div>
           </div>
           <div class="card-panel rounded-2xl p-4 space-y-3 bg-[#11121C]">
-            <div
-              class="flex justify-between items-center border-b border-[#252738] pb-2"
-            >
-              <h4 class="font-bold text-purple-400 text-sm">Metas</h4>
-              <span class="text-xs text-slate-500 font-mono" id="count-metas"
-                >0</span
-              >
-            </div>
+            <div class="flex justify-between items-center border-b border-[#252738] pb-2"><h4 class="font-bold text-purple-400 text-sm">Metas</h4><span class="text-xs text-slate-500 font-mono" id="count-metas">0</span></div>
             <div id="col-metas" class="space-y-3 min-h-[150px]"></div>
           </div>
-          <div
-            class="card-panel rounded-2xl p-4 space-y-3 bg-[#11121C] border-[#00E676]/30"
-          >
-            <div
-              class="flex justify-between items-center border-b border-[#00E676]/30 pb-2"
-            >
-              <h4 class="font-bold text-[#00E676] text-sm">Realizados 🎉</h4>
-              <span
-                class="text-xs text-slate-500 font-mono"
-                id="count-realizados"
-                >0</span
-              >
-            </div>
+          <div class="card-panel rounded-2xl p-4 space-y-3 bg-[#11121C] border-[#00E676]/30">
+            <div class="flex justify-between items-center border-b border-[#00E676]/30 pb-2"><h4 class="font-bold text-[#00E676] text-sm">Realizados 🎉</h4><span class="text-xs text-slate-500 font-mono" id="count-realizados">0</span></div>
             <div id="col-realizados" class="space-y-3 min-h-[150px]"></div>
           </div>
         </div>
@@ -727,480 +332,128 @@
     </main>
 
     <!-- MODALS -->
-
-    <div
-      id="modal-despesa"
-      class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-4 backdrop-blur-sm"
-    >
-      <div
-        class="card-panel rounded-2xl max-w-md w-full p-6 space-y-4 relative border-red-900/40 shadow-2xl"
-      >
-        <h3 class="text-lg font-bold text-white">
-          <span class="text-[#FF3B5C]">+</span>
-          <span id="modal-despesa-title">Nova Despesa</span> (<span
-            id="modal-despesa-mes"
-            >JAN</span
-          >)
-        </h3>
+    
+    <div id="modal-despesa" class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-4 backdrop-blur-sm">
+      <div class="card-panel rounded-2xl max-w-md w-full p-6 space-y-4 relative border-red-900/40 shadow-2xl">
+        <h3 class="text-lg font-bold text-white"><span class="text-[#FF3B5C]">+</span> <span id="modal-despesa-title">Nova Despesa</span> (<span id="modal-despesa-mes">JAN</span>)</h3>
         <form onsubmit="handleSaveDespesa(event)" class="space-y-3">
           <input type="hidden" id="despesa-edit-id" value="" />
-          <div>
-            <label class="block text-xs font-semibold text-slate-400 mb-1"
-              >Dia do Vencimento</label
-            ><input
-              type="number"
-              id="despesa-venc"
-              placeholder="Ex: 10"
-              required
-              class="w-full p-2.5 rounded-lg input-dark"
-            />
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-slate-400 mb-1"
-              >Descrição</label
-            ><input
-              type="text"
-              id="despesa-desc"
-              placeholder="Ex: Conta de Luz"
-              required
-              class="w-full p-2.5 rounded-lg input-dark"
-            />
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-slate-400 mb-1"
-              >Valor Previsto (R$)</label
-            ><input
-              type="number"
-              step="0.01"
-              id="despesa-previsto"
-              placeholder="0.00"
-              required
-              class="w-full p-2.5 rounded-lg input-dark font-mono"
-            />
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-slate-400 mb-1"
-              >Valor Real / Pago (R$)</label
-            ><input
-              type="number"
-              step="0.01"
-              id="despesa-real"
-              placeholder="0.00"
-              class="w-full p-2.5 rounded-lg input-dark font-mono"
-            />
-          </div>
-          <div class="flex items-center gap-2 pt-2">
-            <input
-              type="checkbox"
-              id="despesa-pago"
-              class="w-4 h-4 accent-[#FF3B5C] rounded cursor-pointer"
-            /><label
-              for="despesa-pago"
-              class="text-xs text-slate-300 cursor-pointer"
-              >Marcar como Pago</label
-            >
-          </div>
+          <div><label class="block text-xs font-semibold text-slate-400 mb-1">Dia do Vencimento</label><input type="number" id="despesa-venc" placeholder="Ex: 10" required class="w-full p-2.5 rounded-lg input-dark" /></div>
+          <div><label class="block text-xs font-semibold text-slate-400 mb-1">Descrição</label><input type="text" id="despesa-desc" placeholder="Ex: Conta de Luz" required class="w-full p-2.5 rounded-lg input-dark" /></div>
+          <div><label class="block text-xs font-semibold text-slate-400 mb-1">Valor Previsto (R$)</label><input type="number" step="0.01" id="despesa-previsto" placeholder="0.00" required class="w-full p-2.5 rounded-lg input-dark font-mono" /></div>
+          <div><label class="block text-xs font-semibold text-slate-400 mb-1">Valor Real / Pago (R$)</label><input type="number" step="0.01" id="despesa-real" placeholder="0.00" class="w-full p-2.5 rounded-lg input-dark font-mono" /></div>
+          <div class="flex items-center gap-2 pt-2"><input type="checkbox" id="despesa-pago" class="w-4 h-4 accent-[#FF3B5C] rounded cursor-pointer" /><label for="despesa-pago" class="text-xs text-slate-300 cursor-pointer">Marcar como Pago</label></div>
           <div class="flex justify-end gap-2 pt-4">
-            <button
-              type="button"
-              onclick="closeModal('modal-despesa')"
-              class="px-4 py-2 text-xs font-semibold text-slate-400 hover:text-white"
-            >
-              Cancelar
-            </button>
-            <button
-              type="submit"
-              class="px-4 py-2 text-xs font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition shadow-md"
-            >
-              Salvar
-            </button>
+            <button type="button" onclick="closeModal('modal-despesa')" class="px-4 py-2 text-xs font-semibold text-slate-400 hover:text-white">Cancelar</button>
+            <button type="submit" class="px-4 py-2 text-xs font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition shadow-md">Salvar</button>
           </div>
         </form>
       </div>
     </div>
 
-    <div
-      id="modal-receita"
-      class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-4 backdrop-blur-sm"
-    >
-      <div
-        class="card-panel rounded-2xl max-w-md w-full p-6 space-y-4 relative border-emerald-900/40 shadow-2xl"
-      >
-        <h3 class="text-lg font-bold text-white">
-          <span class="text-[#00E676]">+</span>
-          <span id="modal-receita-title">Nova Receita</span> (<span
-            id="modal-receita-mes"
-            >JAN</span
-          >)
-        </h3>
+    <div id="modal-receita" class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-4 backdrop-blur-sm">
+      <div class="card-panel rounded-2xl max-w-md w-full p-6 space-y-4 relative border-emerald-900/40 shadow-2xl">
+        <h3 class="text-lg font-bold text-white"><span class="text-[#00E676]">+</span> <span id="modal-receita-title">Nova Receita</span> (<span id="modal-receita-mes">JAN</span>)</h3>
         <form onsubmit="handleSaveReceita(event)" class="space-y-3">
           <input type="hidden" id="receita-edit-id" value="" />
-          <div>
-            <label class="block text-xs font-semibold text-slate-400 mb-1"
-              >Descrição</label
-            ><input
-              type="text"
-              id="receita-desc"
-              placeholder="Ex: Salário..."
-              required
-              class="w-full p-2.5 rounded-lg input-dark"
-            />
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-slate-400 mb-1"
-              >Valor Previsto (R$)</label
-            ><input
-              type="number"
-              step="0.01"
-              id="receita-previsto"
-              placeholder="0.00"
-              required
-              class="w-full p-2.5 rounded-lg input-dark font-mono"
-            />
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-slate-400 mb-1"
-              >Valor Real Recebido (R$)</label
-            ><input
-              type="number"
-              step="0.01"
-              id="receita-real"
-              placeholder="0.00"
-              class="w-full p-2.5 rounded-lg input-dark font-mono"
-            />
-          </div>
+          <div><label class="block text-xs font-semibold text-slate-400 mb-1">Descrição</label><input type="text" id="receita-desc" placeholder="Ex: Salário..." required class="w-full p-2.5 rounded-lg input-dark" /></div>
+          <div><label class="block text-xs font-semibold text-slate-400 mb-1">Valor Previsto (R$)</label><input type="number" step="0.01" id="receita-previsto" placeholder="0.00" required class="w-full p-2.5 rounded-lg input-dark font-mono" /></div>
+          <div><label class="block text-xs font-semibold text-slate-400 mb-1">Valor Real Recebido (R$)</label><input type="number" step="0.01" id="receita-real" placeholder="0.00" class="w-full p-2.5 rounded-lg input-dark font-mono" /></div>
           <div class="flex justify-end gap-2 pt-4">
-            <button
-              type="button"
-              onclick="closeModal('modal-receita')"
-              class="px-4 py-2 text-xs font-semibold text-slate-400 hover:text-white"
-            >
-              Cancelar
-            </button>
-            <button
-              type="submit"
-              class="px-4 py-2 text-xs font-bold bg-[#00E676] hover:bg-[#22EF89] text-gray-950 rounded-lg transition shadow-md"
-            >
-              Salvar
-            </button>
+            <button type="button" onclick="closeModal('modal-receita')" class="px-4 py-2 text-xs font-semibold text-slate-400 hover:text-white">Cancelar</button>
+            <button type="submit" class="px-4 py-2 text-xs font-bold bg-[#00E676] hover:bg-[#22EF89] text-gray-950 rounded-lg transition shadow-md">Salvar</button>
           </div>
         </form>
       </div>
     </div>
 
-    <div
-      id="modal-cartao"
-      class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-4 backdrop-blur-sm"
-    >
-      <div
-        class="card-panel rounded-2xl max-w-md w-full p-6 space-y-4 relative border-red-900/40 shadow-2xl"
-      >
-        <h3 class="text-lg font-bold text-white">
-          <span class="text-[#FF3B5C]">💳</span>
-          <span id="modal-cartao-title">Adicionar no Cartão</span>
-        </h3>
+    <div id="modal-cartao" class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-4 backdrop-blur-sm">
+      <div class="card-panel rounded-2xl max-w-md w-full p-6 space-y-4 relative border-red-900/40 shadow-2xl">
+        <h3 class="text-lg font-bold text-white"><span class="text-[#FF3B5C]">💳</span> <span id="modal-cartao-title">Adicionar no Cartão</span></h3>
         <form onsubmit="handleSaveCartao(event)" class="space-y-3">
           <input type="hidden" id="cartao-edit-id" value="" />
-          <div>
-            <label class="block text-xs font-semibold text-slate-400 mb-1"
-              >Categoria</label
-            ><input
-              type="text"
-              id="cartao-cat"
-              placeholder="Ex: Assinaturas..."
-              required
-              class="w-full p-2.5 rounded-lg input-dark"
-            />
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-slate-400 mb-1"
-              >Descrição</label
-            ><input
-              type="text"
-              id="cartao-desc"
-              placeholder="Ex: Netflix..."
-              required
-              class="w-full p-2.5 rounded-lg input-dark"
-            />
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-slate-400 mb-1"
-              >Valor Mensal (R$)</label
-            ><input
-              type="number"
-              step="0.01"
-              id="cartao-valor"
-              placeholder="0.00"
-              class="w-full p-2.5 rounded-lg input-dark font-mono"
-            />
-          </div>
+          <div><label class="block text-xs font-semibold text-slate-400 mb-1">Categoria</label><input type="text" id="cartao-cat" placeholder="Ex: Assinaturas..." required class="w-full p-2.5 rounded-lg input-dark" /></div>
+          <div><label class="block text-xs font-semibold text-slate-400 mb-1">Descrição</label><input type="text" id="cartao-desc" placeholder="Ex: Netflix..." required class="w-full p-2.5 rounded-lg input-dark" /></div>
+          <div><label class="block text-xs font-semibold text-slate-400 mb-1">Valor Mensal (R$)</label><input type="number" step="0.01" id="cartao-valor" placeholder="0.00" class="w-full p-2.5 rounded-lg input-dark font-mono" /></div>
           <div class="grid grid-cols-2 gap-3">
             <div>
-              <label class="block text-xs font-semibold text-slate-400 mb-1"
-                >Mês Inicial</label
-              >
-              <select
-                id="cartao-mes-inicio"
-                class="w-full p-2.5 rounded-lg input-dark cursor-pointer"
-              >
-                <option value="JAN">JAN</option>
-                <option value="FEV">FEV</option>
-                <option value="MAR">MAR</option>
-                <option value="ABR">ABR</option>
-                <option value="MAI">MAI</option>
-                <option value="JUN">JUN</option>
-                <option value="JUL">JUL</option>
-                <option value="AGO">AGO</option>
-                <option value="SET">SET</option>
-                <option value="OUT">OUT</option>
-                <option value="NOV">NOV</option>
-                <option value="DEZ">DEZ</option>
+              <label class="block text-xs font-semibold text-slate-400 mb-1">Mês Inicial</label>
+              <select id="cartao-mes-inicio" class="w-full p-2.5 rounded-lg input-dark cursor-pointer">
+                <option value="JAN">JAN</option> <option value="FEV">FEV</option> <option value="MAR">MAR</option> <option value="ABR">ABR</option>
+                <option value="MAI">MAI</option> <option value="JUN">JUN</option> <option value="JUL">JUL</option> <option value="AGO">AGO</option>
+                <option value="SET">SET</option> <option value="OUT">OUT</option> <option value="NOV">NOV</option> <option value="DEZ">DEZ</option>
               </select>
             </div>
-            <div>
-              <label class="block text-xs font-semibold text-slate-400 mb-1"
-                >Nº Parcelas</label
-              ><input
-                type="number"
-                id="cartao-parcelas"
-                min="1"
-                max="12"
-                value="12"
-                class="w-full p-2.5 rounded-lg input-dark font-mono"
-              />
-            </div>
+            <div><label class="block text-xs font-semibold text-slate-400 mb-1">Nº Parcelas</label><input type="number" id="cartao-parcelas" min="1" max="12" value="12" class="w-full p-2.5 rounded-lg input-dark font-mono" /></div>
           </div>
           <div class="flex justify-end gap-2 pt-4">
-            <button
-              type="button"
-              onclick="closeModal('modal-cartao')"
-              class="px-4 py-2 text-xs font-semibold text-slate-400 hover:text-white"
-            >
-              Cancelar
-            </button>
-            <button
-              type="submit"
-              class="px-4 py-2 text-xs font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition shadow-md"
-            >
-              Salvar
-            </button>
+            <button type="button" onclick="closeModal('modal-cartao')" class="px-4 py-2 text-xs font-semibold text-slate-400 hover:text-white">Cancelar</button>
+            <button type="submit" class="px-4 py-2 text-xs font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition shadow-md">Salvar</button>
           </div>
         </form>
       </div>
     </div>
 
-    <div
-      id="modal-custo-fixo"
-      class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-4 backdrop-blur-sm"
-    >
-      <div
-        class="card-panel rounded-2xl max-w-md w-full p-6 space-y-4 relative shadow-2xl"
-      >
-        <h3 class="text-lg font-bold text-white" id="modal-custo-title">
-          Adicionar Custo Base
-        </h3>
+    <div id="modal-custo-fixo" class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-4 backdrop-blur-sm">
+      <div class="card-panel rounded-2xl max-w-md w-full p-6 space-y-4 relative shadow-2xl">
+        <h3 class="text-lg font-bold text-white" id="modal-custo-title">Adicionar Custo Base</h3>
         <form onsubmit="handleSaveCustoFixo(event)" class="space-y-3">
           <input type="hidden" id="custo-edit-id" value="" />
           <div>
-            <label class="block text-xs font-semibold text-slate-400 mb-1"
-              >Categoria</label
-            >
-            <select
-              id="custo-cat"
-              class="w-full p-2.5 rounded-lg input-dark cursor-pointer"
-            >
-              <option value="Moradia">Moradia</option>
-              <option value="Alimentação">Alimentação</option>
-              <option value="Transporte">Transporte</option>
-              <option value="Financiamento">Financiamento</option>
-              <option value="Assinaturas">Assinaturas</option>
-              <option value="Saúde">Saúde & Exercício</option>
-              <option value="Outros">Outros</option>
+            <label class="block text-xs font-semibold text-slate-400 mb-1">Categoria</label>
+            <select id="custo-cat" class="w-full p-2.5 rounded-lg input-dark cursor-pointer">
+              <option value="Moradia">Moradia</option> <option value="Alimentação">Alimentação</option> <option value="Transporte">Transporte</option>
+              <option value="Financiamento">Financiamento</option> <option value="Assinaturas">Assinaturas</option> <option value="Saúde">Saúde & Exercício</option> <option value="Outros">Outros</option>
             </select>
           </div>
-          <div>
-            <label class="block text-xs font-semibold text-slate-400 mb-1"
-              >Descrição</label
-            ><input
-              type="text"
-              id="custo-desc"
-              placeholder="Ex: Aluguel..."
-              required
-              class="w-full p-2.5 rounded-lg input-dark"
-            />
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-slate-400 mb-1"
-              >Valor Médio (R$)</label
-            ><input
-              type="number"
-              step="0.01"
-              id="custo-valor"
-              placeholder="0.00"
-              required
-              class="w-full p-2.5 rounded-lg input-dark font-mono"
-            />
-          </div>
+          <div><label class="block text-xs font-semibold text-slate-400 mb-1">Descrição</label><input type="text" id="custo-desc" placeholder="Ex: Aluguel..." required class="w-full p-2.5 rounded-lg input-dark" /></div>
+          <div><label class="block text-xs font-semibold text-slate-400 mb-1">Valor Médio (R$)</label><input type="number" step="0.01" id="custo-valor" placeholder="0.00" required class="w-full p-2.5 rounded-lg input-dark font-mono" /></div>
           <div class="flex justify-end gap-2 pt-4">
-            <button
-              type="button"
-              onclick="closeModal('modal-custo-fixo')"
-              class="px-4 py-2 text-xs font-semibold text-slate-400 hover:text-white"
-            >
-              Cancelar
-            </button>
-            <button
-              type="submit"
-              class="px-4 py-2 text-xs font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition shadow-md"
-            >
-              Salvar
-            </button>
+            <button type="button" onclick="closeModal('modal-custo-fixo')" class="px-4 py-2 text-xs font-semibold text-slate-400 hover:text-white">Cancelar</button>
+            <button type="submit" class="px-4 py-2 text-xs font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition shadow-md">Salvar</button>
           </div>
         </form>
       </div>
     </div>
 
-    <div
-      id="modal-porkinho"
-      class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-4 backdrop-blur-sm"
-    >
-      <div
-        class="card-panel rounded-2xl max-w-md w-full p-6 space-y-4 relative border-pink-900/40 shadow-2xl"
-      >
-        <h3 class="text-lg font-bold text-white flex items-center gap-2">
-          <span>🐷</span>
-          <span id="modal-porkinho-title">Movimentação na Reserva</span>
-        </h3>
+    <div id="modal-porkinho" class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-4 backdrop-blur-sm">
+      <div class="card-panel rounded-2xl max-w-md w-full p-6 space-y-4 relative border-pink-900/40 shadow-2xl">
+        <h3 class="text-lg font-bold text-white flex items-center gap-2"><span>🐷</span> <span id="modal-porkinho-title">Movimentação na Reserva</span></h3>
         <form onsubmit="handleSavePorkinho(event)" class="space-y-3">
           <input type="hidden" id="porkinho-edit-id" value="" />
+          <div><label class="block text-xs font-semibold text-slate-400 mb-1">Data / Mês</label><input type="text" id="porkinho-date" placeholder="Ex: Jan/2026" required class="w-full p-2.5 rounded-lg input-dark" /></div>
           <div>
-            <label class="block text-xs font-semibold text-slate-400 mb-1"
-              >Data / Mês</label
-            ><input
-              type="text"
-              id="porkinho-date"
-              placeholder="Ex: Jan/2026"
-              required
-              class="w-full p-2.5 rounded-lg input-dark"
-            />
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-slate-400 mb-1"
-              >Tipo</label
-            >
-            <select
-              id="porkinho-tipo"
-              class="w-full p-2.5 rounded-lg input-dark cursor-pointer"
-            >
-              <option value="aporte">Aporte / Depósito (+)</option>
-              <option value="rendimento">Rendimento Mês (+)</option>
-              <option value="resgate">Resgate / Retirada (-)</option>
+            <label class="block text-xs font-semibold text-slate-400 mb-1">Tipo</label>
+            <select id="porkinho-tipo" class="w-full p-2.5 rounded-lg input-dark cursor-pointer">
+              <option value="aporte">Aporte / Depósito (+)</option> <option value="rendimento">Rendimento Mês (+)</option> <option value="resgate">Resgate / Retirada (-)</option>
             </select>
           </div>
-          <div>
-            <label class="block text-xs font-semibold text-slate-400 mb-1"
-              >Descrição</label
-            ><input
-              type="text"
-              id="porkinho-desc"
-              placeholder="Ex: Sobra Mês..."
-              required
-              class="w-full p-2.5 rounded-lg input-dark"
-            />
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-slate-400 mb-1"
-              >Valor (R$)</label
-            ><input
-              type="number"
-              step="0.01"
-              id="porkinho-valor"
-              placeholder="0.00"
-              required
-              class="w-full p-2.5 rounded-lg input-dark font-mono"
-            />
-          </div>
+          <div><label class="block text-xs font-semibold text-slate-400 mb-1">Descrição</label><input type="text" id="porkinho-desc" placeholder="Ex: Sobra Mês..." required class="w-full p-2.5 rounded-lg input-dark" /></div>
+          <div><label class="block text-xs font-semibold text-slate-400 mb-1">Valor (R$)</label><input type="number" step="0.01" id="porkinho-valor" placeholder="0.00" required class="w-full p-2.5 rounded-lg input-dark font-mono" /></div>
           <div class="flex justify-end gap-2 pt-4">
-            <button
-              type="button"
-              onclick="closeModal('modal-porkinho')"
-              class="px-4 py-2 text-xs font-semibold text-slate-400 hover:text-white"
-            >
-              Cancelar
-            </button>
-            <button
-              type="submit"
-              class="px-4 py-2 text-xs font-semibold bg-pink-600 hover:bg-pink-500 text-white rounded-lg transition shadow-md"
-            >
-              Salvar
-            </button>
+            <button type="button" onclick="closeModal('modal-porkinho')" class="px-4 py-2 text-xs font-semibold text-slate-400 hover:text-white">Cancelar</button>
+            <button type="submit" class="px-4 py-2 text-xs font-semibold bg-pink-600 hover:bg-pink-500 text-white rounded-lg transition shadow-md">Salvar</button>
           </div>
         </form>
       </div>
     </div>
 
-    <div
-      id="modal-sonho"
-      class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-4 backdrop-blur-sm"
-    >
-      <div
-        class="card-panel rounded-2xl max-w-md w-full p-6 space-y-4 relative shadow-2xl"
-      >
-        <h3 class="text-lg font-bold text-white flex items-center gap-2">
-          <span>✨</span> <span id="modal-sonho-title">Novo Item no Mural</span>
-        </h3>
+    <div id="modal-sonho" class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-4 backdrop-blur-sm">
+      <div class="card-panel rounded-2xl max-w-md w-full p-6 space-y-4 relative shadow-2xl">
+        <h3 class="text-lg font-bold text-white flex items-center gap-2"><span>✨</span> <span id="modal-sonho-title">Novo Item no Mural</span></h3>
         <form onsubmit="handleSaveSonho(event)" class="space-y-3">
           <input type="hidden" id="sonho-edit-id" value="" />
+          <div><label class="block text-xs font-semibold text-slate-400 mb-1">Título</label><input type="text" id="sonho-title-input" placeholder="Ex: PS5..." required class="w-full p-2.5 rounded-lg input-dark" /></div>
           <div>
-            <label class="block text-xs font-semibold text-slate-400 mb-1"
-              >Título</label
-            ><input
-              type="text"
-              id="sonho-title-input"
-              placeholder="Ex: PS5..."
-              required
-              class="w-full p-2.5 rounded-lg input-dark"
-            />
-          </div>
-          <div>
-            <label class="block text-xs font-semibold text-slate-400 mb-1"
-              >Prioridade / Coluna</label
-            >
-            <select
-              id="sonho-col"
-              class="w-full p-2.5 rounded-lg input-dark cursor-pointer"
-            >
-              <option value="essencial">Essencial</option>
-              <option value="importante">Importante</option>
-              <option value="metas">Metas</option>
-              <option value="realizados">Sonhos Realizados 🎉</option>
+            <label class="block text-xs font-semibold text-slate-400 mb-1">Prioridade / Coluna</label>
+            <select id="sonho-col" class="w-full p-2.5 rounded-lg input-dark cursor-pointer">
+              <option value="essencial">Essencial</option> <option value="importante">Importante</option> <option value="metas">Metas</option> <option value="realizados">Sonhos Realizados 🎉</option>
             </select>
           </div>
-          <div>
-            <label class="block text-xs font-semibold text-slate-400 mb-1"
-              >Valor Estimado (R$)</label
-            ><input
-              type="number"
-              step="0.01"
-              id="sonho-val"
-              placeholder="0.00"
-              class="w-full p-2.5 rounded-lg input-dark font-mono"
-            />
-          </div>
+          <div><label class="block text-xs font-semibold text-slate-400 mb-1">Valor Estimado (R$)</label><input type="number" step="0.01" id="sonho-val" placeholder="0.00" class="w-full p-2.5 rounded-lg input-dark font-mono" /></div>
           <div class="flex justify-end gap-2 pt-4">
-            <button
-              type="button"
-              onclick="closeModal('modal-sonho')"
-              class="px-4 py-2 text-xs font-semibold text-slate-400 hover:text-white"
-            >
-              Cancelar
-            </button>
-            <button
-              type="submit"
-              class="px-4 py-2 text-xs font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition shadow-md"
-            >
-              Salvar
-            </button>
+            <button type="button" onclick="closeModal('modal-sonho')" class="px-4 py-2 text-xs font-semibold text-slate-400 hover:text-white">Cancelar</button>
+            <button type="submit" class="px-4 py-2 text-xs font-semibold bg-[#FF3B5C] hover:bg-[#FF5473] text-white rounded-lg transition shadow-md">Salvar</button>
           </div>
         </form>
       </div>
@@ -1208,36 +461,13 @@
 
     <!-- JS LOGIC -->
     <script>
-      const MONTHS = [
-        "JAN",
-        "FEV",
-        "MAR",
-        "ABR",
-        "MAI",
-        "JUN",
-        "JUL",
-        "AGO",
-        "SET",
-        "OUT",
-        "NOV",
-        "DEZ",
-      ];
-      const STORAGE_KEY = "planejamento_2026_db_v2"; // CHAVE DE DADOS ORIGINAL MANTIDA
+      const MONTHS = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN", "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"];
+      const STORAGE_KEY = "planejamento_2026_db_v2";
 
       function getDefaultData() {
         const monthlyData = {};
-        MONTHS.forEach((m) => {
-          monthlyData[m] = { expenses: [], incomes: [] };
-        });
-        return {
-          selectedMonth: "JAN",
-          activeTab: "mensal",
-          monthlyData: monthlyData,
-          cardItems: [],
-          fixedCosts: [],
-          porkinho: { transactions: [] },
-          dreams: [],
-        };
+        MONTHS.forEach((m) => { monthlyData[m] = { expenses: [], incomes: [] }; });
+        return { selectedMonth: "JAN", activeTab: "mensal", monthlyData: monthlyData, cardItems: [], fixedCosts: [], porkinho: { transactions: [] }, dreams: [] };
       }
 
       let state = {};
@@ -1248,62 +478,37 @@
           try {
             state = JSON.parse(saved);
             if (!state.monthlyData) state.monthlyData = {};
-            MONTHS.forEach((m) => {
-              if (!state.monthlyData[m])
-                state.monthlyData[m] = { expenses: [], incomes: [] };
-              if (!state.monthlyData[m].expenses)
-                state.monthlyData[m].expenses = [];
-              if (!state.monthlyData[m].incomes)
-                state.monthlyData[m].incomes = [];
+            MONTHS.forEach(m => {
+                if (!state.monthlyData[m]) state.monthlyData[m] = { expenses: [], incomes: [] };
+                if (!state.monthlyData[m].expenses) state.monthlyData[m].expenses = [];
+                if (!state.monthlyData[m].incomes) state.monthlyData[m].incomes = [];
             });
             if (!state.porkinho) state.porkinho = { transactions: [] };
             if (!state.porkinho.transactions) state.porkinho.transactions = [];
             if (!state.dreams) state.dreams = [];
             if (!state.fixedCosts) state.fixedCosts = [];
             if (!state.cardItems) state.cardItems = [];
-          } catch (e) {
-            state = getDefaultData();
-          }
-        } else {
-          state = getDefaultData();
-        }
-        saveState();
-        renderApp();
+          } catch (e) { state = getDefaultData(); }
+        } else { state = getDefaultData(); }
+        saveState(); renderApp();
       }
 
-      function saveState() {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-      }
+      function saveState() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
 
       function renderApp() {
         switchTab(state.activeTab || "mensal");
-        renderMonthSelector();
-        renderMensal();
-        renderCartao();
-        renderCustos();
-        renderPorkinho();
-        renderSonhos();
-        updateMonthlyChart();
+        renderMonthSelector(); renderMensal(); renderCartao(); renderCustos(); renderPorkinho(); renderSonhos(); updateMonthlyChart();
       }
 
       function formatBRL(val) {
-        let v = parseFloat(val);
-        if (isNaN(v)) v = 0;
-        return v.toLocaleString("pt-BR", {
-          style: "currency",
-          currency: "BRL",
-        });
+        let v = parseFloat(val); if (isNaN(v)) v = 0;
+        return v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
       }
 
       function switchTab(tab) {
-        state.activeTab = tab;
-        saveState();
-        document
-          .querySelectorAll(".tab-content")
-          .forEach((el) => el.classList.add("hidden"));
-        document
-          .querySelectorAll(".tab-btn")
-          .forEach((btn) => btn.classList.remove("active"));
+        state.activeTab = tab; saveState();
+        document.querySelectorAll(".tab-content").forEach((el) => el.classList.add("hidden"));
+        document.querySelectorAll(".tab-btn").forEach((btn) => btn.classList.remove("active"));
         const targetContent = document.getElementById(`tab-content-${tab}`);
         const targetBtn = document.getElementById(`tab-btn-${tab}`);
         if (targetContent) targetContent.classList.remove("hidden");
@@ -1318,36 +523,23 @@
           const btn = document.createElement("button");
           const isSelected = state.selectedMonth === m;
           btn.className = `px-5 py-2 rounded-xl font-bold text-xs font-mono transition flex-1 text-center whitespace-nowrap ${
-            isSelected
-              ? "bg-[#FF3B5C] text-white shadow-[0_0_15px_rgba(255,59,92,0.4)] border border-[#FF3B5C]"
-              : "bg-transparent text-slate-400 hover:text-white hover:bg-[#1A1B28] border border-transparent"
+            isSelected ? "bg-[#FF3B5C] text-white shadow-[0_0_15px_rgba(255,59,92,0.4)] border border-[#FF3B5C]" : "bg-transparent text-slate-400 hover:text-white hover:bg-[#1A1B28] border border-transparent"
           }`;
           btn.innerText = m;
-          btn.onclick = () => {
-            state.selectedMonth = m;
-            saveState();
-            renderMonthSelector();
-            renderMensal();
-            updateMonthlyChart();
-          };
+          btn.onclick = () => { state.selectedMonth = m; saveState(); renderMonthSelector(); renderMensal(); updateMonthlyChart(); };
           container.appendChild(btn);
         });
       }
 
       function renderMensal() {
-        const currentM = state.selectedMonth || "JAN";
-        const mData = state.monthlyData[currentM];
-
-        const tbodyExp = document.getElementById("table-despesas-body");
-        tbodyExp.innerHTML = "";
-        let totExpPrev = 0,
-          totExpReal = 0;
+        const currentM = state.selectedMonth || "JAN"; const mData = state.monthlyData[currentM];
+        
+        const tbodyExp = document.getElementById("table-despesas-body"); tbodyExp.innerHTML = "";
+        let totExpPrev = 0, totExpReal = 0;
 
         mData.expenses.forEach((item) => {
-          totExpPrev += parseFloat(item.previsto || 0);
-          totExpReal += parseFloat(item.real || 0);
-          const tr = document.createElement("tr");
-          tr.className = "editable-row border-b border-[#1E1F2E]";
+          totExpPrev += parseFloat(item.previsto || 0); totExpReal += parseFloat(item.real || 0);
+          const tr = document.createElement("tr"); tr.className = "editable-row border-b border-[#1E1F2E]";
           tr.ondblclick = () => editExpense(item.id);
           tr.innerHTML = `
             <td class="py-3 px-3 font-mono text-xs text-slate-400">${item.venc || "--"}</td>
@@ -1360,16 +552,12 @@
           tbodyExp.appendChild(tr);
         });
 
-        const tbodyInc = document.getElementById("table-receitas-body");
-        tbodyInc.innerHTML = "";
-        let totIncPrev = 0,
-          totIncReal = 0;
+        const tbodyInc = document.getElementById("table-receitas-body"); tbodyInc.innerHTML = "";
+        let totIncPrev = 0, totIncReal = 0;
 
         mData.incomes.forEach((item) => {
-          totIncPrev += parseFloat(item.previsto || 0);
-          totIncReal += parseFloat(item.real || 0);
-          const tr = document.createElement("tr");
-          tr.className = "editable-row border-b border-[#1E1F2E]";
+          totIncPrev += parseFloat(item.previsto || 0); totIncReal += parseFloat(item.real || 0);
+          const tr = document.createElement("tr"); tr.className = "editable-row border-b border-[#1E1F2E]";
           tr.ondblclick = () => editIncome(item.id);
           tr.innerHTML = `
             <td class="py-3 px-3 font-semibold text-slate-200">${item.desc}</td>
@@ -1380,200 +568,106 @@
           tbodyInc.appendChild(tr);
         });
 
-        document.getElementById("dash-receita").innerText =
-          formatBRL(totIncReal);
-        document.getElementById("dash-receita-sub").innerText =
-          `Previsto: ${formatBRL(totIncPrev)}`;
-        document.getElementById("dash-despesa").innerText =
-          formatBRL(totExpReal);
-        document.getElementById("dash-despesa-sub").innerText =
-          `Previsto: ${formatBRL(totExpPrev)}`;
+        document.getElementById("dash-receita").innerText = formatBRL(totIncReal); document.getElementById("dash-receita-sub").innerText = `Previsto: ${formatBRL(totIncPrev)}`;
+        document.getElementById("dash-despesa").innerText = formatBRL(totExpReal); document.getElementById("dash-despesa-sub").innerText = `Previsto: ${formatBRL(totExpPrev)}`;
         const saldo = totIncReal - totExpReal;
-        const saldoEl = document.getElementById("dash-saldo");
-        saldoEl.innerText = formatBRL(saldo);
-        saldoEl.className = `text-3xl font-bold font-mono ${saldo >= 0 ? "text-[#00E5FF]" : "text-[#FF3B5C]"}`;
+        const saldoEl = document.getElementById("dash-saldo"); saldoEl.innerText = formatBRL(saldo); saldoEl.className = `text-3xl font-bold font-mono ${saldo >= 0 ? "text-[#00E5FF]" : "text-[#FF3B5C]"}`;
       }
 
       function renderCartao() {
         const theadRow = document.getElementById("cartao-header-row");
-        theadRow.innerHTML =
-          `<th class="py-3 px-3">Categoria</th><th class="py-3 px-3">Item</th>` +
-          MONTHS.map((m) => `<th class="py-3 px-2 text-center">${m}</th>`).join(
-            "",
-          ) +
-          `<th class="py-3 px-2 text-right">Ação</th>`;
-        const tbody = document.getElementById("cartao-body");
-        tbody.innerHTML = "";
-        const totalsByMonth = {};
-        MONTHS.forEach((m) => (totalsByMonth[m] = 0));
+        theadRow.innerHTML = `<th class="py-3 px-3">Categoria</th><th class="py-3 px-3">Item</th>` + MONTHS.map((m) => `<th class="py-3 px-2 text-center">${m}</th>`).join("") + `<th class="py-3 px-2 text-right">Ação</th>`;
+        const tbody = document.getElementById("cartao-body"); tbody.innerHTML = "";
+        const totalsByMonth = {}; MONTHS.forEach((m) => (totalsByMonth[m] = 0));
 
         state.cardItems.forEach((item) => {
-          const tr = document.createElement("tr");
-          tr.className = "editable-row";
+          const tr = document.createElement("tr"); tr.className = "editable-row";
           let monthsHtml = MONTHS.map((m) => {
-            const val = item.values[m] || 0;
-            totalsByMonth[m] += val;
+            const val = item.values[m] || 0; totalsByMonth[m] += val;
             return `<td class="py-3 px-2 text-center font-mono ${val > 0 ? "text-slate-200" : "text-slate-600"}">${val > 0 ? formatBRL(val).replace("R$", "").trim() : "-"}</td>`;
           }).join("");
           tr.innerHTML = `<td class="py-3 px-3 font-semibold text-[#00E5FF]">${item.category}</td><td class="py-3 px-3 text-slate-200">${item.desc}</td>${monthsHtml}<td class="py-3 px-2 text-right"><button onclick="deleteCardItem('${item.id}')" class="text-slate-500 hover:text-red-400 p-1 text-lg">🗑️</button></td>`;
           tbody.appendChild(tr);
         });
 
-        const tfoot = document.getElementById("cartao-footer");
-        let grandTotal = 0;
-        let footMonthsHtml = MONTHS.map((m) => {
-          grandTotal += totalsByMonth[m];
-          return `<td class="py-3 px-2 text-center text-[#FF3B5C]">${formatBRL(totalsByMonth[m]).replace("R$", "").trim()}</td>`;
-        }).join("");
+        const tfoot = document.getElementById("cartao-footer"); let grandTotal = 0;
+        let footMonthsHtml = MONTHS.map((m) => { grandTotal += totalsByMonth[m]; return `<td class="py-3 px-2 text-center text-[#FF3B5C]">${formatBRL(totalsByMonth[m]).replace("R$", "").trim()}</td>`; }).join("");
         tfoot.innerHTML = `<tr><td colspan="2" class="py-3 px-3 uppercase text-right text-slate-400">Total Fatura:</td>${footMonthsHtml}<td class="py-3 px-2 text-right text-white">${formatBRL(grandTotal)}</td></tr>`;
       }
 
       function renderCustos() {
-        const grid = document.getElementById("custos-fixos-grid");
-        grid.innerHTML = "";
-        let totalFixo = 0;
+        const grid = document.getElementById("custos-fixos-grid"); grid.innerHTML = ""; let totalFixo = 0;
         state.fixedCosts.forEach((item) => {
           totalFixo += parseFloat(item.value || 0);
-          const card = document.createElement("div");
-          card.className =
-            "card-panel rounded-xl p-4 flex items-center justify-between bg-[#11121C] hover:bg-[#1A1B28] transition";
+          const card = document.createElement("div"); card.className = "card-panel rounded-xl p-4 flex items-center justify-between bg-[#11121C] hover:bg-[#1A1B28] transition";
           card.innerHTML = `<div><span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">${item.category}</span><h4 class="font-bold text-white text-sm mt-1">${item.desc}</h4><p class="font-mono text-[#FF3B5C] text-sm font-semibold mt-0.5">${formatBRL(item.value)}</p></div><div class="flex items-center gap-1"><button onclick="editCustoFixo('${item.id}')" class="text-slate-400 hover:text-white p-1 text-lg">✏️</button><button onclick="deleteCustoFixo('${item.id}')" class="text-slate-500 hover:text-red-400 p-1 text-lg">🗑️</button></div>`;
           grid.appendChild(card);
         });
-        const rendaEst = (state.monthlyData["JAN"]?.incomes || []).reduce(
-          (acc, i) => acc + parseFloat(i.real || i.previsto || 0),
-          0,
-        );
-        document.getElementById("custos-renda-estimada").innerText =
-          formatBRL(rendaEst);
-        document.getElementById("custos-total-fixo").innerText =
-          formatBRL(totalFixo);
-        const margem = rendaEst - totalFixo;
-        const margemEl = document.getElementById("custos-margem");
-        margemEl.innerText = formatBRL(margem);
-        margemEl.className = `text-2xl font-bold font-mono mt-1 ${margem >= 0 ? "text-[#00E676]" : "text-[#FF3B5C]"}`;
+        const rendaEst = (state.monthlyData["JAN"]?.incomes || []).reduce((acc, i) => acc + parseFloat(i.real || i.previsto || 0), 0);
+        document.getElementById("custos-renda-estimada").innerText = formatBRL(rendaEst); document.getElementById("custos-total-fixo").innerText = formatBRL(totalFixo);
+        const margem = rendaEst - totalFixo; const margemEl = document.getElementById("custos-margem");
+        margemEl.innerText = formatBRL(margem); margemEl.className = `text-2xl font-bold font-mono mt-1 ${margem >= 0 ? "text-[#00E676]" : "text-[#FF3B5C]"}`;
       }
 
       function renderPorkinho() {
-        const tbody = document.getElementById("porkinho-body");
-        tbody.innerHTML = "";
-        let total = 0;
+        const tbody = document.getElementById("porkinho-body"); tbody.innerHTML = ""; let total = 0;
         const trans = state.porkinho?.transactions || [];
         trans.forEach((t) => {
-          const val = parseFloat(t.amount || 0);
-          if (t.type === "resgate") total -= val;
-          else total += val;
-          const tr = document.createElement("tr");
-          tr.className = "editable-row border-b border-[#1E1F2E]";
-          let badge =
-            t.type === "resgate"
-              ? "bg-red-500/10 text-red-400 border-red-500/30"
-              : t.type === "rendimento"
-                ? "bg-[#00E5FF]/10 text-[#00E5FF border-[#00E5FF]/30"
-                : "bg-[#00E676]/10 text-[#00E676] border-[#00E676]/30";
+          const val = parseFloat(t.amount || 0); if (t.type === "resgate") total -= val; else total += val;
+          const tr = document.createElement("tr"); tr.className = "editable-row border-b border-[#1E1F2E]";
+          let badge = t.type === "resgate" ? "bg-red-500/10 text-red-400 border-red-500/30" : t.type === "rendimento" ? "bg-[#00E5FF]/10 text-[#00E5FF] border-[#00E5FF]/30" : "bg-[#00E676]/10 text-[#00E676] border-[#00E676]/30";
           tr.innerHTML = `<td class="py-3 px-3 font-mono text-xs text-slate-400">${t.date}</td><td class="py-3 px-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase border ${badge}">${t.type}</span></td><td class="py-3 px-3 font-semibold text-slate-200">${t.desc}</td><td class="py-3 px-3 font-mono font-bold ${t.type === "resgate" ? "text-red-400" : "text-[#00E676]"}">${t.type === "resgate" ? "- " : "+ "}${formatBRL(val)}</td><td class="py-3 px-2 text-right"><button onclick="deletePorkinho('${t.id}')" class="text-slate-500 hover:text-red-400 p-1 text-lg">🗑️</button></td>`;
           tbody.appendChild(tr);
         });
-        document.getElementById("porkinho-saldo-total").innerText =
-          formatBRL(total);
+        document.getElementById("porkinho-saldo-total").innerText = formatBRL(total);
       }
 
       function renderSonhos() {
-        const cols = {
-          essencial: "col-essencial",
-          importante: "col-importante",
-          metas: "col-metas",
-          realizados: "col-realizados",
-        };
-        const counts = {
-          essencial: "count-essencial",
-          importante: "count-importante",
-          metas: "count-metas",
-          realizados: "count-realizados",
-        };
-        Object.keys(cols).forEach((k) => {
-          document.getElementById(cols[k]).innerHTML = "";
-          document.getElementById(counts[k]).innerText = "0";
-        });
-        const list = state.dreams || [];
-        const counters = {
-          essencial: 0,
-          importante: 0,
-          metas: 0,
-          realizados: 0,
-        };
+        const cols = { essencial: "col-essencial", importante: "col-importante", metas: "col-metas", realizados: "col-realizados" };
+        const counts = { essencial: "count-essencial", importante: "count-importante", metas: "count-metas", realizados: "count-realizados" };
+        Object.keys(cols).forEach((k) => { document.getElementById(cols[k]).innerHTML = ""; document.getElementById(counts[k]).innerText = "0"; });
+        const list = state.dreams || []; const counters = { essencial: 0, importante: 0, metas: 0, realizados: 0 };
         list.forEach((d) => {
-          const colKey = d.col || "essencial";
-          counters[colKey]++;
-          const card = document.createElement("div");
-          card.className =
-            "card-panel rounded-xl p-3 bg-[#151621] border border-[#252738] flex items-center justify-between";
+          const colKey = d.col || "essencial"; counters[colKey]++;
+          const card = document.createElement("div"); card.className = "card-panel rounded-xl p-3 bg-[#151621] border border-[#252738] flex items-center justify-between";
           card.innerHTML = `<div><p class="text-[13px] font-semibold text-white">${d.title}</p>${d.val ? `<span class="font-mono text-xs text-[#00E5FF]">${formatBRL(d.val)}</span>` : ""}</div><div class="flex items-center gap-1"><button onclick="editSonho('${d.id}')" class="text-slate-400 hover:text-white p-1 text-[16px]">✏️</button><button onclick="deleteSonho('${d.id}')" class="text-slate-500 hover:text-red-400 p-1 text-[16px]">🗑️</button></div>`;
-          const target = document.getElementById(
-            cols[colKey] || cols.essencial,
-          );
-          if (target) target.appendChild(card);
+          const target = document.getElementById(cols[colKey] || cols.essencial); if (target) target.appendChild(card);
         });
-        Object.keys(counters).forEach((k) => {
-          document.getElementById(counts[k]).innerText = counters[k];
-        });
+        Object.keys(counters).forEach((k) => { document.getElementById(counts[k]).innerText = counters[k]; });
       }
 
       function updateMonthlyChart() {
         const ctx = document.getElementById("monthlyChart");
         if (!ctx) return;
-        const revenues = [],
-          expenses = [],
-          balances = [];
+        const revenues = [], expenses = [], balances = [];
 
         MONTHS.forEach((m) => {
           const mData = state.monthlyData[m];
-          const rev = mData.incomes.reduce(
-            (acc, i) => acc + parseFloat(i.real || 0),
-            0,
-          );
-          const exp = mData.expenses.reduce(
-            (acc, e) => acc + parseFloat(e.real || 0),
-            0,
-          );
-          revenues.push(rev);
-          expenses.push(exp);
-          balances.push(rev - exp);
+          const rev = mData.incomes.reduce((acc, i) => acc + parseFloat(i.real || 0), 0);
+          const exp = mData.expenses.reduce((acc, e) => acc + parseFloat(e.real || 0), 0);
+          revenues.push(rev); expenses.push(exp); balances.push(rev - exp);
         });
 
         if (window.monthlyChartInstance) window.monthlyChartInstance.destroy();
 
         const ctx2d = ctx.getContext("2d");
-        const gradientGreen = ctx2d.createLinearGradient(0, 0, 0, 300);
-        gradientGreen.addColorStop(0, "rgba(0, 230, 118, 0.4)");
-        gradientGreen.addColorStop(1, "rgba(0, 230, 118, 0.0)");
-        const gradientRed = ctx2d.createLinearGradient(0, 0, 0, 300);
-        gradientRed.addColorStop(0, "rgba(255, 59, 92, 0.4)");
-        gradientRed.addColorStop(1, "rgba(255, 59, 92, 0.0)");
-        const gradientCyan = ctx2d.createLinearGradient(0, 0, 0, 300);
-        gradientCyan.addColorStop(0, "rgba(0, 229, 255, 0.4)");
-        gradientCyan.addColorStop(1, "rgba(0, 229, 255, 0.0)");
+        const gradientGreen = ctx2d.createLinearGradient(0, 0, 0, 300); gradientGreen.addColorStop(0, "rgba(0, 230, 118, 0.4)"); gradientGreen.addColorStop(1, "rgba(0, 230, 118, 0.0)");
+        const gradientRed = ctx2d.createLinearGradient(0, 0, 0, 300); gradientRed.addColorStop(0, "rgba(255, 59, 92, 0.4)"); gradientRed.addColorStop(1, "rgba(255, 59, 92, 0.0)");
+        const gradientCyan = ctx2d.createLinearGradient(0, 0, 0, 300); gradientCyan.addColorStop(0, "rgba(0, 229, 255, 0.4)"); gradientCyan.addColorStop(1, "rgba(0, 229, 255, 0.0)");
 
         const crosshairPlugin = {
-          id: "crosshair",
-          afterDraw: (chart) => {
+          id: 'crosshair',
+          afterDraw: chart => {
             if (chart.tooltip?._active && chart.tooltip._active.length) {
               const activePoint = chart.tooltip._active[0];
               const chartCtx = chart.ctx;
               const x = activePoint.element.x;
               const topY = chart.scales.y.top;
               const bottomY = chart.scales.y.bottom;
-              chartCtx.save();
-              chartCtx.beginPath();
-              chartCtx.moveTo(x, topY);
-              chartCtx.lineTo(x, bottomY);
-              chartCtx.lineWidth = 1;
-              chartCtx.strokeStyle = "#383A59";
-              chartCtx.setLineDash([4, 4]);
-              chartCtx.stroke();
-              chartCtx.restore();
+              chartCtx.save(); chartCtx.beginPath(); chartCtx.moveTo(x, topY); chartCtx.lineTo(x, bottomY);
+              chartCtx.lineWidth = 1; chartCtx.strokeStyle = '#383A59'; chartCtx.setLineDash([4, 4]); chartCtx.stroke(); chartCtx.restore();
             }
-          },
+          }
         };
 
         window.monthlyChartInstance = new Chart(ctx, {
@@ -1582,479 +676,184 @@
           data: {
             labels: MONTHS,
             datasets: [
-              {
-                label: "Receitas",
-                data: revenues,
-                borderColor: "#00E676",
-                backgroundColor: gradientGreen,
-                borderWidth: 2,
-                pointRadius: 0,
-                pointHoverRadius: 5,
-                pointHoverBackgroundColor: "#00E676",
-                pointHoverBorderColor: "#fff",
-                fill: true,
-                tension: 0,
-              },
-              {
-                label: "Despesas",
-                data: expenses,
-                borderColor: "#FF3B5C",
-                backgroundColor: gradientRed,
-                borderWidth: 2,
-                pointRadius: 0,
-                pointHoverRadius: 5,
-                pointHoverBackgroundColor: "#FF3B5C",
-                pointHoverBorderColor: "#fff",
-                fill: true,
-                tension: 0,
-              },
-              {
-                label: "Saldo   ",
-                data: balances,
-                borderColor: "#00E5FF",
-                backgroundColor: gradientCyan,
-                borderWidth: 2,
-                pointRadius: 0,
-                pointHoverRadius: 5,
-                pointHoverBackgroundColor: "#00E5FF",
-                pointHoverBorderColor: "#fff",
-                fill: true,
-                tension: 0,
-              },
+              { label: "Receitas", data: revenues, borderColor: "#00E676", backgroundColor: gradientGreen, borderWidth: 2, pointRadius: 0, pointHoverRadius: 5, pointHoverBackgroundColor: "#00E676", pointHoverBorderColor: "#fff", fill: true, tension: 0 },
+              { label: "Despesas", data: expenses, borderColor: "#FF3B5C", backgroundColor: gradientRed, borderWidth: 2, pointRadius: 0, pointHoverRadius: 5, pointHoverBackgroundColor: "#FF3B5C", pointHoverBorderColor: "#fff", fill: true, tension: 0 },
+              { label: "Saldo   ", data: balances, borderColor: "#00E5FF", backgroundColor: gradientCyan, borderWidth: 2, pointRadius: 0, pointHoverRadius: 5, pointHoverBackgroundColor: "#00E5FF", pointHoverBorderColor: "#fff", fill: true, tension: 0 }
             ],
           },
           options: {
-            responsive: true,
-            maintainAspectRatio: false,
+            responsive: true, maintainAspectRatio: false,
             interaction: { mode: "index", intersect: false },
             layout: { padding: { top: 10 } },
             plugins: {
-              legend: {
-                labels: {
-                  color: "#94a3b8",
-                  font: { family: "JetBrains Mono", size: 11 },
-                  usePointStyle: true,
-                  boxWidth: 6,
-                },
-              },
-              tooltip: {
-                backgroundColor: "#0B0C10",
-                titleColor: "#94a3b8",
-                bodyColor: "#fff",
-                borderColor: "#252738",
-                borderWidth: 1,
-                padding: 12,
-                displayColors: true,
-                usePointStyle: true,
-                titleFont: { family: "JetBrains Mono", size: 11 },
-                bodyFont: { family: "JetBrains Mono", size: 12 },
-                callbacks: {
-                  label: function (context) {
-                    return ` ${context.dataset.label}: ${new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(context.parsed.y)}`;
-                  },
-                },
+              legend: { labels: { color: "#94a3b8", font: { family: "JetBrains Mono", size: 11 }, usePointStyle: true, boxWidth: 6 } },
+              tooltip: { 
+                backgroundColor: "#0B0C10", titleColor: "#94a3b8", bodyColor: "#fff", borderColor: "#252738", borderWidth: 1, padding: 12, 
+                displayColors: true, usePointStyle: true, titleFont: { family: "JetBrains Mono", size: 11 }, bodyFont: { family: "JetBrains Mono", size: 12 },
+                callbacks: { label: function (context) { return ` ${context.dataset.label}: ${new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(context.parsed.y)}`; } } 
               },
             },
             scales: {
-              x: {
-                grid: { color: "#161824", drawBorder: false },
-                ticks: {
-                  color: "#64748b",
-                  font: { family: "JetBrains Mono", size: 10 },
-                },
-              },
-              y: {
-                grid: { color: "#161824", drawBorder: false },
-                ticks: {
-                  color: "#64748b",
-                  font: { family: "JetBrains Mono", size: 10 },
-                  callback: function (value) {
-                    return Math.abs(value) >= 1000
-                      ? (value / 1000).toFixed(1) + "k"
-                      : value;
-                  },
-                },
-                border: { dash: [4, 4] },
-              },
+              x: { grid: { color: "#161824", drawBorder: false }, ticks: { color: "#64748b", font: { family: "JetBrains Mono", size: 10 } } },
+              y: { grid: { color: "#161824", drawBorder: false }, ticks: { color: "#64748b", font: { family: "JetBrains Mono", size: 10 }, callback: function (value) { return Math.abs(value) >= 1000 ? (value / 1000).toFixed(1) + "k" : value; } }, border: { dash: [4,4] } }
             },
           },
         });
       }
 
-      function openModal(id) {
-        document.getElementById(id).classList.remove("hidden");
-        document.getElementById(id).classList.add("flex");
-      }
-      function closeModal(id) {
-        document.getElementById(id).classList.remove("flex");
-        document.getElementById(id).classList.add("hidden");
-      }
+      function openModal(id) { document.getElementById(id).classList.remove("hidden"); document.getElementById(id).classList.add("flex"); }
+      function closeModal(id) { document.getElementById(id).classList.remove("flex"); document.getElementById(id).classList.add("hidden"); }
 
       function openModalDespesa(item = null) {
-        document.getElementById("modal-despesa-mes").innerText =
-          state.selectedMonth;
+        document.getElementById("modal-despesa-mes").innerText = state.selectedMonth;
         if (item) {
-          document.getElementById("modal-despesa-title").innerText =
-            "Editar Despesa";
-          document.getElementById("despesa-edit-id").value = item.id;
-          document.getElementById("despesa-venc").value = item.venc || "";
-          document.getElementById("despesa-desc").value = item.desc;
-          document.getElementById("despesa-previsto").value = item.previsto;
-          document.getElementById("despesa-real").value = item.real;
-          document.getElementById("despesa-pago").checked = item.pago;
+          document.getElementById("modal-despesa-title").innerText = "Editar Despesa"; document.getElementById("despesa-edit-id").value = item.id;
+          document.getElementById("despesa-venc").value = item.venc || ""; document.getElementById("despesa-desc").value = item.desc;
+          document.getElementById("despesa-previsto").value = item.previsto; document.getElementById("despesa-real").value = item.real; document.getElementById("despesa-pago").checked = item.pago;
         } else {
-          document.getElementById("modal-despesa-title").innerText =
-            "Nova Despesa";
-          document.getElementById("despesa-edit-id").value = "";
-          document.getElementById("despesa-venc").value = "10";
-          document.getElementById("despesa-desc").value = "";
-          document.getElementById("despesa-previsto").value = "";
-          document.getElementById("despesa-real").value = "";
-          document.getElementById("despesa-pago").checked = false;
+          document.getElementById("modal-despesa-title").innerText = "Nova Despesa"; document.getElementById("despesa-edit-id").value = "";
+          document.getElementById("despesa-venc").value = "10"; document.getElementById("despesa-desc").value = "";
+          document.getElementById("despesa-previsto").value = ""; document.getElementById("despesa-real").value = ""; document.getElementById("despesa-pago").checked = false;
         }
         openModal("modal-despesa");
       }
-
+      
       function handleSaveDespesa(e) {
         e.preventDefault();
-        const id = document.getElementById("despesa-edit-id").value,
-          venc = document.getElementById("despesa-venc").value,
-          desc = document.getElementById("despesa-desc").value;
-        const previsto =
-            parseFloat(document.getElementById("despesa-previsto").value) || 0,
-          real = parseFloat(document.getElementById("despesa-real").value) || 0,
-          pago = document.getElementById("despesa-pago").checked;
+        const id = document.getElementById("despesa-edit-id").value, venc = document.getElementById("despesa-venc").value, desc = document.getElementById("despesa-desc").value;
+        const previsto = parseFloat(document.getElementById("despesa-previsto").value) || 0, real = parseFloat(document.getElementById("despesa-real").value) || 0, pago = document.getElementById("despesa-pago").checked;
         const mData = state.monthlyData[state.selectedMonth];
-        if (id) {
-          const item = mData.expenses.find((x) => x.id === id);
-          if (item) {
-            item.venc = venc;
-            item.desc = desc;
-            item.previsto = previsto;
-            item.real = real;
-            item.pago = pago;
-          }
-        } else {
-          mData.expenses.push({
-            id: "e_" + Date.now(),
-            venc,
-            desc,
-            previsto,
-            real,
-            pago,
-          });
-        }
-        saveState();
-        renderMensal();
-        closeModal("modal-despesa");
-        updateMonthlyChart();
+        if (id) { const item = mData.expenses.find((x) => x.id === id); if (item) { item.venc = venc; item.desc = desc; item.previsto = previsto; item.real = real; item.pago = pago; } } 
+        else { mData.expenses.push({ id: "e_" + Date.now(), venc, desc, previsto, real, pago }); }
+        saveState(); renderMensal(); closeModal("modal-despesa"); updateMonthlyChart();
       }
-
-      function editExpense(id) {
-        const item = state.monthlyData[state.selectedMonth].expenses.find(
-          (x) => x.id === id,
-        );
-        if (item) openModalDespesa(item);
-      }
-      function deleteExpense(id) {
-        state.monthlyData[state.selectedMonth].expenses = state.monthlyData[
-          state.selectedMonth
-        ].expenses.filter((x) => x.id !== id);
-        saveState();
-        renderMensal();
-        updateMonthlyChart();
-      }
-      function toggleExpenseStatus(id) {
-        const item = state.monthlyData[state.selectedMonth].expenses.find(
-          (x) => x.id === id,
-        );
-        if (item) {
-          item.pago = !item.pago;
-          saveState();
-          renderMensal();
-        }
-      }
+      
+      function editExpense(id) { const item = state.monthlyData[state.selectedMonth].expenses.find((x) => x.id === id); if (item) openModalDespesa(item); }
+      function deleteExpense(id) { state.monthlyData[state.selectedMonth].expenses = state.monthlyData[state.selectedMonth].expenses.filter((x) => x.id !== id); saveState(); renderMensal(); updateMonthlyChart(); }
+      function toggleExpenseStatus(id) { const item = state.monthlyData[state.selectedMonth].expenses.find((x) => x.id === id); if (item) { item.pago = !item.pago; saveState(); renderMensal(); } }
 
       function openModalReceita(item = null) {
-        document.getElementById("modal-receita-mes").innerText =
-          state.selectedMonth;
+        document.getElementById("modal-receita-mes").innerText = state.selectedMonth;
         if (item) {
-          document.getElementById("modal-receita-title").innerText =
-            "Editar Receita";
-          document.getElementById("receita-edit-id").value = item.id;
-          document.getElementById("receita-desc").value = item.desc;
-          document.getElementById("receita-previsto").value = item.previsto;
-          document.getElementById("receita-real").value = item.real;
+          document.getElementById("modal-receita-title").innerText = "Editar Receita"; document.getElementById("receita-edit-id").value = item.id;
+          document.getElementById("receita-desc").value = item.desc; document.getElementById("receita-previsto").value = item.previsto; document.getElementById("receita-real").value = item.real;
         } else {
-          document.getElementById("modal-receita-title").innerText =
-            "Nova Receita";
-          document.getElementById("receita-edit-id").value = "";
-          document.getElementById("receita-desc").value = "";
-          document.getElementById("receita-previsto").value = "";
-          document.getElementById("receita-real").value = "";
+          document.getElementById("modal-receita-title").innerText = "Nova Receita"; document.getElementById("receita-edit-id").value = "";
+          document.getElementById("receita-desc").value = ""; document.getElementById("receita-previsto").value = ""; document.getElementById("receita-real").value = "";
         }
         openModal("modal-receita");
       }
-
+      
       function handleSaveReceita(e) {
         e.preventDefault();
-        const id = document.getElementById("receita-edit-id").value,
-          desc = document.getElementById("receita-desc").value;
-        const previsto =
-            parseFloat(document.getElementById("receita-previsto").value) || 0,
-          real = parseFloat(document.getElementById("receita-real").value) || 0;
+        const id = document.getElementById("receita-edit-id").value, desc = document.getElementById("receita-desc").value;
+        const previsto = parseFloat(document.getElementById("receita-previsto").value) || 0, real = parseFloat(document.getElementById("receita-real").value) || 0;
         const mData = state.monthlyData[state.selectedMonth];
-        if (id) {
-          const item = mData.incomes.find((x) => x.id === id);
-          if (item) {
-            item.desc = desc;
-            item.previsto = previsto;
-            item.real = real;
-          }
-        } else {
-          mData.incomes.push({ id: "i_" + Date.now(), desc, previsto, real });
-        }
-        saveState();
-        renderMensal();
-        closeModal("modal-receita");
-        updateMonthlyChart();
+        if (id) { const item = mData.incomes.find((x) => x.id === id); if (item) { item.desc = desc; item.previsto = previsto; item.real = real; } } 
+        else { mData.incomes.push({ id: "i_" + Date.now(), desc, previsto, real }); }
+        saveState(); renderMensal(); closeModal("modal-receita"); updateMonthlyChart();
       }
-
-      function editIncome(id) {
-        const item = state.monthlyData[state.selectedMonth].incomes.find(
-          (x) => x.id === id,
-        );
-        if (item) openModalReceita(item);
-      }
-      function deleteIncome(id) {
-        state.monthlyData[state.selectedMonth].incomes = state.monthlyData[
-          state.selectedMonth
-        ].incomes.filter((x) => x.id !== id);
-        saveState();
-        renderMensal();
-        updateMonthlyChart();
-      }
+      
+      function editIncome(id) { const item = state.monthlyData[state.selectedMonth].incomes.find((x) => x.id === id); if (item) openModalReceita(item); }
+      function deleteIncome(id) { state.monthlyData[state.selectedMonth].incomes = state.monthlyData[state.selectedMonth].incomes.filter((x) => x.id !== id); saveState(); renderMensal(); updateMonthlyChart(); }
 
       function openModalCartao() {
-        document.getElementById("cartao-edit-id").value = "";
-        document.getElementById("cartao-cat").value = "";
-        document.getElementById("cartao-desc").value = "";
-        document.getElementById("cartao-valor").value = "";
-        document.getElementById("cartao-mes-inicio").value = "JAN";
-        document.getElementById("cartao-parcelas").value = "12";
+        document.getElementById("cartao-edit-id").value = ""; document.getElementById("cartao-cat").value = "";
+        document.getElementById("cartao-desc").value = ""; document.getElementById("cartao-valor").value = "";
+        document.getElementById("cartao-mes-inicio").value = "JAN"; document.getElementById("cartao-parcelas").value = "12";
         openModal("modal-cartao");
       }
-
+      
       function handleSaveCartao(e) {
         e.preventDefault();
-        const cat = document.getElementById("cartao-cat").value,
-          desc = document.getElementById("cartao-desc").value,
-          val = parseFloat(document.getElementById("cartao-valor").value) || 0;
-        const startMonth = document.getElementById("cartao-mes-inicio").value,
-          numParcelas =
-            parseInt(document.getElementById("cartao-parcelas").value) || 12;
-        let vals = {};
-        MONTHS.forEach((m) => (vals[m] = 0));
-        let startIndex = MONTHS.indexOf(startMonth);
-        if (startIndex === -1) startIndex = 0;
-        for (
-          let i = 0;
-          i < numParcelas && startIndex + i < MONTHS.length;
-          i++
-        ) {
-          vals[MONTHS[startIndex + i]] = val;
-        }
-        state.cardItems.push({
-          id: "c_" + Date.now(),
-          category: cat,
-          desc: desc,
-          values: vals,
-        });
-        saveState();
-        renderCartao();
-        closeModal("modal-cartao");
+        const cat = document.getElementById("cartao-cat").value, desc = document.getElementById("cartao-desc").value, val = parseFloat(document.getElementById("cartao-valor").value) || 0;
+        const startMonth = document.getElementById("cartao-mes-inicio").value, numParcelas = parseInt(document.getElementById("cartao-parcelas").value) || 12;
+        let vals = {}; MONTHS.forEach((m) => (vals[m] = 0));
+        let startIndex = MONTHS.indexOf(startMonth); if (startIndex === -1) startIndex = 0;
+        for (let i = 0; i < numParcelas && startIndex + i < MONTHS.length; i++) { vals[MONTHS[startIndex + i]] = val; }
+        state.cardItems.push({ id: "c_" + Date.now(), category: cat, desc: desc, values: vals, });
+        saveState(); renderCartao(); closeModal("modal-cartao");
       }
-      function deleteCardItem(id) {
-        state.cardItems = state.cardItems.filter((x) => x.id !== id);
-        saveState();
-        renderCartao();
-      }
+      function deleteCardItem(id) { state.cardItems = state.cardItems.filter((x) => x.id !== id); saveState(); renderCartao(); }
 
       function openModalCustoFixo(item = null) {
         if (item) {
-          document.getElementById("custo-edit-id").value = item.id;
-          document.getElementById("custo-cat").value = item.category;
-          document.getElementById("custo-desc").value = item.desc;
-          document.getElementById("custo-valor").value = item.value;
+          document.getElementById("custo-edit-id").value = item.id; document.getElementById("custo-cat").value = item.category;
+          document.getElementById("custo-desc").value = item.desc; document.getElementById("custo-valor").value = item.value;
         } else {
-          document.getElementById("custo-edit-id").value = "";
-          document.getElementById("custo-cat").value = "Moradia";
-          document.getElementById("custo-desc").value = "";
-          document.getElementById("custo-valor").value = "";
+          document.getElementById("custo-edit-id").value = ""; document.getElementById("custo-cat").value = "Moradia";
+          document.getElementById("custo-desc").value = ""; document.getElementById("custo-valor").value = "";
         }
         openModal("modal-custo-fixo");
       }
-
+      
       function handleSaveCustoFixo(e) {
         e.preventDefault();
-        const id = document.getElementById("custo-edit-id").value,
-          category = document.getElementById("custo-cat").value;
-        const desc = document.getElementById("custo-desc").value,
-          value = parseFloat(document.getElementById("custo-valor").value) || 0;
-        if (id) {
-          const item = state.fixedCosts.find((x) => x.id === id);
-          if (item) {
-            item.category = category;
-            item.desc = desc;
-            item.value = value;
-          }
-        } else {
-          state.fixedCosts.push({
-            id: "f_" + Date.now(),
-            category,
-            desc,
-            value,
-          });
-        }
-        saveState();
-        renderCustos();
-        closeModal("modal-custo-fixo");
+        const id = document.getElementById("custo-edit-id").value, category = document.getElementById("custo-cat").value;
+        const desc = document.getElementById("custo-desc").value, value = parseFloat(document.getElementById("custo-valor").value) || 0;
+        if (id) { const item = state.fixedCosts.find((x) => x.id === id); if (item) { item.category = category; item.desc = desc; item.value = value; } } 
+        else { state.fixedCosts.push({ id: "f_" + Date.now(), category, desc, value, }); }
+        saveState(); renderCustos(); closeModal("modal-custo-fixo");
       }
-      function editCustoFixo(id) {
-        const item = state.fixedCosts.find((x) => x.id === id);
-        if (item) openModalCustoFixo(item);
-      }
-      function deleteCustoFixo(id) {
-        state.fixedCosts = state.fixedCosts.filter((x) => x.id !== id);
-        saveState();
-        renderCustos();
-      }
+      function editCustoFixo(id) { const item = state.fixedCosts.find((x) => x.id === id); if (item) openModalCustoFixo(item); }
+      function deleteCustoFixo(id) { state.fixedCosts = state.fixedCosts.filter((x) => x.id !== id); saveState(); renderCustos(); }
 
       function openModalPorkinho() {
-        document.getElementById("porkinho-edit-id").value = "";
-        document.getElementById("porkinho-date").value =
-          state.selectedMonth + "/2026";
-        document.getElementById("porkinho-tipo").value = "aporte";
-        document.getElementById("porkinho-desc").value = "";
-        document.getElementById("porkinho-valor").value = "";
+        document.getElementById("porkinho-edit-id").value = ""; document.getElementById("porkinho-date").value = state.selectedMonth + "/2026";
+        document.getElementById("porkinho-tipo").value = "aporte"; document.getElementById("porkinho-desc").value = ""; document.getElementById("porkinho-valor").value = "";
         openModal("modal-porkinho");
       }
-
+      
       function handleSavePorkinho(e) {
         e.preventDefault();
-        const date = document.getElementById("porkinho-date").value,
-          type = document.getElementById("porkinho-tipo").value;
-        const desc = document.getElementById("porkinho-desc").value,
-          amount =
-            parseFloat(document.getElementById("porkinho-valor").value) || 0;
-        if (!state.porkinho) state.porkinho = { transactions: [] };
-        if (!state.porkinho.transactions) state.porkinho.transactions = [];
-        state.porkinho.transactions.push({
-          id: "p_" + Date.now(),
-          date,
-          type,
-          desc,
-          amount,
-        });
-        saveState();
-        renderPorkinho();
-        closeModal("modal-porkinho");
+        const date = document.getElementById("porkinho-date").value, type = document.getElementById("porkinho-tipo").value;
+        const desc = document.getElementById("porkinho-desc").value, amount = parseFloat(document.getElementById("porkinho-valor").value) || 0;
+        if (!state.porkinho) state.porkinho = { transactions: [] }; if (!state.porkinho.transactions) state.porkinho.transactions = [];
+        state.porkinho.transactions.push({ id: "p_" + Date.now(), date, type, desc, amount, });
+        saveState(); renderPorkinho(); closeModal("modal-porkinho");
       }
-      function deletePorkinho(id) {
-        state.porkinho.transactions = state.porkinho.transactions.filter(
-          (x) => x.id !== id,
-        );
-        saveState();
-        renderPorkinho();
-      }
+      function deletePorkinho(id) { state.porkinho.transactions = state.porkinho.transactions.filter( (x) => x.id !== id, ); saveState(); renderPorkinho(); }
 
       function openModalSonho(item = null) {
         if (item) {
-          document.getElementById("sonho-edit-id").value = item.id;
-          document.getElementById("sonho-title-input").value = item.title;
-          document.getElementById("sonho-col").value = item.col;
-          document.getElementById("sonho-val").value = item.val || "";
+          document.getElementById("sonho-edit-id").value = item.id; document.getElementById("sonho-title-input").value = item.title;
+          document.getElementById("sonho-col").value = item.col; document.getElementById("sonho-val").value = item.val || "";
         } else {
-          document.getElementById("sonho-edit-id").value = "";
-          document.getElementById("sonho-title-input").value = "";
-          document.getElementById("sonho-col").value = "essencial";
-          document.getElementById("sonho-val").value = "";
+          document.getElementById("sonho-edit-id").value = ""; document.getElementById("sonho-title-input").value = "";
+          document.getElementById("sonho-col").value = "essencial"; document.getElementById("sonho-val").value = "";
         }
         openModal("modal-sonho");
       }
-
+      
       function handleSaveSonho(e) {
         e.preventDefault();
-        const id = document.getElementById("sonho-edit-id").value,
-          title = document.getElementById("sonho-title-input").value;
-        const col = document.getElementById("sonho-col").value,
-          val = parseFloat(document.getElementById("sonho-val").value) || 0;
-        if (id) {
-          const item = state.dreams.find((x) => x.id === id);
-          if (item) {
-            item.title = title;
-            item.col = col;
-            item.val = val;
-          }
-        } else {
-          state.dreams.push({ id: "d_" + Date.now(), title, col, val });
-        }
-        saveState();
-        renderSonhos();
-        closeModal("modal-sonho");
+        const id = document.getElementById("sonho-edit-id").value, title = document.getElementById("sonho-title-input").value;
+        const col = document.getElementById("sonho-col").value, val = parseFloat(document.getElementById("sonho-val").value) || 0;
+        if (id) { const item = state.dreams.find((x) => x.id === id); if (item) { item.title = title; item.col = col; item.val = val; } } 
+        else { state.dreams.push({ id: "d_" + Date.now(), title, col, val }); }
+        saveState(); renderSonhos(); closeModal("modal-sonho");
       }
-      function editSonho(id) {
-        const item = state.dreams.find((x) => x.id === id);
-        if (item) openModalSonho(item);
-      }
-      function deleteSonho(id) {
-        state.dreams = state.dreams.filter((x) => x.id !== id);
-        saveState();
-        renderSonhos();
-      }
+      function editSonho(id) { const item = state.dreams.find((x) => x.id === id); if (item) openModalSonho(item); }
+      function deleteSonho(id) { state.dreams = state.dreams.filter((x) => x.id !== id); saveState(); renderSonhos(); }
 
       function exportData() {
-        const dataStr =
-          "data:text/json;charset=utf-8," +
-          encodeURIComponent(JSON.stringify(state, null, 2));
-        const a = document.createElement("a");
-        a.setAttribute("href", dataStr);
-        a.setAttribute(
-          "download",
-          `planejamento_2026_backup_${new Date().toISOString().slice(0, 10)}.json`,
-        );
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state, null, 2));
+        const a = document.createElement("a"); a.setAttribute("href", dataStr); a.setAttribute("download", `planejamento_2026_backup_${new Date().toISOString().slice(0, 10)}.json`);
+        document.body.appendChild(a); a.click(); a.remove();
       }
-
+      
       function importData(event) {
         const fileReader = new FileReader();
         if (event.target.files[0]) {
           fileReader.readAsText(event.target.files[0], "UTF-8");
           fileReader.onload = (e) => {
-            try {
-              state = JSON.parse(e.target.result);
-              saveState();
-              initApp();
-              alert("Dados restaurados com sucesso!");
-            } catch (error) {
-              alert("Erro ao importar arquivo.");
-            }
+            try { state = JSON.parse(e.target.result); saveState(); initApp(); alert("Dados restaurados com sucesso!"); } 
+            catch (error) { alert("Erro ao importar arquivo."); }
           };
         }
       }
-
-      function resetDataPrompt() {
-        if (
-          confirm(
-            "Deseja realmente apagar tudo e restaurar os dados originais (padrão)?",
-          )
-        ) {
-          localStorage.removeItem(STORAGE_KEY);
-          initApp();
-        }
-      }
+      
+      function resetDataPrompt() { if (confirm("Deseja realmente apagar tudo e restaurar os dados originais (padrão)?")) { localStorage.removeItem(STORAGE_KEY); initApp(); } }
 
       window.onload = initApp;
     </script>
